@@ -7,6 +7,7 @@ export const App = () => {
     <div className="app">
 
       <div className="gradient-1" />
+      <div className="gradient-2" />
 
       hi
 

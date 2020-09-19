@@ -2,6 +2,20 @@
 
 $sqrt2: math.sqrt(2)
 
+@mixin gradient-common
+  position: absolute
+
+  top: 50%
+  left: 50%
+
+  //height: max(calc(100vh * #{$sqrt2}), calc(100vh * #{$sqrt2}))
+  // 1.5 is ~sqrt(2)
+  height: max(calc(100vh * 1.5), calc(100vw * 1.5))
+  width: max(calc(100vh * 1.5), calc(100vw * 1.5))
+
+  z-index: -1
+
+
 .app
   position: relative
   height: 100%
@@ -14,17 +28,7 @@ $sqrt2: math.sqrt(2)
   font-size: 48px
 
   .gradient-1
-    position: absolute
-
-    top: 50%
-    left: 50%
-
-    //height: max(calc(100vh * #{$sqrt2}), calc(100vh * #{$sqrt2}))
-    // 1.5 is ~sqrt(2)
-    height: max(calc(100vh * 1.5), calc(100vw * 1.5))
-    width: max(calc(100vh * 1.5), calc(100vw * 1.5))
-
-    z-index: -1
+    @include gradient-common
 
     background-image: linear-gradient(var(--g1), var(--g2))
 
