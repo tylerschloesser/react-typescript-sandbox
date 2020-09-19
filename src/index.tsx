@@ -1,6 +1,8 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 
+import { App } from './app'
+
 import './index.sass'
 
-ReactDOM.render(<div>hi</div>, document.getElementById('root'))
+ReactDOM.render(<App />, document.getElementById('root'))
