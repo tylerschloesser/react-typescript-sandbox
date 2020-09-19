@@ -1,9 +1,11 @@
 @use 'sass:math'
 
 $sqrt2: math.sqrt(2)
-$gradient-timing-function: cubic-bezier(.77,0,.18,1)
 
-$gradient-scale: 2
+$gradient-timing-function: cubic-bezier(.77,0,.18,1)
+$circle-timing-function: cubic-bezier(.77,0,.18,1)
+
+$gradient-scale: .5
 
 @mixin gradient-common
   position: absolute
@@ -19,8 +21,10 @@ $gradient-scale: 2
 
   z-index: -1
 
-
 .app
+  height: 100%
+
+.circle
   position: relative
   height: 100%
 
@@ -32,23 +36,25 @@ $gradient-scale: 2
 
   overflow: hidden
 
-  font-size: 48px
+  clip-path: circle(20%)
+  animation: circle 1s $circle-timing-function infinite
+  animation-direction: alternate
 
   .gradient-1
     @include gradient-common
 
     background-image: linear-gradient(var(--g1-1), var(--g1-2))
 
-    animation: gradient-1 8s $gradient-timing-function infinite
+    animation: gradient-1 2s $gradient-timing-function infinite
 
   .gradient-2
     @include gradient-common
 
     background-image: linear-gradient(var(--g2-1), var(--g2-2))
 
-    animation: gradient-1 8s $gradient-timing-function infinite
-    animation-direction: reverse
-    animation-delay: -4s
+    animation: gradient-1 2s $gradient-timing-function infinite
+    //animation-direction: reverse
+    animation-delay: -1s
 
 
 @keyframes gradient-1
@@ -56,4 +62,11 @@ $gradient-scale: 2
     transform: translate(-50%, -50%) rotate(0)
   to
     transform: translate(-50%, -50%) rotate(360deg)
+
+
+@keyframes circle
+  from
+    transform: scale(1)
+  to
+    transform: scale(1.2)
 
