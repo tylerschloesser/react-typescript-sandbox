@@ -6,7 +6,7 @@ export const App = () => {
   return (
     <div className="app">
 
-      <div className="gradient" />
+      <div className="gradient-1" />
 
       hi
 
