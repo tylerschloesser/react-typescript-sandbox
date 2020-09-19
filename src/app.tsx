@@ -5,9 +5,10 @@ import './app.sass'
 export const App = () => {
   return (
     <div className="app">
-      hi
 
+      hi
       <div className="gradient" />
+
     </div>
   )
 }
