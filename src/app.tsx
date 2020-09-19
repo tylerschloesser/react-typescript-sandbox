@@ -9,7 +9,10 @@ export const App = () => {
       <div className="gradient-1" />
       <div className="gradient-2" />
 
-      hi
+      <div className="content">
+        hi
+      </div>
+
 
     </div>
   )
