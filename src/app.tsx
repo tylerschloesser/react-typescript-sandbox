@@ -9,11 +9,6 @@ export const App = () => {
       <div className="gradient-1" />
       <div className="gradient-2" />
 
-      <div className="content">
-        hi
-      </div>
-
-
     </div>
   )
 }

@@ -1,6 +1,9 @@
 @use 'sass:math'
 
 $sqrt2: math.sqrt(2)
+$gradient-timing-function: cubic-bezier(.77,0,.18,1)
+
+$gradient-scale: 2
 
 @mixin gradient-common
   position: absolute
@@ -11,8 +14,8 @@ $sqrt2: math.sqrt(2)
 
   //height: max(calc(100vh * #{$sqrt2}), calc(100vh * #{$sqrt2}))
   // 1.5 is ~sqrt(2)
-  height: max(calc(100vh * 1.5), calc(100vw * 1.5))
-  width: max(calc(100vh * 1.5), calc(100vw * 1.5))
+  height: max(calc(100vh * #{$gradient-scale}), calc(100vw * #{$gradient-scale}))
+  width: max(calc(100vh * #{$gradient-scale}), calc(100vw * #{$gradient-scale}))
 
   z-index: -1
 
@@ -25,11 +28,7 @@ $sqrt2: math.sqrt(2)
   --g1-2: blue
 
   --g2-1: transparent
-  --g2-2: white
-
-  --g3-1: transparent
-  --g3-2: white
-
+  --g2-2: black
 
   overflow: hidden
 
@@ -40,21 +39,16 @@ $sqrt2: math.sqrt(2)
 
     background-image: linear-gradient(var(--g1-1), var(--g1-2))
 
-    animation: gradient-1 4s ease-in-out infinite
+    animation: gradient-1 8s $gradient-timing-function infinite
 
   .gradient-2
     @include gradient-common
 
     background-image: linear-gradient(var(--g2-1), var(--g2-2))
 
-    animation: gradient-1 2s ease-in-out infinite
-
-  .gradient-3
-    @include gradient-common
-
-    background-image: linear-gradient(var(--g3-1), var(--g3-2))
-
-    //animation: gradient-1 2s linear infinite
+    animation: gradient-1 8s $gradient-timing-function infinite
+    animation-direction: reverse
+    animation-delay: -4s
 
 
 @keyframes gradient-1
