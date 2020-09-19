@@ -1,3 +1,6 @@
+@use 'sass:math'
+
+$sqrt2: math.sqrt(2)
 
 .app
   position: relative
@@ -13,8 +16,13 @@
   .gradient
     position: absolute
 
-    height: max(100vh, 100vw)
-    width: max(100vh, 100vw)
+    top: 50%
+    left: 50%
+
+    //height: max(calc(100vh * #{$sqrt2}), calc(100vh * #{$sqrt2}))
+    // 1.5 is ~sqrt(2)
+    height: max(calc(100vh * 1.5), calc(100vw * 1.5))
+    width: max(calc(100vh * 1.5), calc(100vw * 1.5))
 
     z-index: -1
 
@@ -24,7 +32,7 @@
 
 @keyframes gradient
   from
-    transform: rotate(0)
+    transform: translate(-50%, -50%) rotate(0)
   to
-    transform: rotate(360deg)
+    transform: translate(-50%, -50%) rotate(360deg)
 

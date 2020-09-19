@@ -6,8 +6,9 @@ export const App = () => {
   return (
     <div className="app">
 
-      hi
       <div className="gradient" />
+
+      hi
 
     </div>
   )
