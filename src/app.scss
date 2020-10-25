@@ -1,0 +1,169 @@
+@use 'sass:math';
+@use 'font';
+
+$shadow: 0px 0px calc(var(--w) / 2) 0px #444;
+$skewX: 20deg;
+//$skewX: 0deg;
+
+.app {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+
+  color: white;
+	font-family: Bookerly-Light;
+  font-size: 6vw;
+
+  max-height: 50vw;
+
+  --vs: 65vw;
+
+  --blue: rgb(34,47,62);
+  --lime: rgb(235,253,181);
+  --green: rgb(174,209,74);
+
+  --anim-dur: 1s;
+  --anim-fn: cubic-bezier(.5,.5,0,1);
+  //--anim-fn: linear;
+  --anim-sep: 100ms;
+
+  --w: 8vw;
+}
+
+.bg {
+
+  --x2w: 8vw;
+  --x3w: var(--x2w);
+  --x4w: calc(var(--x2w) + 10vw);
+
+  --x2: 70vw;
+  --x3: calc(var(--x2) + var(--x2w));
+  --x4: calc(100vw);
+
+  --shadow-w: 8vw;
+  --tx: calc(var(--w) / -8);
+}
+
+.bg {
+  height: 100%;
+  position: absolute;
+  transform: skewX(#{$skewX});
+}
+
+
+.bg > div {
+  height: 100%;
+  position: absolute;
+  top: 0;
+
+  transform: translateX(var(--tx));
+  opacity: 0;
+  animation: bg var(--anim-dur) var(--anim-fn);
+  animation-fill-mode: forwards;
+
+  @for $i from 1 through 3 {
+    &:nth-child(#{$i}) {
+      animation-delay: calc(#{3 - $i} * var(--anim-sep));
+    }
+  }
+
+  // right
+  &:nth-child(1) {
+    background-color: var(--lime);
+    left: var(--x4);
+    width: var(--x4w);
+  }
+
+  // center
+  &:nth-child(2) {
+    background-color: var(--green);
+    left: 0;
+    width: calc(var(--vs) + var(--w) * 2);
+  }
+
+  // left
+  &:nth-child(3) {
+    background-color: var(--lime);
+    left: 0;
+    width: calc(var(--vs) + var(--w));
+    box-shadow: $shadow;
+  }
+}
+
+
+.bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  left: 50%;
+
+  background: url(https://i.ibb.co/2NrN9P9/stock.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-v {
+  &, & > div {
+    position: absolute;
+  }
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  & > :nth-child(1) {
+    width: calc(var(--vs) * 2);
+    background-color: var(--blue);
+    height: 100%;
+    left: calc(-1 * var(--vs));
+    transform: skewX(#{$skewX});
+    box-shadow: $shadow;
+  }
+
+
+  & > :nth-child(2) {
+    --h: 16vw;
+    background-color: var(--blue);
+    top: 0;
+    right: 5vw;
+    width: calc(var(--h) / #{math.sqrt(2) / 2});
+    height: calc(var(--h) / #{math.sqrt(2) / 2});
+
+    $v: math.tan(20deg);
+
+    transform:
+      // position the triangle to the right
+      translate(calc(50% - #{$v/2*100% * math.sqrt(2)}), -50%)
+      scaleX($v)
+      rotate(45deg);
+    box-shadow: 10px 0px 10px -10px black;
+  }
+}
+
+@keyframes bg {
+  0% {
+
+  }
+
+  20% {
+    //opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.app-header {
+  position: relative;
+  top: 0;
+  left: 2vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
