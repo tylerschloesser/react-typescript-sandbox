@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "start": "webpack-dev-server --host 0.0.0.0"
+  },
   "name": "react-typescript-sandbox",
   "version": "1.0.0",
   "description": "",
@@ -18,9 +21,6 @@
     "webpack-dev-server": "^3.11.0"
   },
   "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tylerschloesser/react-typescript-sandbox.git"
