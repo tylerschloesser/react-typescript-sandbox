@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import './app.sass'
+import './app.scss'
 
 export const App = () => {
   return (
