@@ -1,3 +1,11 @@
+html {
+  --color-1: black;
+  --color-2: white;
+
+  background-color: var(--color-1);
+  color: var(--color-2);
+}
+
 .app {
   font-size: 48px;
 }
