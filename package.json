@@ -20,7 +20,10 @@
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/react": "^16.9.56",
+    "@types/react-dom": "^16.9.9"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tylerschloesser/react-typescript-sandbox.git"
