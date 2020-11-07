@@ -31,5 +31,10 @@ module.exports = async env => {
       }),
     ],
     stats: 'minimal',
+    devServer: {
+      proxy: {
+        '/api': 'http://localhost:3000',
+      },
+    },
   }
 }
