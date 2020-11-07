@@ -14,12 +14,18 @@ interface AppParams {
   tool: string
 }
 
+const Environment = () => {
+  return (
+    <div id="tool-environment" />
+  )
+}
+
 const Tool = () => {
   const { tool } = useParams<AppParams>()
   console.log({ tool })
   return <div className={tool && `tool-${tool}`}>
     <div className="app">
-      <div id="environment" className="app-a1">
+      <div className="app-a1">
         <h1>
           <a href="#environment">
             environment
