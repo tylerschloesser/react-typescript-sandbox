@@ -44,6 +44,9 @@ const Enviroment = () => {
 export const App = () => {
   useEffect(() => {
     console.log('main')
+    fetch('/api').then(res => res.text()).then(res => {
+      console.log('api', res)
+    })
   }, [])
   return (
     <Router hashType="noslash">
