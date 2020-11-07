@@ -14,17 +14,10 @@ html {
 
   width: 100vw;
   font-size: 20vmin;
-  h1 {
-    border: 1px solid --var(--color-1);
-  }
 
-  &[class*="app__"] { 
+  &--tool-selected {
     width:33vw;
     font-size: 5vmin;
-
-    h1 {
-      border: 1px solid --var(--color-2);
-    }
   }
 
   display: flex;

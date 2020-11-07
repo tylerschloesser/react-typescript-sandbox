@@ -16,7 +16,7 @@ interface AppParams {
 
 const Environment = () => {
   return (
-    <div id="tool-environment" />
+    <div id="environment" />
   )
 }
 
@@ -24,16 +24,23 @@ const Tool = () => {
   const { tool } = useParams<AppParams>()
   console.log({ tool })
   return (
-    <div className={`app ${tool ? `app__${tool}` : ''}`}>
-      <div className="app__environment">
-        <h1>
-          <a href="#environment">
-            environment
-          </a>
-        </h1>
+    <div className={`
+      app 
+      ${tool ? `app--tool-selected` : ''}
+      ${tool ? `app--${tool}` : ''}
+    `}>
+      <div className="app__main">
+        <h1> <a href="#environment"> environment </a> </h1>
+      </div>
+      <div className="app__tools">
+        {tool === 'environment' && <Environment />}
       </div>
     </div>
   )
+}
+
+const Enviroment = () => {
+  return (<div className="environment" />)
 }
 
 export const App = () => {
@@ -42,9 +49,7 @@ export const App = () => {
   }, [])
   return (
     <Router hashType="noslash">
-      <Switch>
-        <Route path="/:tool?" component={Tool} />
-      </Switch>
+      <Route path="/:tool?" component={Tool} />
     </Router>
   )
 }
