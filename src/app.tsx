@@ -24,15 +24,14 @@ const Tool = () => {
   const { tool } = useParams<AppParams>()
   console.log({ tool })
   return (
-    <div className={`
-      app 
-      ${tool ? `app--tool-selected` : ''}
-    `}>
-      <div className="app__main">
-        <h1> <a href="#environment"> environment </a> </h1>
+    <div className={`app ${tool ? `app--${tool}` : 'app--home'}`}>
+      <div className="app__a">
+        <Link to="/environment">
+          Environment
+        </Link>
       </div>
-      <div className="app__tools">
-        {tool === 'environment' && <Environment />}
+      <div className="app__b">
+        TODO
       </div>
     </div>
   )

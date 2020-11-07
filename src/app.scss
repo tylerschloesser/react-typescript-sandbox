@@ -4,45 +4,30 @@ html {
 
   background-color: var(--color-1);
   color: var(--color-2);
-
-  * {
-    transition: all 500ms;
-    text-transform: uppercase;
-  }
 }
 
 .app {
 
   * {
-    transition: width 0ms, font-size 0ms ;
+    text-decoration: none;
+    color: var(--color-2);
   }
 
   width: 100vw;
-  font-size: 20vmin;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  &--tool-selected {
-    width:33vw;
-    font-size: 5vmin;
+
+  &__a {
+    flex: 1;
   }
 
-  &__main {
-
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  &.app--home .app__a {
   }
 
-  a {
-    display: block;
-    padding: 10vmin;
-    color: inherit;
-    text-decoration: none;
-  }
-
-  h1:hover {
-    pointer: cursor;
-    background-color: var(--color-2);
-    color: var(--color-1);
+  &__b {
+    width: 0;
   }
 }
