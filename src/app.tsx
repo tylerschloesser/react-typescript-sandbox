@@ -27,7 +27,6 @@ const Tool = () => {
     <div className={`
       app 
       ${tool ? `app--tool-selected` : ''}
-      ${tool ? `app--${tool}` : ''}
     `}>
       <div className="app__main">
         <h1> <a href="#environment"> environment </a> </h1>
