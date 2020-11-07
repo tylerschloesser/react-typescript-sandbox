@@ -6,7 +6,7 @@ import {
   Route,
   Link,
   useParams,
-} from "react-router-dom"
+} from 'react-router-dom'
 
 import './app.scss'
 
