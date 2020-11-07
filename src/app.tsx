@@ -16,7 +16,18 @@ interface AppParams {
 
 const Tool = () => {
   const { tool } = useParams<AppParams>()
-  return <div>{tool}</div>
+  console.log({ tool })
+  return <div className={tool && `tool-${tool}`}>
+    <div className="app">
+      <div id="environment" className="app-a1">
+        <h1>
+          <a href="#environment">
+            environment
+          </a>
+        </h1>
+      </div>
+    </div>
+  </div>
 }
 
 export const App = () => {
@@ -26,17 +37,8 @@ export const App = () => {
   return (
     <Router hashType="noslash">
       <Switch>
-        <Route path="/:tool" component={Tool} />
+        <Route path="/:tool?" component={Tool} />
       </Switch>
-      <div className="app">
-        <div id="environment" className="app-a1">
-          <h1>
-            <a href="#environment">
-              environment
-            </a>
-          </h1>
-        </div>
-      </div>
     </Router>
   )
 }

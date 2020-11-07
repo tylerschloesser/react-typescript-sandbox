@@ -7,8 +7,19 @@ html {
 }
 
 .app {
+
+  transition: all 500ms;
+
   height: 100vh;
+
+  width: 100vw;
   font-size: 20vmin;
+
+  [class*="tool-"] & { 
+    width:33vw;
+    font-size: 5vmin;
+  }
+
   display: flex;
   justify-content: center;
   align-items: center;
