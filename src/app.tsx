@@ -23,9 +23,9 @@ const Environment = () => {
 const Tool = () => {
   const { tool } = useParams<AppParams>()
   console.log({ tool })
-  return <div className={tool && `tool-${tool}`}>
-    <div className="app">
-      <div className="app-a1">
+  return (
+    <div className={`app ${tool ? `app__${tool}` : ''}`}>
+      <div className="app__environment">
         <h1>
           <a href="#environment">
             environment
@@ -33,7 +33,7 @@ const Tool = () => {
         </h1>
       </div>
     </div>
-  </div>
+  )
 }
 
 export const App = () => {

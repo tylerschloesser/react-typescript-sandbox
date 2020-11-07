@@ -14,10 +14,17 @@ html {
 
   width: 100vw;
   font-size: 20vmin;
+  h1 {
+    border: 1px solid --var(--color-1);
+  }
 
-  [class*="tool-"] & { 
+  &[class*="app__"] { 
     width:33vw;
-    font-size: 10vmin;
+    font-size: 5vmin;
+
+    h1 {
+      border: 1px solid --var(--color-2);
+    }
   }
 
   display: flex;
