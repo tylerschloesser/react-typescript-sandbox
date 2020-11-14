@@ -1,6 +1,13 @@
 import * as React from 'react'
 import { useContext, Fragment, useEffect, useState, useRef } from 'react'
 
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from 'react-router-dom'
+
 import * as RssParser from 'rss-parser'
 
 const rssParser = new RssParser()
@@ -113,7 +120,7 @@ const PostAction = ({
   }
 
   return (
-    <button 
+    <button
       className={className.join(' ')}
       onClick={onClick}
     >
@@ -192,12 +199,12 @@ const QueueStatus = () => {
   }
 
   return (
-    <button className="queue-status">
+    <Link to="/queue/1" className="queue-status">
       {`start `}
       <span className="queue-status__count">
         ({queue.length} in queue)
       </span>
-    </button>
+    </Link>
   )
 }
 
@@ -205,6 +212,13 @@ interface AppState {
   queue: RssParser.Item[],
 }
 
+const QueueStep = () => {
+  return (
+    <div className="queue-step">
+      queue step
+    </div>
+  )
+}
 
 const AppContext = React.createContext<IAppContext>(null)
 
@@ -232,11 +246,16 @@ export const App = () => {
 
   return (
     <AppContext.Provider value={context}>
-      <div className="app">
-        <QueueStatus />
-        <AppHeader />
-        <AppContent />
-      </div>
+      <Router>
+        <Route exact path="/">
+          <div className="app">
+            <QueueStatus />
+            <AppHeader />
+            <AppContent />
+          </div>
+        </Route>
+        <Route exact path="/queue/:index" component={QueueStep} />
+      </Router>
     </AppContext.Provider>
   )
 }

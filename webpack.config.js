@@ -35,6 +35,7 @@ module.exports = async env => {
       proxy: {
         '/api': 'http://localhost:3000',
       },
+      historyApiFallback: true,
     },
   }
 }
