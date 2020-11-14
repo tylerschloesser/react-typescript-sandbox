@@ -70,12 +70,12 @@ interface PostMetaProps {
 
 const PostMeta = ({
   post,
-}) => {
+}: PostMetaProps) => {
   return (
     <div className="post-meta">
-      <div className="post-meta__title">
+      <a className="post-meta__title" href={post.link}>
         {post.title}
-      </div>
+      </a>
       <div className="post-meta__domain">
         ({new URL(post.link).hostname})
       </div>
@@ -124,7 +124,7 @@ const AppContent = () => {
       <div className="content__posts">
         <PostList posts={frontPage.value.rss.items} />
       </div>
-      <pre>
+      <pre style={{ display: 'none' }}>
         {frontPage.value.json}
       </pre>
     </div>
@@ -134,7 +134,8 @@ const AppContent = () => {
 const AppHeader = () => {
   return (
     <div className="header">
-      Hacker News
+      <div className="header__logo">Y</div>
+      <h1 className="header__text">Hacker News</h1>
     </div>
   )
 
