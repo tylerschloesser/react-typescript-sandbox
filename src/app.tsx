@@ -220,6 +220,13 @@ const QueueStep = () => {
   const index = parseInt(useParams<{ index: string }>().index) - 1
 
   const post = queue[index]
+
+  useEffect(() => {
+    if (post) {
+			window.open(post.link);
+    }
+  }, [ post ])
+
   if (!post) {
     return <div>Invalid index :(</div>
   }
@@ -228,8 +235,11 @@ const QueueStep = () => {
     <div className="queue-step">
       <div className="queue-step__header">
         {post.title}
+        <Link to={`/queue/${index+2}`}>next</Link>
       </div>
-      <iframe className="queue-step__content" src={post.link} />
+      <div className="queue-step__content">
+        todo
+      </div>
     </div>
   )
 }
