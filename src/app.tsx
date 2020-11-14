@@ -52,13 +52,12 @@ function useFrontPage(): Future<FrontPage> {
   return state
 }
 
-export const App = () => {
-
+const AppContent = () => {
   const frontPage = useFrontPage()
 
   if (!frontPage.ready) {
     return (
-      <div className="app">
+      <div className="content">
         loading front page
       </div>
     )
@@ -66,15 +65,35 @@ export const App = () => {
 
   if (frontPage.error) {
     return (
-      <div className="app">
+      <div className="content">
         Failed to load front page :( - {frontPage.error.message}
       </div>
     )
   }
 
   return (
+    <div className="content">
+      <pre>
+        {frontPage.value.test}
+      </pre>
+    </div>
+  )
+}
+
+const AppHeader = () => {
+  return (
+    <div className="header">
+      Hacker News
+    </div>
+  )
+
+}
+
+export const App = () => {
+  return (
     <div className="app">
-      {frontPage.value.test}
+      <AppHeader />
+      <AppContent />
     </div>
   )
 }

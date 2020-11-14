@@ -1,5 +1,7 @@
 html {
+  --hn-orange: #ff6602;
 }
 
-.app {
+.header {
+  background-color: var(--hn-orange);
 }
