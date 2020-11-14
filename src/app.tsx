@@ -1,11 +1,16 @@
 import * as React from 'react'
-import { Fragment, useEffect, useState, useRef } from 'react'
+import { useContext, Fragment, useEffect, useState, useRef } from 'react'
 
 import * as RssParser from 'rss-parser'
 
 const rssParser = new RssParser()
 
 import './app.scss'
+
+interface IAppContext extends AppState {
+  //enqueue(RssParser.Item): void,
+  enqueue(post: RssParser.Item): void
+}
 
 interface FrontPage {
   rss: RssParser.Output
@@ -85,15 +90,31 @@ const PostMeta = ({
 }
 
 interface PostActionProps {
-
+  post: RssParser.Item
 }
 
 const PostAction = ({
-
+  post,
 }: PostActionProps) => {
+
+  const {
+    queue,
+    enqueue,
+  } = useContext(AppContext)
+
+  const isInQueue: boolean = !!queue.find(p => p.guid === post.guid)
+
+  const onClick = () => {
+    console.log('debug onclick', post)
+    enqueue(post)
+  }
+
   return (
-    <button className="post-action">
-      +
+    <button 
+      className="post-action" 
+      onClick={onClick}
+    >
+      {isInQueue ? '-' : '+'}
     </button>
   )
 }
@@ -110,7 +131,7 @@ const PostList = ({
             <PostMeta post={post} />
           </div>
           <div className="posts__post-action">
-            <PostAction />
+            <PostAction post={post} />
           </div>
         </Fragment>
       ))}
@@ -159,11 +180,40 @@ const AppHeader = () => {
 
 }
 
+
+interface AppState {
+  queue: RssParser.Item[],
+}
+
+
+const AppContext = React.createContext<IAppContext>(null)
+
 export const App = () => {
+
+  const [state, setState] = useState<AppState>({
+    queue: [],
+  })
+
+  const context = {
+    ...state,
+    enqueue: post => {
+      setState(prev => ({
+        ...prev,
+        queue: [ ...state.queue, post ],
+      }))
+    },
+  }
+
+  useEffect(() => {
+    console.log(state.queue)
+  }, [ state.queue ])
+
   return (
-    <div className="app">
-      <AppHeader />
-      <AppContent />
-    </div>
+    <AppContext.Provider value={context}>
+      <div className="app">
+        <AppHeader />
+        <AppContent />
+      </div>
+    </AppContext.Provider>
   )
 }

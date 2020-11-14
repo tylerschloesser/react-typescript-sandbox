@@ -61,6 +61,10 @@ html {
     padding: var(--u);
     text-align: right;
   }
+
+  &__post-action {
+    //align-self: center;
+  }
 }
 
 .post-meta {
