@@ -71,14 +71,15 @@ interface PostMetaProps {
 const PostMeta = ({
   post,
 }: PostMetaProps) => {
+  const domain = new URL(post.link).hostname
   return (
     <div className="post-meta">
       <a className="post-meta__title" href={post.link}>
         {post.title}
       </a>
-      <div className="post-meta__domain">
-        ({new URL(post.link).hostname})
-      </div>
+      <a className="post-meta__domain" href={domain}>
+        ({domain})
+      </a>
     </div>
   )
 }

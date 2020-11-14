@@ -18,7 +18,9 @@ html {
   }
 
   a {
-    text-decoration: none;
+    &:not(:hover) {
+      text-decoration: none;
+    }
   }
 }
 
@@ -68,6 +70,7 @@ html {
     padding: var(--u);
 
     &:hover {
+      text-decoration: none;
       background-color: var(--hn-hover);
     }
   }
