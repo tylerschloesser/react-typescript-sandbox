@@ -8,8 +8,8 @@ const rssParser = new RssParser()
 import './app.scss'
 
 interface IAppContext extends AppState {
-  //enqueue(RssParser.Item): void,
   enqueue(post: RssParser.Item): void
+  dequeue(post: RssParser.Item): void
 }
 
 interface FrontPage {
@@ -100,14 +100,12 @@ const PostAction = ({
   const {
     queue,
     enqueue,
+    dequeue,
   } = useContext(AppContext)
 
   const isInQueue: boolean = !!queue.find(p => p.guid === post.guid)
 
-  const onClick = () => {
-    console.log('debug onclick', post)
-    enqueue(post)
-  }
+  const onClick = () => (isInQueue ? dequeue : enqueue)(post)
 
   return (
     <button 
@@ -194,11 +192,15 @@ export const App = () => {
     queue: [],
   })
 
-  const context = {
+  const context: IAppContext = {
     ...state,
     enqueue: post => setState({
       ...state,
       queue: [ ...state.queue, post ],
+    }),
+    dequeue: post => setState({
+      ...state,
+      queue: state.queue.filter(p => p.guid !== post.guid),
     }),
   }
 
