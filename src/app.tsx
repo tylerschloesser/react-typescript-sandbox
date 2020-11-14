@@ -84,6 +84,20 @@ const PostMeta = ({
   )
 }
 
+interface PostActionProps {
+
+}
+
+const PostAction = ({
+
+}: PostActionProps) => {
+  return (
+    <button className="post-action">
+      +
+    </button>
+  )
+}
+
 const PostList = ({
   posts,
 }: PostListProps) => {
@@ -94,6 +108,9 @@ const PostList = ({
           <div className="posts__post-number">{i+1}.</div>
           <div className="posts__post-meta">
             <PostMeta post={post} />
+          </div>
+          <div className="posts__post-action">
+            <PostAction />
           </div>
         </Fragment>
       ))}

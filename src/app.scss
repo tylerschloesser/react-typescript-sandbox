@@ -55,7 +55,7 @@ html {
 
 .posts {
   display: grid;
-  grid-template-columns: min-content auto;
+  grid-template-columns: min-content auto min-content;
 
   &__post-number {
     padding: var(--u);
