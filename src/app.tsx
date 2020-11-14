@@ -217,11 +217,16 @@ const QueueStep = () => {
 
   const { queue } = useContext(AppContext)
 
-  const { index } = useParams<{ index: string }>()
+  const index = parseInt(useParams<{ index: string }>().index) - 1
+
+  const post = queue[index]
+  if (!post) {
+    return <div>Invalid index :(</div>
+  }
 
   return (
     <div className="queue-step">
-      queue step {index}
+      {post.title}
     </div>
   )
 }
