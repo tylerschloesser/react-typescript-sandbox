@@ -226,7 +226,10 @@ const QueueStep = () => {
 
   return (
     <div className="queue-step">
-      {post.title}
+      <div className="queue-step__header">
+        {post.title}
+      </div>
+      <iframe className="queue-step__content" src={post.link} />
     </div>
   )
 }

@@ -104,3 +104,22 @@ html {
     font-size: .66em;
   }
 }
+
+.queue-step {
+
+  display: flex;
+  flex-direction: column-reverse;
+  height: 100vh;
+
+  &__header {
+    background-color: var(--hn-orange);
+    font-size: .66em;
+    text-align: center;
+    padding: var(--u);
+  }
+
+  &__content { 
+    width: 100vw;
+    flex: 1;
+  }
+}
