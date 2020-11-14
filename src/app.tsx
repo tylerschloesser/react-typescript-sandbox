@@ -90,7 +90,7 @@ const PostList = ({
     <div className="posts">
       {posts.map((post, i) => (
         <Fragment key={post.guid}>
-          <div className="posts__post-number">{i+1}</div>
+          <div className="posts__post-number">{i+1}.</div>
           <div className="posts__post-meta">
             <PostMeta post={post} />
           </div>

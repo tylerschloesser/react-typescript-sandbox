@@ -2,16 +2,33 @@ html {
   --hn-orange: #ff6602;
   --hn-bg: #f6f6ef;
 
+  --u: 1vw;
+  --2u: calc(var(--u) * 2);
+
   font-family: Verdana, Geneva, sans-serif;
   font-size: 15px;
 }
 
 .header {
-  padding: 2vw;
+  padding: var(--2u);
   background-color: var(--hn-orange);
   font-weight: 700;
 }
 
 .content {
+  padding: var(--2u);
   background-color: var(--hn-bg);
+}
+
+.posts {
+  display: grid;
+  grid-template-columns: min-content auto;
+
+  &__post-number, &__post-meta {
+    padding: var(--u);
+  }
+
+  &__post-number {
+    text-align: right;
+  }
 }
