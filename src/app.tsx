@@ -107,12 +107,17 @@ const PostAction = ({
 
   const onClick = () => (isInQueue ? dequeue : enqueue)(post)
 
+  const className = [ 'post-action' ]
+  if (isInQueue) {
+    className.push('post-action--queued')
+  }
+
   return (
     <button 
-      className="post-action" 
+      className={className.join(' ')}
       onClick={onClick}
     >
-      {isInQueue ? '-' : '+'}
+      {isInQueue ? '➖' : '➕'}
     </button>
   )
 }
