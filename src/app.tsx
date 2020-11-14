@@ -5,7 +5,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  useParams,
 } from 'react-router-dom'
 
 import * as RssParser from 'rss-parser'
@@ -213,9 +214,14 @@ interface AppState {
 }
 
 const QueueStep = () => {
+
+  const { queue } = useContext(AppContext)
+
+  const { index } = useParams<{ index: string }>()
+
   return (
     <div className="queue-step">
-      queue step
+      queue step {index}
     </div>
   )
 }
@@ -224,9 +230,28 @@ const AppContext = React.createContext<IAppContext>(null)
 
 export const App = () => {
 
-  const [state, setState] = useState<AppState>({
-    queue: [],
-  })
+  const [state, setState] = useState<AppState>(null)
+
+  useEffect(() => {
+    const json = localStorage.getItem('state')
+    if (json) {
+      setState(JSON.parse(json))
+    } else {
+      setState({
+        queue: [],
+      })
+    }
+  }, [])
+
+  useEffect(() => {
+    if (state) {
+      localStorage.setItem('state', JSON.stringify(state, null, 2))
+    }
+  }, [ state ])
+
+  if (!state) {
+    return null
+  }
 
   const context: IAppContext = {
     ...state,
@@ -239,10 +264,6 @@ export const App = () => {
       queue: state.queue.filter(p => p.guid !== post.guid),
     }),
   }
-
-  useEffect(() => {
-    console.log(state.queue)
-  }, [ state.queue ])
 
   return (
     <AppContext.Provider value={context}>
