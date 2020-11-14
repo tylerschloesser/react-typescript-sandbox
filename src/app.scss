@@ -1,6 +1,8 @@
 html {
   --hn-orange: #ff6602;
   --hn-bg: #f6f6ef;
+  --hn-primary: black;
+  --hn-secondary: #828282;
 
   --u: 1vw;
   --2u: calc(var(--u) * 2);
@@ -30,5 +32,11 @@ html {
 
   &__post-number {
     text-align: right;
+  }
+}
+
+.post-meta {
+  &__domain {
+    color: var(--hn-secondary);
   }
 }

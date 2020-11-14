@@ -77,7 +77,7 @@ const PostMeta = ({
         {post.title}
       </div>
       <div className="post-meta__domain">
-        {new URL(post.link).hostname}
+        ({new URL(post.link).hostname})
       </div>
     </div>
   )
