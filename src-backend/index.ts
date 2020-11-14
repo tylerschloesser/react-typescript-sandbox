@@ -9,11 +9,11 @@ const readFile = promisify(fs.readFile)
 
 app.get('/api', async (req, res) => {
   try {
-    const rss = await readFile('./example-frontpage.rss')
+    const rss = await readFile('./src-backend/example-frontpage.rss')
     // simulate latency
     setTimeout(() => {
       res.send(rss)
-    }, 1000)
+    }, 100)
   } catch (error) {
     res.status(500).send('not good')
   }

@@ -1,6 +1,10 @@
 import * as React from 'react'
 import { useEffect, useState, useRef } from 'react'
 
+import * as RssParser from 'rss-parser'
+
+const rssParser = new RssParser()
+
 import './app.scss'
 
 interface FrontPage {
@@ -25,8 +29,9 @@ const api: Api = {
       }
       return res.text()
     })
+    const parsed = await rssParser.parseString(res)
     return {
-      test: res,
+      test: JSON.stringify(parsed, null, 2),
     }
   }
 }
