@@ -196,12 +196,10 @@ export const App = () => {
 
   const context = {
     ...state,
-    enqueue: post => {
-      setState(prev => ({
-        ...prev,
-        queue: [ ...state.queue, post ],
-      }))
-    },
+    enqueue: post => setState({
+      ...state,
+      queue: [ ...state.queue, post ],
+    }),
   }
 
   useEffect(() => {
