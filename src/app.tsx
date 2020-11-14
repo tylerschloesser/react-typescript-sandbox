@@ -183,6 +183,23 @@ const AppHeader = () => {
 
 }
 
+const QueueStatus = () => {
+
+  const { queue } = useContext(AppContext)
+
+  if (!queue.length) {
+    return null
+  }
+
+  return (
+    <button className="queue-status">
+      {`start `}
+      <span className="queue-status__count">
+        ({queue.length} in queue)
+      </span>
+    </button>
+  )
+}
 
 interface AppState {
   queue: RssParser.Item[],
@@ -216,6 +233,7 @@ export const App = () => {
   return (
     <AppContext.Provider value={context}>
       <div className="app">
+        <QueueStatus />
         <AppHeader />
         <AppContent />
       </div>
