@@ -1,33 +1,5 @@
 html {
-  --color-1: black;
-  --color-2: white;
-
-  background-color: var(--color-1);
-  color: var(--color-2);
 }
 
 .app {
-
-  * {
-    text-decoration: none;
-    color: var(--color-2);
-  }
-
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-
-  &__a {
-    flex: 1;
-  }
-
-  &.app--home .app__a {
-  }
-
-  &__b {
-    width: 0;
-  }
 }
