@@ -19,7 +19,12 @@ interface Future<T> {
 
 const api: Api = {
   getFrontPage: async () => {
-    const res = await fetch('/api').then(res => res.text())
+    const res = await fetch('/api').then(res => {
+      if (!res.ok || res.status !== 200) {
+        throw Error('failed')
+      }
+      return res.text()
+    })
     return {
       test: res,
     }

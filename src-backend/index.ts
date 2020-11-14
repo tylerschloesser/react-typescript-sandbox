@@ -2,8 +2,21 @@ const express = require('express')
 const app = express()
 const port = 3000
 
-app.get('/api', (req, res) => {
-  res.send('Hello World!')
+const fs = require('fs')
+const { promisify } = require('util')
+
+const readFile = promisify(fs.readFile)
+
+app.get('/api', async (req, res) => {
+  try {
+    const rss = await readFile('./example-frontpage.rss')
+    // simulate latency
+    setTimeout(() => {
+      res.send(rss)
+    }, 1000)
+  } catch (error) {
+    res.status(500).send('not good')
+  }
 })
 
 app.listen(port, () => {
