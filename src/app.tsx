@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useEffect, useState, useRef } from 'react'
+import { Fragment, useEffect, useState, useRef } from 'react'
 
 import * as RssParser from 'rss-parser'
 
@@ -8,7 +8,8 @@ const rssParser = new RssParser()
 import './app.scss'
 
 interface FrontPage {
-  test: string
+  rss: RssParser.Output
+  json: string
 }
 
 interface Api {
@@ -31,7 +32,8 @@ const api: Api = {
     })
     const parsed = await rssParser.parseString(res)
     return {
-      test: JSON.stringify(parsed, null, 2),
+      rss: parsed,
+      json: JSON.stringify(parsed, null, 2),
     }
   }
 }
@@ -50,6 +52,52 @@ function useFrontPage(): Future<FrontPage> {
   }, [])
 
   return state
+}
+
+interface PostProps {
+  num: number
+  title: string
+  domain: string
+}
+
+interface PostListProps {
+  posts: RssParser.Item[]
+}
+
+interface PostMetaProps {
+  post: RssParser.Item
+}
+
+const PostMeta = ({
+  post,
+}) => {
+  return (
+    <div className="post-meta">
+      <div className="post-meta__title">
+        {post.title}
+      </div>
+      <div className="post-meta__domain">
+        {new URL(post.link).hostname}
+      </div>
+    </div>
+  )
+}
+
+const PostList = ({
+  posts,
+}: PostListProps) => {
+  return (
+    <div className="posts">
+      {posts.map((post, i) => (
+        <Fragment key={post.guid}>
+          <div className="posts__post-number">{i+1}</div>
+          <div className="posts__post-meta">
+            <PostMeta post={post} />
+          </div>
+        </Fragment>
+      ))}
+    </div>
+  )
 }
 
 const AppContent = () => {
@@ -73,8 +121,11 @@ const AppContent = () => {
 
   return (
     <div className="content">
+      <div className="content__posts">
+        <PostList posts={frontPage.value.rss.items} />
+      </div>
       <pre>
-        {frontPage.value.test}
+        {frontPage.value.json}
       </pre>
     </div>
   )

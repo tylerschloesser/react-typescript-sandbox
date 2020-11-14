@@ -1,7 +1,17 @@
 html {
   --hn-orange: #ff6602;
+  --hn-bg: #f6f6ef;
+
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 15px;
 }
 
 .header {
+  padding: 2vw;
   background-color: var(--hn-orange);
+  font-weight: 700;
+}
+
+.content {
+  background-color: var(--hn-bg);
 }
