@@ -182,11 +182,21 @@ const AppContent = () => {
   )
 }
 
+function headerTextTransform(value: string) {
+  return (
+    <>
+      Hacker News
+    </>
+  )
+}
+
 const AppHeader = () => {
   return (
     <div className="header">
       <div className="header__logo">Y</div>
-      <h1 className="header__text">Hacker News</h1>
+      <h1 className="header__text">
+        {headerTextTransform('Hacker News')}
+      </h1>
     </div>
   )
 
