@@ -57,9 +57,30 @@ html {
     font-weight: 700;
 
     padding: var(--1-unit);
-    font-size: var(--1-unit);
-    line-height: var(--2-units);
     border-left: 2px solid var(--hn-logo);
+
+    &, & > .header-text-animation {
+      font-size: var(--1-unit);
+      line-height: var(--2-units);
+    }
+
+    @keyframes header-text-animation {
+      0% {
+
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+    .header-text-animation {
+      opacity: .5;
+      animation: 1s header-text-animation;
+      @for $i from 1 through 11 {
+        &:nth-child(#{$i}) {
+          animation-delay: #{$i * 100ms};
+        }
+      }
+    }
   }
 
 }

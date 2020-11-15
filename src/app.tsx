@@ -182,10 +182,12 @@ const AppContent = () => {
   )
 }
 
-function headerTextTransform(value: string) {
+function headerTextAnimation(value: string) {
   return (
     <>
-      Hacker News
+      {`Hacker News`.split('').map((l,i) => (
+        <span key={i} className="header-text-animation">{l}</span>
+      ))}
     </>
   )
 }
@@ -195,7 +197,7 @@ const AppHeader = () => {
     <div className="header">
       <div className="header__logo">Y</div>
       <h1 className="header__text">
-        {headerTextTransform('Hacker News')}
+        {headerTextAnimation('Hacker News')}
       </h1>
     </div>
   )
