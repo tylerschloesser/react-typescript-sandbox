@@ -251,7 +251,14 @@ const QueueStep = () => {
 const AppContext = React.createContext<IAppContext>(null)
 
 interface HnStory {
+  by: string
+  decscendants: number
+  id: number
+  kids: number[]
+  score: number
+  time: number
   title: string
+  url: string
 }
 
 interface HnApiV2 {
