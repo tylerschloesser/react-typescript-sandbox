@@ -64,21 +64,24 @@ html {
       line-height: var(--2-units);
     }
 
+    $animation-duration: 200ms;
+    .header-text-animation {
+      opacity: 0;
+      animation: #{$animation-duration} header-text-animation forwards;
+      @for $i from 1 through 11 {
+        &:nth-child(#{$i}) {
+          animation-delay: #{$i / 11 * $animation-duration};
+        }
+      }
+    }
+
     @keyframes header-text-animation {
       0% {
-
+        transform: scale(2);
       }
       100% {
         opacity: 1;
-      }
-    }
-    .header-text-animation {
-      opacity: .5;
-      animation: 1s header-text-animation;
-      @for $i from 1 through 11 {
-        &:nth-child(#{$i}) {
-          animation-delay: #{$i * 100ms};
-        }
+        transform: scale(1);
       }
     }
   }
