@@ -22,6 +22,8 @@ html {
   --1-unit: calc(var(--logo-size) / 4);
   --2-units: calc(var(--1-unit) * 2);
 
+  --fn: cubic-bezier(0,.5,1,.5);
+
   font-family: Verdana, Geneva, sans-serif;
 
   * {
@@ -53,7 +55,13 @@ html {
     text-align: center;
     border: 2px solid var(--hn-logo);
 
-    animation: #{$animation-duration} header-text-animation forwards;
+    &, &.header-text-animation {
+      animation: 
+        #{$animation-duration} 
+        var(--fn) 
+        header-text-animation 
+        forwards;
+    }
   }
 
   &__text {
@@ -70,7 +78,7 @@ html {
 
     .header-text-animation {
       opacity: 0;
-      animation: #{$animation-duration} header-text-animation forwards;
+      animation: #{$animation-duration} var(--fn) header-text-animation forwards;
       transform-origin: center;
       @for $i from 1 through 11 {
         &:nth-child(#{$i}) {
