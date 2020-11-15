@@ -57,13 +57,30 @@ html {
   align-items: center;
   display: flex;
 
-  &__logo, .header-letter {
+  &__logo {
     animation: 
       #{$animation-duration} 
       var(--fn) 
       header-text-animation 
       forwards;
   }
+
+  .header-letter {
+    opacity: 0;
+    animation: 
+      #{$animation-duration} 
+      var(--fn) 
+      header-text-animation 
+      forwards;
+
+    $num-letters: 12;
+    @for $i from 1 to $num-letters {
+      &:nth-child(#{$i}) {
+        animation-delay: #{$i / $num-letters * $animation-duration};
+      }
+    }
+  }
+
 
   &__logo {
     color: var(--hn-logo);
