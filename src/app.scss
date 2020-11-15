@@ -131,12 +131,13 @@ html {
   grid-template-columns: min-content auto min-content;
 
   &__post-number {
+    color: var(--hn-secondary);
     font-size: var(--1-unit);
     line-height: calc(var(--1-unit) * 1.33);
     width: var(--4-units);
     padding: var(--1-unit);
-    padding-left: 0;
-    text-align: right;
+    //padding-left: 0;
+    text-align: center;
   }
 
   &__post-content {
