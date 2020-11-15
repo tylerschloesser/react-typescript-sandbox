@@ -75,7 +75,7 @@ html {
   .header-letter {
     opacity: 0;
 
-    &:not(&.header-leter--space) {
+    &:not(.header-leter--space) {
       display: inline-block;
     }
 
@@ -130,7 +130,9 @@ html {
   grid-template-columns: min-content auto min-content;
 
   &__post-number {
-    padding: var(--u);
+    padding: var(--1-unit);
+    font-size: var(--1-unit);
+    line-height: var(--2-units);
     text-align: right;
   }
 
