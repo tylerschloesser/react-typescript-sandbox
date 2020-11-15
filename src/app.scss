@@ -12,6 +12,8 @@ html {
   --u: 1vw;
   --2u: calc(var(--u) * 2);
 
+  --header-height: 10vh;
+
   font-family: Verdana, Geneva, sans-serif;
 
   * {
@@ -27,7 +29,7 @@ html {
 }
 
 .header {
-  padding: var(--2u);
+  height: var(--header-height);
   background-color: var(--hn-orange);
   align-items: center;
   display: flex;
