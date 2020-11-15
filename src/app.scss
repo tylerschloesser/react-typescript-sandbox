@@ -19,6 +19,9 @@ html {
   --header-height: 10vh;
   --logo-size: var(--header-height);
 
+    --1-unit: calc(var(--logo-size) / 4);
+    --2-units: calc(var(--1-unit) * 2);
+
   font-family: Verdana, Geneva, sans-serif;
 
   * {
@@ -40,8 +43,6 @@ html {
   display: flex;
 
   &__logo {
-    --1-unit: calc(var(--logo-size) / 4);
-    --2-units: calc(var(--1-unit) * 2);
     color: var(--hn-logo);
     margin: var(--1-unit);
     font-size: var(--1-unit);
@@ -54,6 +55,11 @@ html {
 
   &__text {
     font-weight: 700;
+
+    padding: var(--1-unit);
+    font-size: var(--1-unit);
+    line-height: var(--2-units);
+    border-left: 2px solid rgb(0,0,0,.5);
   }
 
 }
