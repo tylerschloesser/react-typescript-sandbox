@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { useContext, Fragment, useEffect, useState, useRef } from 'react'
+import firebase from 'firebase'
 
 import {
   BrowserRouter as Router,
@@ -211,6 +212,9 @@ const QueueStatus = () => {
 
 interface AppState {
   queue: RssParser.Item[],
+  topStoryIds: Future<number[]>,
+  firebaseApp: firebase.app.App,
+  storyIdToStory: Map<number, HnStory>,
 }
 
 const QueueStep = () => {
@@ -246,25 +250,59 @@ const QueueStep = () => {
 
 const AppContext = React.createContext<IAppContext>(null)
 
+interface HnStory {
+  title: string
+}
+
+interface HnApiV2 {
+  getTopStories(): Promise<HnStory[]>,
+}
+
 export const App = () => {
 
   const [state, setState] = useState<AppState>(null)
 
   useEffect(() => {
-    const json = localStorage.getItem('state')
-    if (json) {
-      setState(JSON.parse(json))
-    } else {
-      setState({
-        queue: [],
+    const app = firebase.initializeApp({
+      databaseURL: "https://hacker-news.firebaseio.com",
+    })
+    setState({
+      queue: [],
+      topStoryIds: {
+        ready: false,
+      },
+      firebaseApp: app,
+      storyIdToStory: new Map(),
+    })
+
+    app.database().ref('/v0/topstories').once('value', snapshot => {
+      setState(prev => ({
+        ...prev,
+        topStoryIds: {
+          ready: true,
+          value: snapshot.val(),
+        },
+      }))
+
+      const storyIds: number[] = snapshot.val()
+      storyIds.slice(0, 10).forEach(storyId => {
+        app.database().ref(`/v0/item/${storyId}`)
+          .once('value', snapshot => {
+            setState(prev => ({
+              ...prev,
+              storyIdToStory: {
+                ...prev.storyIdToStory,
+                [storyId]: snapshot.val(),
+              }
+            }))
+          })
       })
-    }
+    })
+
   }, [])
 
   useEffect(() => {
-    if (state) {
-      localStorage.setItem('state', JSON.stringify(state, null, 2))
-    }
+    console.log(state)
   }, [ state ])
 
   if (!state) {
@@ -273,14 +311,14 @@ export const App = () => {
 
   const context: IAppContext = {
     ...state,
-    enqueue: post => setState({
-      ...state,
+    enqueue: post => setState(prev => ({
+      ...prev,
       queue: [ ...state.queue, post ],
-    }),
-    dequeue: post => setState({
-      ...state,
+    })),
+    dequeue: post => setState(prev => ({
+      ...prev,
       queue: state.queue.filter(p => p.guid !== post.guid),
-    }),
+    })),
   }
 
   return (
