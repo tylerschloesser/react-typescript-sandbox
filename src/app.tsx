@@ -186,7 +186,7 @@ function headerTextAnimation(value: string) {
   return (
     <>
       {`Hacker News`.split('').map((l,i) => (
-        <span key={i} className="header-text-animation">{l}</span>
+        <span key={i} className="header-letter">{l}</span>
       ))}
     </>
   )
