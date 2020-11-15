@@ -11,7 +11,7 @@
 
 html {
   * {
-    //box-sizing: border-box;
+    box-sizing: border-box;
   }
 
   --hn-logo: white;
@@ -32,6 +32,7 @@ html {
 
   --1-unit: calc(var(--logo-size) / 4);
   --2-units: calc(var(--1-unit) * 2);
+  --4-units: calc(var(--1-unit) * 4);
 
   --fn: cubic-bezier(0,.5,1,.5);
 
@@ -72,26 +73,26 @@ html {
       forwards;
   }
 
-  .header-letter {
-    opacity: 0;
+  // .header-letter {
+  //   opacity: 0;
 
-    &:not(.header-leter--space) {
-      display: inline-block;
-    }
+  //   &:not(.header-leter--space) {
+  //     display: inline-block;
+  //   }
 
-    animation: 
-      #{$animation-duration} 
-      var(--fn) 
-      header-text-animation 
-      forwards;
+  //   animation: 
+  //     #{$animation-duration} 
+  //     var(--fn) 
+  //     header-text-animation 
+  //     forwards;
 
-    $num-letters: 12;
-    @for $i from 1 to $num-letters {
-      &:nth-child(#{$i}) {
-        animation-delay: #{$i / $num-letters * $animation-duration};
-      }
-    }
-  }
+  //   $num-letters: 12;
+  //   @for $i from 1 to $num-letters {
+  //     &:nth-child(#{$i}) {
+  //       animation-delay: #{$i / $num-letters * $animation-duration};
+  //     }
+  //   }
+  // }
 
 
   &__logo {
@@ -110,7 +111,8 @@ html {
     font-weight: 700;
 
     padding: var(--1-unit);
-    border-left: 2px solid var(--hn-logo);
+    padding-left: 0;
+    //border-left: 2px solid var(--hn-logo);
 
 
     * {
@@ -129,13 +131,12 @@ html {
   grid-template-columns: min-content auto min-content;
 
   &__post-number {
-    padding: var(--1-unit) ;
     font-size: var(--1-unit);
-    width: var(--2-units);
-    line-height: var(--2-units);
-    border-right: 2px solid var(--hn-secondary);
-    text-align: center;
-    align-self: center;
+    line-height: calc(var(--1-unit) * 1.33);
+    width: var(--4-units);
+    padding: var(--1-unit);
+    padding-left: 0;
+    text-align: right;
   }
 
   &__post-content {
@@ -143,6 +144,7 @@ html {
   }
 
   &__post-meta {
+    padding: var(--1-unit) 0;
   }
 
   &__post-action {
@@ -162,6 +164,8 @@ html {
   &__title {
     display: block;
     color: var(--hn-primary);
+    font-size: var(--1-unit);
+    line-height: calc(var(--1-unit) * 1.33);
 
     &:hover {
       text-decoration: none;
