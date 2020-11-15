@@ -282,29 +282,29 @@ export const App = () => {
       storyIdToStory: new Map(),
     })
 
-    app.database().ref('/v0/topstories').once('value', snapshot => {
-      setState(prev => ({
-        ...prev,
-        topStoryIds: {
-          ready: true,
-          value: snapshot.val(),
-        },
-      }))
+    // app.database().ref('/v0/topstories').once('value', snapshot => {
+    //   setState(prev => ({
+    //     ...prev,
+    //     topStoryIds: {
+    //       ready: true,
+    //       value: snapshot.val(),
+    //     },
+    //   }))
 
-      const storyIds: number[] = snapshot.val()
-      storyIds.slice(0, 10).forEach(storyId => {
-        app.database().ref(`/v0/item/${storyId}`)
-          .once('value', snapshot => {
-            setState(prev => ({
-              ...prev,
-              storyIdToStory: {
-                ...prev.storyIdToStory,
-                [storyId]: snapshot.val(),
-              }
-            }))
-          })
-      })
-    })
+    //   const storyIds: number[] = snapshot.val()
+    //   storyIds.slice(0, 10).forEach(storyId => {
+    //     app.database().ref(`/v0/item/${storyId}`)
+    //       .once('value', snapshot => {
+    //         setState(prev => ({
+    //           ...prev,
+    //           storyIdToStory: {
+    //             ...prev.storyIdToStory,
+    //             [storyId]: snapshot.val(),
+    //           }
+    //         }))
+    //       })
+    //   })
+    // })
 
   }, [])
 
