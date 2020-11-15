@@ -1,7 +1,6 @@
 
 @keyframes header-text-animation {
   0% {
-    transform: scale(.5) translate(100%, 0);
     border-color: transparent;
   }
   100% {
@@ -56,6 +55,14 @@ html {
   background-color: var(--hn-orange);
   align-items: center;
   display: flex;
+
+  &__logo {
+    transform: scale(.25) translate(0, 0);
+  }
+
+  .header-letter {
+    transform: scale(.25) translate(0, 0);
+  }
 
   &__logo {
     animation: 
