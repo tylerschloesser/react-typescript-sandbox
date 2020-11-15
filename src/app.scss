@@ -1,4 +1,8 @@
 html {
+  * {
+    box-sizing: border-box;
+  }
+
   --hn-logo: white;
   --hn-orange: #ff6602;
   --hn-bg: #f6f6ef;
@@ -13,6 +17,7 @@ html {
   --2u: calc(var(--u) * 2);
 
   --header-height: 10vh;
+  --logo-size: var(--header-height);
 
   font-family: Verdana, Geneva, sans-serif;
 
@@ -35,15 +40,16 @@ html {
   display: flex;
 
   &__logo {
-    --size: 3vw;
+    --1-unit: calc(var(--logo-size) / 4);
+    --2-units: calc(var(--1-unit) / 2);
     color: var(--hn-logo);
-    font-size: var(--size);
-    width: var(--size);
+    margin: var(--1-unit);
+    font-size: var(--1-unit);
+    line-height: calc(var(--logo-size) / 2);
+    width: calc(var(--logo-size) / 2);
+    height: calc(var(--logo-size) / 2);
     text-align: center;
-    border: 1px solid var(--hn-logo);
-    padding: calc(var(--size) / 4);
-
-    margin-right: var(--2u);
+    border: 2px solid var(--hn-logo);
   }
 
   &__text {
