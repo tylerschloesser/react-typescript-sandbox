@@ -131,15 +131,24 @@ html {
   &__post-number {
     padding: var(--1-unit) ;
     font-size: var(--1-unit);
-    line-height: var(--2-units);
     width: var(--2-units);
+    line-height: var(--2-units);
     border-right: 2px solid var(--hn-secondary);
     text-align: center;
+    align-self: center;
+  }
+
+  &__post-content {
+
+  }
+
+  &__post-meta {
   }
 
   &__post-action {
     //align-self: center;
   }
+
 }
 
 .post-action {
@@ -149,10 +158,10 @@ html {
 }
 
 .post-meta {
+
   &__title {
     display: block;
     color: var(--hn-primary);
-    padding: var(--u);
 
     &:hover {
       text-decoration: none;
