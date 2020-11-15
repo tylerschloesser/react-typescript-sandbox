@@ -74,7 +74,11 @@ html {
 
   .header-letter {
     opacity: 0;
-    display: inline-block;
+
+    &:not(&.header-leter--space) {
+      display: inline-block;
+    }
+
     animation: 
       #{$animation-duration} 
       var(--fn) 
