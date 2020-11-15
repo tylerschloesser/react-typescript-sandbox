@@ -11,7 +11,7 @@
 
 html {
   * {
-    box-sizing: border-box;
+    //box-sizing: border-box;
   }
 
   --hn-logo: white;
@@ -121,7 +121,6 @@ html {
 }
 
 .content {
-  padding: var(--2u);
   background-color: var(--hn-bg);
 }
 
@@ -130,10 +129,12 @@ html {
   grid-template-columns: min-content auto min-content;
 
   &__post-number {
-    padding: var(--1-unit);
+    padding: var(--1-unit) ;
     font-size: var(--1-unit);
     line-height: var(--2-units);
+    width: var(--2-units);
     border-right: 2px solid var(--hn-secondary);
+    text-align: right;
   }
 
   &__post-action {
