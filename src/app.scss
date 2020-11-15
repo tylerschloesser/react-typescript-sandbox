@@ -19,8 +19,8 @@ html {
   --header-height: 10vh;
   --logo-size: var(--header-height);
 
-    --1-unit: calc(var(--logo-size) / 4);
-    --2-units: calc(var(--1-unit) * 2);
+  --1-unit: calc(var(--logo-size) / 4);
+  --2-units: calc(var(--1-unit) * 2);
 
   font-family: Verdana, Geneva, sans-serif;
 
@@ -37,6 +37,7 @@ html {
 }
 
 .header {
+  $animation-duration: 250ms;
   height: var(--header-height);
   background-color: var(--hn-orange);
   align-items: center;
@@ -51,6 +52,8 @@ html {
     height: var(--2-units);
     text-align: center;
     border: 2px solid var(--hn-logo);
+
+    animation: #{$animation-duration} header-text-animation forwards;
   }
 
   &__text {
@@ -59,18 +62,19 @@ html {
     padding: var(--1-unit);
     border-left: 2px solid var(--hn-logo);
 
+
     &, & > .header-text-animation {
       font-size: var(--1-unit);
       line-height: var(--2-units);
     }
 
-    $animation-duration: 200ms;
     .header-text-animation {
       opacity: 0;
       animation: #{$animation-duration} header-text-animation forwards;
+      transform-origin: center;
       @for $i from 1 through 11 {
         &:nth-child(#{$i}) {
-          animation-delay: #{$i / 11 * $animation-duration};
+          animation-delay: #{$i * 2 / 11 * $animation-duration};
         }
       }
     }
@@ -78,6 +82,7 @@ html {
     @keyframes header-text-animation {
       0% {
         transform: scale(2);
+        border-color: transparent;
       }
       100% {
         opacity: 1;
