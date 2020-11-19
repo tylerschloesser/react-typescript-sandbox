@@ -19,6 +19,7 @@ export const App = () => {
 
   return (
     <div className="story-detail-page">
+      <div className="__header">todo header</div>
       <div className="__image">
         <img src={src} alt={alt} />
       </div>

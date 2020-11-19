@@ -12,6 +12,14 @@ $scale: $imgw / $pagew;
 
 .story-detail-page {
 
+  .__header {
+    height: 44px;
+    line-height: 44px;
+    background-color: #333;
+    text-align: center;
+    color: #444;
+  }
+
   .__image {
     img {
       display: block;
