@@ -5,13 +5,20 @@ import './app.scss'
 
 export const App = () => {
 
-  const bem = (block, modifiers: string[] = []) => ([
-    block,
-    ...modifiers.map(m=>`${block}--${m}`),
+  const block = 'story-detail-page'
+
+  const bem = (element, modifiers: string[] = []) => ([
+    `${block}__${element}`,
   ].join(' '))
 
+  const src = ""
+  const alt = ""
+
   return (
-    <div className={bem('app')}>
+    <div className="story-detail-page">
+      <div className="__img">
+        <img src={src} alt={alt} />
+      </div>
       hi
     </div>
   )
