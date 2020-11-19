@@ -13,7 +13,8 @@ export const App = () => {
 
   const x = 400
   const y = 400
-  const src = `https://source.unsplash.com/random/${x}x${y}`
+  const src =
+    `https://source.unsplash.com/random/${x}x${y}`
   const alt = ""
 
   return (
