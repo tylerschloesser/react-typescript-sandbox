@@ -1,6 +1,6 @@
 html {
   --bg: #232323;
-  --fg: #ffffff;
+  --fg: #d8d8d8;
 
   background-color: var(--bg);
   color: var(--fg);
@@ -30,12 +30,17 @@ $scale: $imgw / $pagew;
 
     position: relative;
     .__crown {
-      
     }
   }
 
+  text-align: center;
+
   .__title {
     font-family: AmazonEmber-Bold;
-    text-align: center;
+    margin: 20px 0;
+  }
+
+  .__author {
+    color: #b8b8b8;
   }
 }

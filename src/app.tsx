@@ -28,6 +28,9 @@ export const App = () => {
         <h1 className="__title">
           {`Tea Cups and Train Wrecks`}
         </h1>
+        <div className="__author">
+          {'by'} {`Kelly Yonce`}
+        </div>
       </div>
     </>
   )
