@@ -1,9 +1,9 @@
 html {
-  --color-1: black;
-  --color-2: white;
+  --bg: #232323;
+  --fg: #ffffff;
 
-  background-color: var(--color-1);
-  color: var(--color-2);
+  background-color: var(--bg);
+  color: var(--fg);
 }
 
 .app {
