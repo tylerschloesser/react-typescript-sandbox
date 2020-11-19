@@ -21,9 +21,7 @@ export const App = () => {
     <>
       <div className="story-detail-page">
         <div className="__header">todo header</div>
-        <div className="__image">
-          <img src={src} alt={alt} />
-        </div>
+        <img className="__image" src={src} alt={alt} />
         <div className="__crown" />
         <h1 className="__title">
           {`Tea Cups and Train Wrecks`}

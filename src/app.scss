@@ -12,6 +12,8 @@ $scale: $imgw / $pagew;
 
 .story-detail-page {
 
+  text-align: center;
+
   .__header {
     height: 44px;
     line-height: 44px;
@@ -21,26 +23,19 @@ $scale: $imgw / $pagew;
   }
 
   .__image {
-    img {
-      display: block;
-      margin: 20px auto;
-      width: $scale * 100vw;
-      border-radius: 100%;
-    }
-
-    position: relative;
-    .__crown {
-    }
+    display: block;
+    margin: 20px auto;
+    width: $scale * 100vw;
+    border-radius: 100%;
   }
-
-  text-align: center;
 
   .__title {
     font-family: AmazonEmber-Bold;
-    margin: 20px 0;
+    margin: 20px 0 10px;
   }
 
   .__author {
     color: #b8b8b8;
+    margin: 10px 0 20px;
   }
 }
