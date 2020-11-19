@@ -21,13 +21,18 @@ export const App = () => {
     <>
       <div className="story-detail-page">
         <div className="__header">todo header</div>
-        <img className="__image" src={src} alt={alt} />
-        <div className="__crown" />
+        <div className="__image-wrapper">
+          <img className="__image" src={src} alt={alt} />
+          <div className="__crown" />
+        </div>
         <h1 className="__title">
           {`Tea Cups and Train Wrecks`}
         </h1>
         <div className="__author">
           {'by'} {`Kelly Yonce`}
+        </div>
+        <div className="episode">
+          {'Hughton Cremmer is just a regular teen. When Nothing becomes Something, all bets are off. But friendship? That\'s forever. Or so...'}
         </div>
       </div>
     </>
