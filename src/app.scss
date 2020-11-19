@@ -12,11 +12,17 @@ $scale: $imgw / $pagew;
 
 .story-detail-page {
 
-  .__img {
-    text-align: center;
+  .__image {
     img {
+      display: block;
+      margin: 20px auto;
       width: $scale * 100vw;
       border-radius: 100%;
+    }
+
+    position: relative;
+    .__crown {
+      
     }
   }
 }
