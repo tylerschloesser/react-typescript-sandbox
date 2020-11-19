@@ -6,6 +6,13 @@ html {
   color: var(--fg);
 }
 
-.app {
-  font-size: 48px;
+$pagew: 375px;
+$imgw: 230px;
+$scale: $imgw / $pagew;
+
+.story-detail-page {
+
+  &.__img {
+    width: $scale * 100vw;
+  }
 }
