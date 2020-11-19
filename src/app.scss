@@ -12,7 +12,11 @@ $scale: $imgw / $pagew;
 
 .story-detail-page {
 
-  &.__img {
-    width: $scale * 100vw;
+  .__img {
+    text-align: center;
+    img {
+      width: $scale * 100vw;
+      border-radius: 100%;
+    }
   }
 }

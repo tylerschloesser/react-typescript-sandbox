@@ -11,8 +11,8 @@ export const App = () => {
     `${block}__${element}`,
   ].join(' '))
 
-  const x = 100
-  const y = 100
+  const x = 400
+  const y = 400
   const src = `https://source.unsplash.com/random/${x}x${y}`
   const alt = ""
 
