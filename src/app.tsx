@@ -11,7 +11,9 @@ export const App = () => {
     `${block}__${element}`,
   ].join(' '))
 
-  const src = ""
+  const x = 100
+  const y = 100
+  const src = `https://source.unsplash.com/random/${x}x${y}`
   const alt = ""
 
   return (
@@ -19,7 +21,6 @@ export const App = () => {
       <div className="__img">
         <img src={src} alt={alt} />
       </div>
-      hi
     </div>
   )
 }
