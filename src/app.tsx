@@ -13,6 +13,7 @@ const StoryImage = ({
 
   return (
     <div className={`story-image ${loaded ? '--loaded' : ''}`}>
+      <div className="__throne-bg" />
       <div className="__crown" />
       <img className="__image" src={src} alt={alt} onLoad={onLoad} />
       <div className="__throne-fg" />
