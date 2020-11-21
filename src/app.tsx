@@ -11,8 +11,22 @@ const StoryImage = ({
   const [loaded,setLoaded] = useState(false)
   const onLoad = () => setLoaded(true)
 
+  const throne = true
+
+  const modifiers = {
+    loaded,
+    throne,
+  }
+
+  const className = [
+    'story-image',
+    ...Object.entries(modifiers)
+      .filter(([k,v]) => v)
+      .map(([k]) => `--${k}`)
+  ].join(' ')
+
   return (
-    <div className={`story-image ${loaded ? '--loaded' : ''}`}>
+    <div className={className}>
       <div className="__throne --bg --l" />
       <div className="__throne --bg --r" />
       <div className="__crown" />
