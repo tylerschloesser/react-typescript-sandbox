@@ -21,6 +21,7 @@ $scale: $imgw / $pagew;
 }
 
 .story-image {
+  --image-width: 50vw;
   --image-width: 181px;
   --image-height: var(--image-width);
   --loaded: 0;
@@ -125,7 +126,7 @@ $scale: $imgw / $pagew;
     --angle: 37deg;
 
     // distance between image and crown. ~5px when image is 180px
-    --gap: calc(var(--image-width) / 36);
+    --gap: calc(var(--image-width) * .03);
 
     --angle-with-transition: calc(var(--angle) + var(--loaded) * 3deg);
     --gap-with-transition: var(--gap); // disable this transition for now
@@ -153,9 +154,9 @@ $scale: $imgw / $pagew;
     $source-star-height: 24px;
     --aspect-ratio: #{$source-star-width / $source-star-height};
 
-
-    --star-width: calc(var(--scale));
-    --star-height: calc(var(--scale) / var(--aspect-ratio));
+    --scale: 1;
+    --star-width: calc(var(--image-width) * .09 * var(--scale));
+    --star-height: calc(var(--star-width) / var(--aspect-ratio));
 
     width: var(--star-width);
     height: var(--star-height);
@@ -163,13 +164,12 @@ $scale: $imgw / $pagew;
     position: absolute;
 
     &.--1 {
-      --scale: calc(var(--image-width) * .09);
       top: 0;
       left: 0;
     }
 
     &.--2 {
-      --scale: calc(var(--image-width) * .127);
+      --scale: 1.2;
       top: calc(var(--image-height) * .11);
       right: calc(var(--image-width) * -.09);
     }
