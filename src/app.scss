@@ -62,7 +62,7 @@ $scale: $imgw / $pagew;
     --angle: 37deg;
     --gap: 5px; // distance between image and crown
 
-    --angle-with-transition: calc(var(--angle) + var(--loaded) * 5deg);
+    --angle-with-transition: calc(var(--angle) + var(--loaded) * 3deg);
     --gap-with-transition: var(--gap); // disable this transition for now
 
     position: absolute;
