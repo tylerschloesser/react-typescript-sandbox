@@ -21,9 +21,10 @@ $scale: $imgw / $pagew;
 }
 
 .story-image {
-  --image-width: 180px;
+  --image-width: 50vw;
   --image-height: var(--image-width);
   --loaded: 0;
+  --not-loaded: 1;
 
   transition: all .33s;
 	&, * {
@@ -32,6 +33,7 @@ $scale: $imgw / $pagew;
 
   &.--loaded {
     --loaded: 1;
+    --not-loaded: 0;
   }
 
   position: relative;
@@ -88,6 +90,10 @@ $scale: $imgw / $pagew;
     border: 1px solid rgba(255,232,199,0.55);
     box-shadow: 7px 2px 4px 0 rgba(71,71,71,0.09);
 
+    --rotate-y: calc(var(--flip) * 180deg);
+
+    --rotate-y-with-transition: calc(var(--rotate-y) + var(--not-loaded) * -60deg);
+
     transform:
       // fix for safari
       // when safari rotates the right rectangle around the Y axis,
@@ -95,7 +101,7 @@ $scale: $imgw / $pagew;
       // the image, we need to manually move the rectangle up the Z axis
       translateZ(1px)
 
-      rotateY(calc(var(--flip) * 180deg))
+      rotateY(var(--rotate-y-with-transition))
       skewX(#{$throne-skew-x})
       translateX(calc(var(--image-width) * .01))
       ;
