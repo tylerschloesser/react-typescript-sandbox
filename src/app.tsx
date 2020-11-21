@@ -7,10 +7,14 @@ const StoryImage = ({
   src,
   alt,
 }) => {
+
+  const [loaded,setLoaded] = useState(false)
+  const onLoad = () => setLoaded(true)
+
   return (
-    <div className="story-image">
+    <div className={`story-image ${loaded ? '--loaded' : ''}`}>
       <div className="__crown" />
-      <img className="__image" src={src} alt={alt} />
+      <img className="__image" src={src} alt={alt} onLoad={onLoad} />
     </div>
   )
 }

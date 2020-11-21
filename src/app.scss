@@ -23,8 +23,16 @@ $scale: $imgw / $pagew;
 .story-image {
   --image-width: 230px;
   --image-height: var(--image-width);
+  --loaded: 0;
+
+  transition: all 250ms;
+
+  &.--loaded {
+    --loaded: 1;
+  }
 
   position: relative;
+  opacity: var(--loaded);
 
   .__image {
     display: block;
@@ -36,26 +44,28 @@ $scale: $imgw / $pagew;
 
   .__crown {
 
-    // size of the source png
-    --original-crown-width: 350px;
-    --original-crown-height: 292px;
+    $source-crown-width: 350px;
+    $source-crown-height: 292px;
 
     --scale: .2;
 
-    --crown-width: calc(var(--original-crown-width) * var(--scale));
-    --crown-height: calc(var(--original-crown-height) * var(--scale));
+    --crown-width: calc(#{$source-crown-width} * var(--scale));
+    --crown-height: calc(#{$source-crown-height} * var(--scale));
 
     --angle: 37deg;
     --gap: 5px; // distance between image and crown
+
+    --angle-with-transition: calc(var(--angle) + var(--loaded) * 4deg);
 
     position: absolute;
     top: 50%;
     left: 50%;
 
     // start at the center of the image, rotate, and move outside
+    transition: all 250ms ease-out;
     transform:
       translate(-50%, -50%)
-      rotate(var(--angle))
+      rotate(var(--angle-with-transition))
       translateY(calc(var(--gap) * -1))
       translateY(calc(var(--crown-height) / -2))
       translateY(calc(var(--image-height) / -2));
