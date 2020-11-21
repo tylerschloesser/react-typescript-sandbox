@@ -1,8 +1,8 @@
 html {
-  // --bg: #232323;
+  --bg: white;
+  //--bg: #232323;
   // --fg: #d8d8d8;
 
-  --bg: white;
 
   background-color: var(--bg);
   color: var(--fg);
@@ -129,7 +129,7 @@ $scale: $imgw / $pagew;
     // add 1px to compensate for angled render
     --gap: calc(var(--image-width) * .03 + 1px);
 
-    --angle-with-transition: calc(var(--angle) + var(--not-loaded) * 3deg);
+    --angle-with-transition: calc(var(--angle) + var(--not-loaded) * -3deg);
     --gap-with-transition: var(--gap); // disable this transition for now
 
     position: absolute;
