@@ -1,6 +1,8 @@
 html {
-  --bg: #232323;
-  --fg: #d8d8d8;
+  // --bg: #232323;
+  // --fg: #d8d8d8;
+
+  --bg: white;
 
   background-color: var(--bg);
   color: var(--fg);
@@ -34,27 +36,34 @@ $scale: $imgw / $pagew;
 
   .__crown {
 
-      --crown-width: 46px;
-      --crown-height: 39px;
+    // size of the source png
+    --original-crown-width: 350px;
+    --original-crown-height: 292px;
 
-      --angle: 37deg;
-      --gap: 5px; // distance between image and crown
+    --scale: .2;
 
-      position: absolute;
-      top: 50%;
-      left: 50%;
+    --crown-width: calc(var(--original-crown-width) * var(--scale));
+    --crown-height: calc(var(--original-crown-height) * var(--scale));
 
-      // start at the center of the image, rotate, and move outside
-      transform:
-        translate(-50%, -50%)
-        rotate(var(--angle))
-        translateY(calc(var(--gap) * -1))
-        translateY(calc(var(--crown-height) / -2))
-        translateY(calc(var(--image-height) / -2));
+    --angle: 37deg;
+    --gap: 5px; // distance between image and crown
 
-      width: var(--crown-width);
-      height: var(--crown-height);
-      background: url('/assets/crown.png');
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    // start at the center of the image, rotate, and move outside
+    transform:
+      translate(-50%, -50%)
+      rotate(var(--angle))
+      translateY(calc(var(--gap) * -1))
+      translateY(calc(var(--crown-height) / -2))
+      translateY(calc(var(--image-height) / -2));
+
+    width: var(--crown-width);
+    height: var(--crown-height);
+    background: url('/assets/crown.png');
+    background-size: cover;
   }
 }
 
