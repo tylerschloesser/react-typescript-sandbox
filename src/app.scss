@@ -55,18 +55,19 @@ $scale: $imgw / $pagew;
     --angle: 37deg;
     --gap: 5px; // distance between image and crown
 
-    --angle-with-transition: calc(var(--angle) + var(--loaded) * 4deg);
+    --angle-with-transition: calc(var(--angle) + var(--loaded) * 5deg);
+    --gap-with-transition: calc(var(--gap) + var(--loaded) * 5px);
 
     position: absolute;
     top: 50%;
     left: 50%;
 
     // start at the center of the image, rotate, and move outside
-    transition: all 250ms ease-out;
+    transition: all .33s ease-out;
     transform:
       translate(-50%, -50%)
       rotate(var(--angle-with-transition))
-      translateY(calc(var(--gap) * -1))
+      translateY(calc(var(--gap-with-transition) * -1))
       translateY(calc(var(--crown-height) / -2))
       translateY(calc(var(--image-height) / -2));
 
