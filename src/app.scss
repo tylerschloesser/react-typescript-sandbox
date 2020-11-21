@@ -77,14 +77,17 @@ $scale: $imgw / $pagew;
 
     $source-crown-width: 350px;
     $source-crown-height: 292px;
+    --aspect-ratio: #{$source-crown-width / $source-crown-height};
 
-    --scale: .2;
+    --scale: calc(var(--image-width) * .25);
 
-    --crown-width: calc(#{$source-crown-width} * var(--scale));
-    --crown-height: calc(#{$source-crown-height} * var(--scale));
+    --crown-width: calc(var(--scale));
+    --crown-height: calc(var(--scale) / var(--aspect-ratio));
 
     --angle: 37deg;
-    --gap: 5px; // distance between image and crown
+
+    // distance between image and crown. ~5px when image is 180px
+    --gap: calc(var(--image-width) / 36);
 
     --angle-with-transition: calc(var(--angle) + var(--loaded) * 3deg);
     --gap-with-transition: var(--gap); // disable this transition for now
