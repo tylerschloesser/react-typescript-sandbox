@@ -26,9 +26,8 @@ $scale: $imgw / $pagew;
   --loaded: 0;
   --not-loaded: 1;
 
-  transition: all .33s;
 	&, * {
-		box-sizing: border-box;
+    transition: all 1s cubic-bezier(0, 0, 0, 1);
 	}
 
   &.--loaded {
@@ -38,6 +37,7 @@ $scale: $imgw / $pagew;
 
   position: relative;
   opacity: var(--loaded);
+  //opacity: 1;
 
   .__image {
     position: relative;
@@ -141,7 +141,6 @@ $scale: $imgw / $pagew;
     left: 50%;
 
     // start at the center of the image, rotate, and move outside
-    transition: all .33s ease-out;
     transform:
       translate(-50%, -50%)
       rotate(var(--angle-with-transition))
