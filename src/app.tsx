@@ -11,12 +11,10 @@ const StoryImage = ({
   const [loaded,setLoaded] = useState(false)
   const onLoad = () => setLoaded(true)
 
+  const crown = true
   const throne = true
 
-  const modifiers = {
-    loaded,
-    throne,
-  }
+  const modifiers = { loaded }
 
   const className = [
     'story-image',
@@ -27,12 +25,16 @@ const StoryImage = ({
 
   return (
     <div className={className}>
-      <div className="__throne --bg --l" />
-      <div className="__throne --bg --r" />
-      <div className="__crown" />
+      {throne && <>
+        <div className="__throne --bg --l" />
+        <div className="__throne --bg --r" />
+      </>}
+      {crown && <div className="__crown" />}
       <img className="__image" src={src} alt={alt} onLoad={onLoad} />
-      <div className="__throne --fg --l" />
-      <div className="__throne --fg --r" />
+      {throne && <>
+        <div className="__throne --fg --l" />
+        <div className="__throne --fg --r" />
+      </>}
     </div>
   )
 }
