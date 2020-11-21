@@ -89,8 +89,9 @@ $scale: $imgw / $pagew;
         // fix for safari
         // when safari rotates the right rectangle around the Y axis,
         // it moves behind the image. to get the rectangle in front of
-        // the image, we need to manually move the rectangle up the Z axis
-        translateZ(1px)
+        // the image, we need to manually move the rectangle up the Z axis.
+        // translate by a big number to compensate for the transition.
+        translateZ(1000px)
 
         rotateY(var(--rotate-y-with-transition))
         skewX(#{$throne-skew-x})
