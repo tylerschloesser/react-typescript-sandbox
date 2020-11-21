@@ -22,7 +22,7 @@ $scale: $imgw / $pagew;
 
 .story-image {
   --image-width: 50vw;
-  --image-width: 181px;
+  //--image-width: 181px;
   --image-height: var(--image-width);
   --loaded: 0;
   --not-loaded: 1;
@@ -126,8 +126,8 @@ $scale: $imgw / $pagew;
     --angle: 37deg;
 
     // distance between image and crown. ~5px when image is 180px
-    // add 1px to compensate for angled render
-    --gap: calc(var(--image-width) * .03 + 1px);
+    // +.5px to round up
+    --gap: calc(var(--image-width) * .03 + .5px);
 
     --angle-with-transition: calc(var(--angle) + var(--not-loaded) * -3deg);
     --gap-with-transition: var(--gap); // disable this transition for now
