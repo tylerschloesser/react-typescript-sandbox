@@ -48,16 +48,17 @@ $scale: $imgw / $pagew;
       top: 50%;
       left: 50%;
 
-      transform: 
-        translate(-50%, -50%) 
-        rotate(var(--angle)) 
+      // start at the center of the image, rotate, and move outside
+      transform:
+        translate(-50%, -50%)
+        rotate(var(--angle))
         translateY(calc(var(--gap) * -1))
         translateY(calc(var(--crown-height) / -2))
         translateY(calc(var(--image-height) / -2));
 
       width: var(--crown-width);
       height: var(--crown-height);
-      background: url('https://drive.corp.amazon.com/view/tschloes@/rebrand/Fave_Hero_NoSparkles_rotated.png?download=true');
+      background: url('/assets/crown.png');
     }
   }
 
