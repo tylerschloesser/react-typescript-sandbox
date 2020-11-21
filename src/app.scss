@@ -56,17 +56,19 @@ $scale: $imgw / $pagew;
 			box-shadow: 7px 2px 4px 0 rgba(71,71,71,0.09);
 
       transform: 
-        skewX(calc(30deg * var(--flip))) 
-        translateX(calc(var(--image-width) / 25 * var(--flip)));
+        rotateY(calc(var(--flip) * 180deg))
+        skewX(30deg) 
+        translateX(calc(var(--image-width) / 25))
+        ;
     }
 
     &::before {
-      --flip: 1;
+      --flip: 0;
       left: 0;
     }
 
     &::after {
-      --flip: -1;
+      --flip: 1;
       right: 0;
     }
   }
