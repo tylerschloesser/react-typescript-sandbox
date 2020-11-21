@@ -164,20 +164,26 @@ $scale: $imgw / $pagew;
 
     position: absolute;
 
+    --top-with-transition: calc(var(--top) + var(--not-loaded) * 3%);
+    top: var(--top-with-transition);
+    opacity: var(--loaded);
+
     &.--1 {
-      top: -2%;
+      --top: -2%;
       left: 4%;
+      transition-delay: 200ms;
     }
 
     &.--2 {
       --scale: 1.2;
-      top: 11%;
+      --top: 11%;
       right: -3%;
     }
 
     &.--3 {
-      top: 1%;
+      --top: 1%;
       right: -13%;
+      transition-delay: 100ms;
     }
   }
 }
