@@ -119,10 +119,8 @@ $scale: $imgw / $pagew;
     $source-crown-height: 292px;
     --aspect-ratio: #{$source-crown-width / $source-crown-height};
 
-    --scale: calc(var(--image-width) * .25);
-
-    --crown-width: calc(var(--scale));
-    --crown-height: calc(var(--scale) / var(--aspect-ratio));
+    --crown-width: calc(var(--image-width) * .25);
+    --crown-height: calc(var(--crown-width) / var(--aspect-ratio));
 
     --angle: 37deg;
 
