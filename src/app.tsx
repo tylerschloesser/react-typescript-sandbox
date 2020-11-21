@@ -3,6 +3,18 @@ import { useEffect, useState, useRef } from 'react'
 
 import './app.scss'
 
+const StoryImage = ({
+  src,
+  alt,
+}) => {
+  return (
+    <div className="story-image">
+      <div className="__crown" />
+      <img className="__image" src={src} alt={alt} />
+    </div>
+  )
+}
+
 export const App = () => {
 
   const block = 'story-detail-page'
@@ -18,23 +30,29 @@ export const App = () => {
   const alt = ""
 
   return (
-    <>
-      <div className="story-detail-page">
-        <div className="__header">todo header</div>
-        <div className="__image-wrapper">
-          <img className="__image" src={src} alt={alt} />
-          <div className="__crown" />
-        </div>
-        <h1 className="__title">
-          {`Tea Cups and Train Wrecks`}
-        </h1>
-        <div className="__author">
-          {'by'} {`Kelly Yonce`}
-        </div>
-        <div className="episode">
-          {'Hughton Cremmer is just a regular teen. When Nothing becomes Something, all bets are off. But friendship? That\'s forever. Or so...'}
-        </div>
-      </div>
-    </>
+    <div className="demo">
+      <StoryImage src={src} alt={alt} />
+    </div>
   )
+
+  // return (
+  //   <>
+  //     <div className="story-detail-page">
+  //       <div className="__header">todo header</div>
+  //       <div className="__image-wrapper">
+  //         <img className="__image" src={src} alt={alt} />
+  //         <div className="__crown" />
+  //       </div>
+  //       <h1 className="__title">
+  //         {`Tea Cups and Train Wrecks`}
+  //       </h1>
+  //       <div className="__author">
+  //         {'by'} {`Kelly Yonce`}
+  //       </div>
+  //       <div className="episode">
+  //         {'Hughton Cremmer is just a regular teen. When Nothing becomes Something, all bets are off. But friendship? That\'s forever. Or so...'}
+  //       </div>
+  //     </div>
+  //   </>
+  // )
 }

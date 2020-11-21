@@ -10,6 +10,54 @@ $pagew: 375px;
 $imgw: 230px;
 $scale: $imgw / $pagew;
 
+.demo {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.story-image {
+  --image-width: 230px;
+  --image-height: var(--image-width);
+
+  position: relative;
+
+  .__image {
+    display: block;
+    margin: 0 auto;
+    width: var(--image-width);
+    height: var(--image-height);
+    border-radius: 100%;
+  }
+
+  .__crown {
+
+      --crown-width: 46px;
+      --crown-height: 39px;
+
+      --angle: 37deg;
+      --gap: 5px; // distance between image and crown
+
+      position: absolute;
+      top: 50%;
+      left: 50%;
+
+      // start at the center of the image, rotate, and move outside
+      transform:
+        translate(-50%, -50%)
+        rotate(var(--angle))
+        translateY(calc(var(--gap) * -1))
+        translateY(calc(var(--crown-height) / -2))
+        translateY(calc(var(--image-height) / -2));
+
+      width: var(--crown-width);
+      height: var(--crown-height);
+      background: url('/assets/crown.png');
+  }
+}
+
 .story-detail-page {
 
   text-align: center;
