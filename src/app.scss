@@ -50,7 +50,7 @@ $scale: $imgw / $pagew;
 
   $throne-skew-x: 25deg;
 
-  [class^=__throne-bg-] {
+  .__throne.--bg {
 
     --rect-width: calc(var(--image-width) * .24);
     --rect-height: calc(var(--image-height) *.32);
@@ -70,17 +70,17 @@ $scale: $imgw / $pagew;
       ;
   }
 
-  .__throne-bg-l {
+  .__throne.--l {
     --flip: 0;
     left: 0;
   }
 
-  .__throne-bg-r {
+  .__throne.--r {
     --flip: 1;
     right: 0;
   }
 
-  [class^=__throne-fg-] {
+  .__throne.--fg {
     position: absolute;
     bottom: 0;
     height: calc(var(--image-height) * .44);
@@ -105,16 +105,6 @@ $scale: $imgw / $pagew;
       skewX(#{$throne-skew-x})
       translateX(calc(var(--image-width) * .01))
       ;
-  }
-
-  .__throne-fg-l {
-    --flip: 0;
-    left: 0;
-  }
-
-  .__throne-fg-r {
-    --flip: 1;
-    right: 0;
   }
 
   .__crown {
