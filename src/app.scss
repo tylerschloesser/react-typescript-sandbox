@@ -42,6 +42,13 @@ $scale: $imgw / $pagew;
     border-radius: 100%;
   }
 
+  .__fave-fg {
+    &::before {
+      content: '';
+      display: block;
+    }
+  }
+
   .__crown {
 
     $source-crown-width: 350px;
@@ -56,7 +63,7 @@ $scale: $imgw / $pagew;
     --gap: 5px; // distance between image and crown
 
     --angle-with-transition: calc(var(--angle) + var(--loaded) * 5deg);
-    --gap-with-transition: calc(var(--gap) + var(--loaded) * 5px);
+    --gap-with-transition: var(--gap); // disable this transition for now
 
     position: absolute;
     top: 50%;
