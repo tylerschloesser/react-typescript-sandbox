@@ -94,7 +94,7 @@ $scale: $imgw / $pagew;
 
         rotateY(var(--rotate-y-with-transition))
         skewX(#{$throne-skew-x})
-        translateX(calc(var(--image-width) * .01))
+        translateX(calc(var(--rect-width) * .1))
         ;
     }
 
