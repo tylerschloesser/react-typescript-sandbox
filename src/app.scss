@@ -126,7 +126,8 @@ $scale: $imgw / $pagew;
     --angle: 37deg;
 
     // distance between image and crown. ~5px when image is 180px
-    --gap: calc(var(--image-width) * .03);
+    // add 1px to compensate for angled render
+    --gap: calc(var(--image-width) * .03 + 1px);
 
     --angle-with-transition: calc(var(--angle) + var(--not-loaded) * 3deg);
     --gap-with-transition: var(--gap); // disable this transition for now
@@ -139,7 +140,7 @@ $scale: $imgw / $pagew;
     transform:
       translate(-50%, -50%)
       rotate(var(--angle-with-transition))
-      //translateY(calc(var(--gap-with-transition) * -1))
+      translateY(calc(var(--gap-with-transition) * -1))
       translateY(calc(var(--crown-height) / -2))
       translateY(calc(var(--image-height) / -2));
 
