@@ -21,7 +21,7 @@ $scale: $imgw / $pagew;
 }
 
 .story-image {
-  --image-width: 50vw;
+  --image-width: 181px;
   --image-height: var(--image-width);
   --loaded: 0;
   --not-loaded: 1;
@@ -148,6 +148,33 @@ $scale: $imgw / $pagew;
     height: var(--crown-height);
     background: url('/assets/crown.png');
     background-size: cover;
+  }
+
+  .__star {
+    $source-star-width: 16px;
+    $source-star-height: 24px;
+    --aspect-ratio: #{$source-star-width / $source-star-height};
+
+
+    --star-width: calc(var(--scale));
+    --star-height: calc(var(--scale) / var(--aspect-ratio));
+
+    width: var(--star-width);
+    height: var(--star-height);
+
+    position: absolute;
+
+    &.--1 {
+      --scale: calc(var(--image-width) * .09);
+      top: 0;
+      left: 0;
+    }
+
+    &.--2 {
+      --scale: calc(var(--image-width) * .127);
+      top: calc(var(--image-height) * .11);
+      right: calc(var(--image-width) * -.09);
+    }
   }
 }
 
