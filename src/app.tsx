@@ -86,7 +86,7 @@ const TopFaved = () => {
 
   const [loaded, setLoaded] = useState(false)
 
-  const stories = times(5).map(i => ({
+  const stories = times(4).map(i => ({
     key: i,
     alt: '',
     src: `https://source.unsplash.com/random/${
