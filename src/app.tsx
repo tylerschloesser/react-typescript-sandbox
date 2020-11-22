@@ -49,7 +49,6 @@ const StoryImage = ({
       .map(([k]) => `--${k}`)
   ].join(' ')
 
-
   return (
     <div className={className} style={style}>
       {throne && <>
@@ -67,35 +66,37 @@ const StoryImage = ({
   )
 }
 
-export const App = () => {
+const TopFaved = () => {
 
-  const block = 'story-detail-page'
+  const stories = times(5).map(i => ({
+    alt: '',
+    src: `https://source.unsplash.com/random/${
+      `${375 + i}x${375 + i}`
+    }`,
+  }))
 
-  const bem = (element, modifiers: string[] = []) => ([
-    `${block}__${element}`,
-  ].join(' '))
-
-  const x = 400
-  const y = 400
-
-  const alt = ""
+  const skelaton = stories.map(({ src, alt }, i) => (
+    <div key={i} className="__item">
+      <StoryImage
+        key={i}
+        size="33vw"
+        src={`https://source.unsplash.com/random/${
+          `${375 + i}x${375 + i}`
+        }`}
+        alt=""
+      />
+    </div>
+  ))
 
   return (
-    <div className="demo">
-      {times(4).map((i) => (
-        <div key={i} className="__item">
-          <StoryImage
-            key={i}
-            size="33vw"
-            src={`https://source.unsplash.com/random/${
-              `${375 + i}x${375 + i}`
-            }`}
-            alt=""
-          />
-      </div>
-      ))}
+    <div className="top-faved">
+      {skelaton}
     </div>
   )
+}
+
+export const App = () => {
+  return <TopFaved />
 
   // return (
   //   <>
