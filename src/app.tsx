@@ -72,13 +72,21 @@ export const App = () => {
 
   const x = 400
   const y = 400
-    
+
   const alt = ""
 
   return (
     <div className="demo">
       {times(4).map((i) => (
-        <StoryImage key={i} src={`https://source.unsplash.com/random/${x}x${y}`} alt="" />
+        <div key={i} className="__item">
+          <StoryImage
+            key={i}
+            src={`https://source.unsplash.com/random/${
+              `${375 + i}x${375 + i}`
+            }`}
+            alt=""
+          />
+      </div>
       ))}
     </div>
   )
