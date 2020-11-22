@@ -84,6 +84,8 @@ const TopFavedStory = ({
 
 const TopFaved = () => {
 
+  const [loaded, setLoaded] = useState(false)
+
   const stories = times(5).map(i => ({
     key: i,
     alt: '',
@@ -91,6 +93,21 @@ const TopFaved = () => {
       `${375 + i}x${375 + i}`
     }`,
   }))
+
+  const onLoad = async () => await Promise.all(
+    stories.map(({ src }) => new Promise((resolve) => {
+      const image = new Image()
+      image.onload = () => resolve()
+      image.src = src
+    }))
+  )
+
+  useEffect(() => {
+    onLoad().then(() => {
+      console.log('top faved images loaded')
+      setLoaded(true)
+    })
+  }, [])
 
   const skelaton = stories.map(({ key, src, alt }, i) => (
     <TopFavedStory key={key} src={src} alt={alt} skelaton />
