@@ -112,8 +112,8 @@ const TopFaved = () => {
     })
   }, [])
 
-  const skelaton = stories.map(({ key, src, alt }, i) => (
-    <TopFavedStory key={key} src={src} alt={alt} num={i + 1} />
+  const skelaton = stories.map(({ src, alt }, i) => (
+    <TopFavedStory key={i} src={src} alt={alt} num={i + 1} />
   ))
 
   const className = [
