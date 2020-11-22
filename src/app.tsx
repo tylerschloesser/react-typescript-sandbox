@@ -3,6 +3,18 @@ import { useEffect, useState, useRef } from 'react'
 
 import './app.scss'
 
+const Star = ({ i }) => (
+  <svg className={`__star --${i + 1}`} viewBox="0 0 16 24">
+    <defs>
+      <linearGradient id="story-image-star-gradient" gradientTransform="rotate(90)">
+        <stop stopColor="#FFE7C2" offset="0%"/>
+        <stop stopColor="#F87611" offset="100%"/>
+      </linearGradient>
+    </defs>
+    <path d="M5.4 9.3C6.7 8 7.6 4.9 8 0 8.3 4.9 9.1 8 10.4 9.3 11.7 10.6 13.6 11.4 16 11.7 13.6 12 11.7 12.7 10.4 14 9.1 15.3 8.3 18.7 8 24.1 7.6 18.7 6.7 15.3 5.4 14 4 12.7 2.2 12 0 11.7 2.2 11.4 4 10.6 5.4 9.3Z" fill="url(#story-image-star-gradient)" />
+  </svg>
+)
+
 const StoryImage = ({
   src,
   alt,
@@ -44,17 +56,7 @@ const StoryImage = ({
         <div className="__throne --fg --l" />
         <div className="__throne --fg --r" />
       </>}
-      {stars && times(3).map(i => (
-        <svg className={`__star --${i + 1}`} viewBox="0 0 16 24">
-          <defs>
-            <linearGradient id="story-image-star-gradient" gradientTransform="rotate(90)">
-              <stop stopColor="#FFE7C2" offset="0%"/>
-              <stop stopColor="#F87611" offset="100%"/>
-            </linearGradient>
-          </defs>
-          <path d="M5.4 9.3C6.7 8 7.6 4.9 8 0 8.3 4.9 9.1 8 10.4 9.3 11.7 10.6 13.6 11.4 16 11.7 13.6 12 11.7 12.7 10.4 14 9.1 15.3 8.3 18.7 8 24.1 7.6 18.7 6.7 15.3 5.4 14 4 12.7 2.2 12 0 11.7 2.2 11.4 4 10.6 5.4 9.3Z" fill="url(#story-image-star-gradient)" />
-        </svg>
-      ))}
+      {stars && times(3).map(i => <Star key={i} i={i} />)}
     </div>
   )
 }
