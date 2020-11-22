@@ -18,12 +18,12 @@ html, body, #root {
 
 .demo {
   width: 100vw;
-
-  // 100% instead of 100vh because https://developers.google.com/web/updates/2016/12/url-bar-resizing
-  height: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+
+  & > div {
+    margin: 10vh;
+  }
 }
 
 .story-image {

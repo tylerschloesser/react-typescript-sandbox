@@ -3,6 +3,14 @@ import { useEffect, useState, useRef } from 'react'
 
 import './app.scss'
 
+const times = n => {
+  const arr = []
+  for (let i = 0; i < n; i++) {
+    arr.push(i)
+  }
+  return arr
+}
+
 const Star = ({ i }) => (
   <svg className={`__star --${i + 1}`} viewBox="0 0 16 24">
     <defs>
@@ -36,13 +44,6 @@ const StoryImage = ({
       .map(([k]) => `--${k}`)
   ].join(' ')
 
-  const times = n => {
-    const arr = []
-    for (let i = 0; i < n; i++) {
-      arr.push(i)
-    }
-    return arr
-  }
 
   return (
     <div className={className}>
@@ -71,13 +72,14 @@ export const App = () => {
 
   const x = 400
   const y = 400
-  const src =
-    `https://source.unsplash.com/random/${x}x${y}`
+    
   const alt = ""
 
   return (
     <div className="demo">
-      <StoryImage src={src} alt={alt} />
+      {times(4).map((i) => (
+        <StoryImage key={i} src={`https://source.unsplash.com/random/${x}x${y}`} alt="" />
+      ))}
     </div>
   )
 
