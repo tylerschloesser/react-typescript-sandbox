@@ -12,9 +12,15 @@ $pagew: 375px;
 $imgw: 230px;
 $scale: $imgw / $pagew;
 
+html, body, #root {
+  height: 100%;
+}
+
 .demo {
   width: 100vw;
-  height: 100vh;
+
+  // 100% instead of 100vh because https://developers.google.com/web/updates/2016/12/url-bar-resizing
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
