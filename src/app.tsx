@@ -24,6 +24,7 @@ const Star = ({ i }) => (
 )
 
 const StoryImage = ({
+  size = '181px', // size in the sketch mocks
   src,
   alt,
 }) => {
@@ -37,6 +38,10 @@ const StoryImage = ({
 
   const modifiers = { loaded }
 
+  const style = {
+    '--image-width': size,
+  } as React.CSSProperties
+
   const className = [
     'story-image',
     ...Object.entries(modifiers)
@@ -46,7 +51,7 @@ const StoryImage = ({
 
 
   return (
-    <div className={className}>
+    <div className={className} style={style}>
       {throne && <>
         <div className="__throne --bg --l" />
         <div className="__throne --bg --r" />
@@ -81,6 +86,7 @@ export const App = () => {
         <div key={i} className="__item">
           <StoryImage
             key={i}
+            size="33vw"
             src={`https://source.unsplash.com/random/${
               `${375 + i}x${375 + i}`
             }`}

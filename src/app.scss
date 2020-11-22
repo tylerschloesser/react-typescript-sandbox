@@ -18,13 +18,18 @@ html, body, #root {
 
 .demo {
   width: 100vw;
+
+  // https://developers.google.com/web/updates/2016/12/url-bar-resizing
+  max-width: 100%;
+
   display: flex;
   flex-direction: column;
+  align-items: center;
+
+
 }
 
 .story-image {
-  --image-width: 50vw;
-  //--image-width: 181px;
   --image-height: var(--image-width);
   --loaded: 0;
   --not-loaded: 1;
