@@ -77,14 +77,7 @@ const TopFaved = () => {
 
   const skelaton = stories.map(({ src, alt }, i) => (
     <div key={i} className="__item">
-      <StoryImage
-        key={i}
-        size="33vw"
-        src={`https://source.unsplash.com/random/${
-          `${375 + i}x${375 + i}`
-        }`}
-        alt=""
-      />
+      <StoryImage key={i} size="33vw" src={src} alt={alt} />
     </div>
   ))
 
