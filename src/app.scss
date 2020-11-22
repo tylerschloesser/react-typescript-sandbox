@@ -41,10 +41,15 @@ html, body, #root {
 .story-image {
   --image-height: var(--image-width);
 
-	&, * {
+	* {
     transition: all 1s cubic-bezier(0, 0, 0, 1);
 	}
-
+  
+  @for $i from 0 through 3 {
+    *:nth-child(n + #{$i}) {
+      --transition-delay: #{$i * 200ms};
+    }
+  }
 
   position: relative;
   opacity: var(--loaded);
