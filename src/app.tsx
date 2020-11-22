@@ -113,7 +113,9 @@ const TopFaved = () => {
     <TopFavedStory key={key} src={src} alt={alt} skelaton />
   ))
 
-  const className = 'top-faved'
+  const className = [
+    'top-faved',
+  ].join(' ')
 
   return (
     <div className={className}>
