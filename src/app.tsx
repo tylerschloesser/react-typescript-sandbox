@@ -79,6 +79,7 @@ const TopFavedStory = ({
   ].filter(c => c !== null).join(' ')
   return (
     <div className={className}>
+      <h2>{num}</h2>
       <StoryImage size="33vw" src={src} alt={alt} />
     </div>
   )
