@@ -1,6 +1,6 @@
 html {
   --bg: white;
-  //--bg: #232323;
+  --bg: #232323;
   // --fg: #d8d8d8;
 
 
@@ -52,6 +52,10 @@ html, body, #root {
     margin: 0 auto;
     width: var(--image-width);
     height: var(--image-height);
+
+    // add some depth to improve images similar to the background color
+    box-shadow: 0px 0px 1px rgba(255,255,255,.5);
+    
     border-radius: 100%;
   }
 
