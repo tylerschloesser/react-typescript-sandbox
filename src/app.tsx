@@ -113,8 +113,10 @@ const TopFaved = () => {
     <TopFavedStory key={key} src={src} alt={alt} skelaton />
   ))
 
+  const className = 'top-faved'
+
   return (
-    <div className="top-faved">
+    <div className={className}>
       {skelaton}
     </div>
   )
