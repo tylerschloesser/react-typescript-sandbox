@@ -69,7 +69,7 @@ const StoryImage = ({
 const TopFavedStory = ({
   src,
   alt,
-  skelaton,
+  skelaton = false,
 }) => {
   const className = [
     '__story',
@@ -110,12 +110,13 @@ const TopFaved = () => {
   }, [])
 
   const skelaton = stories.map(({ key, src, alt }, i) => (
-    <TopFavedStory key={key} src={src} alt={alt} skelaton />
+    <TopFavedStory key={key} src={src} alt={alt} />
   ))
 
   const className = [
     'top-faved',
-  ].join(' ')
+    loaded ? '--loaded' : null,
+  ].filter(c => c).join(' ')
 
   return (
     <div className={className}>

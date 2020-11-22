@@ -29,21 +29,22 @@ html, body, #root {
   .__story {
     margin: 5vh 0;
   }
+
+  --loaded: 0;
+  --not-loaded: 1;
+  &.--loaded {
+    --loaded: 1;
+    --not-loaded: 0;
+  }
 }
 
 .story-image {
   --image-height: var(--image-width);
-  --loaded: 0;
-  --not-loaded: 1;
 
 	&, * {
     transition: all 1s cubic-bezier(0, 0, 0, 1);
 	}
 
-  &.--loaded {
-    --loaded: 1;
-    --not-loaded: 0;
-  }
 
   position: relative;
   opacity: var(--loaded);
