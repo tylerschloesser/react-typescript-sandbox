@@ -68,7 +68,6 @@ const StoryImage = ({
 }
 
 const TopFavedStory = ({
-  key,
   src,
   alt,
   skelaton = false,
