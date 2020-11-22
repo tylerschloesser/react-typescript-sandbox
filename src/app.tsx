@@ -66,19 +66,29 @@ const StoryImage = ({
   )
 }
 
+const TopFavedStory = ({
+  src,
+  alt,
+}) => {
+  return (
+    <div className="__story-image">
+      <StoryImage size="33vw" src={src} alt={alt} />
+    </div>
+  )
+}
+
 const TopFaved = () => {
 
   const stories = times(5).map(i => ({
+    key: i,
     alt: '',
     src: `https://source.unsplash.com/random/${
       `${375 + i}x${375 + i}`
     }`,
   }))
 
-  const skelaton = stories.map(({ src, alt }, i) => (
-    <div key={i} className="__item">
-      <StoryImage key={i} size="33vw" src={src} alt={alt} />
-    </div>
+  const skelaton = stories.map(({ key, src, alt }, i) => (
+    <TopFavedStory key={key} src={src} alt={alt} />
   ))
 
   return (
