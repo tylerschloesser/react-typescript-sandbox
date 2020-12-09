@@ -28,11 +28,16 @@ nav {
   }
 
   a {
+    text-decoration: none;
     color: #444;
     &:hover {
+      color: #777;
+    }
+
+    &.active {
       color: #aaa;
     }
-    text-decoration: none;
+
     font: 2vmin AmazonEmber-Light;
 
     display: block;

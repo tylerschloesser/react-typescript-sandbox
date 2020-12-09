@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, NavLink } from 'react-router-dom'
 
 import { MediumClap } from './medium-clap'
 
@@ -35,7 +35,9 @@ export const App = () => {
           <ul>
             {pages.map(({ path, name }) => (
               <li>
-                <Link to={path}>{name}</Link>
+                <NavLink exact to={path} activeClassName="active">
+                  {name}
+                </NavLink>
               </li>
             ))}
           </ul>
