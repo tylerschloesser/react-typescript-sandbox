@@ -15,18 +15,36 @@ const ClapOn = () => (
 	</svg>
 )
 
+const BOUNCE_DURATION = 400 // ms
+
 export const App = () => {
   const [on, setOn] = useState(false)
+  const [bounce, setBounce] = useState(false)
+
+
   return (
     <div className="app" onClick={() => setOn(false)}>
       <button
         className="clap-button"
         onClick={(e) => {
           setOn(true)
+          if (!bounce) {
+            setBounce(true)
+            setTimeout(() => {
+              setBounce(false)
+            }, BOUNCE_DURATION)
+          }
           e.stopPropagation()
         }}
       >
-        {on ? <ClapOn /> : <ClapOff />}
+        <div
+          className={`clap-icon ${bounce ? '--bounce' : ''}`}
+          style={{
+            '--bounce-duration': `${BOUNCE_DURATION}ms`,
+          } as React.CSSProperties}
+        >
+          {on ? <ClapOn /> : <ClapOff />}
+        </div>
       </button>
     </div>
   )

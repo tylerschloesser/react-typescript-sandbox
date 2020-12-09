@@ -46,7 +46,12 @@
       fill: #bbb;
     }
 
+  }
+}
+
+.clap-icon {
+  &.--bounce {
     animation-name: bounce;
-    animation-duration: .4s;
+    animation-duration: var(--bounce-duration);
   }
 }
