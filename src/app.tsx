@@ -6,12 +6,6 @@ import { BackgroundTricks } from './background-tricks'
 
 import './app.scss'
 
-interface Page {
-  path: string
-  name: string
-  component: React.Component,
-}
-
 const pages = [
   {
     path: '/',
