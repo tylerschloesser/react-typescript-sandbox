@@ -27,6 +27,11 @@ const pages = [
 export const App = () => (
   <div className="app">
     <Router>
+      <Switch>
+        {pages.map(({ path, component }) => (
+          <Route key={path} exact path={path} component={component} />
+        ))}
+      </Switch>
       <nav>
         <ul>
           {pages.map(({ path, name }) => (
@@ -38,11 +43,6 @@ export const App = () => (
           ))}
         </ul>
       </nav>
-      <Switch>
-        {pages.map(({ path, component }) => (
-          <Route key={path} exact path={path} component={component} />
-        ))}
-      </Switch>
     </Router>
   </div>
 )

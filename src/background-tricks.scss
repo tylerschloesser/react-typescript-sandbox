@@ -1,6 +1,35 @@
 @use 'sass:math';
 @use 'sass:list';
 
+.background-tricks {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & > nav {
+    position: fixed;
+    left: 0;
+
+    a {
+      display: block;
+      font: 5vmin AmazonEmber-Light;
+      padding: 5vmin;
+      text-decoration: none;
+
+      color: var(--color-nav-link);
+      &:hover {
+        color: var(--color-nav-link-hover);
+      }
+      &.active {
+        color: var(--color-nav-link-active);
+      }
+    }
+  }
+}
+
 .radial-gradient {
   width: 50vmin;
   height: 50vmin;
