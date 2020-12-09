@@ -43,7 +43,11 @@ export const MediumClap = () => {
   const [on, setOn] = useState(false)
   const [bounce, setBounce] = useState(false)
   const [confettis, setConfettis] = useState({})
+  const [count, setCount] = useState(0)
 
+  const [showCount, setShowCount] = useState(false)
+
+  console.log(JSON.stringify(confettis, null, 2))
   return (
     <div
       className="medium-clap" onClick={() => setOn(false)}
@@ -54,17 +58,25 @@ export const MediumClap = () => {
       <button
         className="clap-button"
         onClick={(e) => {
-          setOn(true)
+          if (!on) {
+            setOn(true)
+          }
           if (!bounce) {
             setBounce(true)
-            setConfettis(old => ({
-              ...old,
-              [Date.now()]: `${Math.random() * 360}deg`,
-            }))
-            setTimeout(() => {
-              setBounce(false)
-            }, CONFETTI_DURATION)
+            setTimeout(() => setBounce(false), CONFETTI_DURATION)
           }
+          const confettiKey = `${Date.now()}`
+          setConfettis(old => ({
+            ...old,
+            [confettiKey]: `${Math.random() * 360}deg`,
+          }))
+          setTimeout(() => {
+            console.log('deleting', confettiKey)
+            setConfettis(old => {
+              delete old[confettiKey]
+              return { ...old }
+            })
+          }, CONFETTI_DURATION)
           e.stopPropagation()
         }}
       >

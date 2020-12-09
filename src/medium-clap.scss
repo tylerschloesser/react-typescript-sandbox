@@ -58,7 +58,7 @@
 
 @keyframes confetti {
   0% {
-    transform: scale(1.2) rotate(var(--angle));
+    transform: scale(1) rotate(var(--angle));
     opacity: 0;
   }
   50% {
@@ -68,7 +68,7 @@
   }
   100% {
     opacity: 0;
-    transform: scale(1.8) rotate(var(--angle));
+    transform: scale(2) rotate(var(--angle));
   }
 }
 
