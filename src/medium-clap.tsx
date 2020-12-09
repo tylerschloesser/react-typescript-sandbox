@@ -24,6 +24,7 @@ const ClapOn = () => (
 )
 
 const CONFETTI_DURATION = 400 // ms
+const COUNT_DURATION = 1000 // ms
 
 const Confetti = ({ angle }) => (
   <div 
@@ -45,7 +46,7 @@ export const MediumClap = () => {
   const [confettis, setConfettis] = useState({})
   const [count, setCount] = useState(0)
 
-  const [showCount, setShowCount] = useState(false)
+  const [countTimeout, setCountTimeout] = useState(null)
 
   console.log(JSON.stringify(confettis, null, 2))
   return (
@@ -53,11 +54,21 @@ export const MediumClap = () => {
       className="medium-clap" onClick={() => setOn(false)}
       style={{
         '--confetti-duration': `${CONFETTI_DURATION}ms`,
+        '--count-duration': `${COUNT_DURATION}ms`,
       } as React.CSSProperties}
     >
       <button
         className="clap-button"
         onClick={(e) => {
+          setCountTimeout(old => {
+            if (old) {
+              clearTimeout(old)
+            }
+            return setTimeout(() => {
+              setCountTimeout(null)
+            }, COUNT_DURATION)
+          })
+
           if (!on) {
             setOn(true)
           }
@@ -88,6 +99,7 @@ export const MediumClap = () => {
         {Object.entries(confettis).map(([ key, angle ]) => (
           <Confetti key={key} angle={angle} />
         ))}
+    {/*countTimeout && <div className="count">{count}</div>*/}
       </button>
     </div>
   )
