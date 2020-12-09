@@ -2,9 +2,13 @@ html {
   background-image: radial-gradient(rgba(16, 20, 33, .9), rgb(16, 20, 33));
   color: #bbb;
   height: 100vh;
-  font: 48px Arial;
   letter-spacing: .03em;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.clap {
+  width: 25vmin;
+  height: 25vmin;
 }
