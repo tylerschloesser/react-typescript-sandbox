@@ -16,10 +16,16 @@ const ClapOn = () => (
 )
 
 export const App = () => {
-  const [on, setOn] = useState(true)
+  const [on, setOn] = useState(false)
   return (
-    <div className="app">
-      <button className="clap-button" onClick={() => setOn(!on)}>
+    <div className="app" onClick={() => setOn(false)}>
+      <button
+        className="clap-button"
+        onClick={(e) => {
+          setOn(true)
+          e.stopPropagation()
+        }}
+      >
         {on ? <ClapOn /> : <ClapOff />}
       </button>
     </div>
