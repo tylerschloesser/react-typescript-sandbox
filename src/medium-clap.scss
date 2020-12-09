@@ -60,23 +60,6 @@
   }
 }
 
-@function circles-background($num: 5, $circle-diameter: 5%) {
-    $result: ();
-    @for $i from 0 to $num {
-      $angle: 2rad * math.$pi / 5 * $i;
-      $x: math.sin($angle);
-      $y: math.cos($angle);
-      $xp: math.round($x * (50% - $circle-diameter) + 50%);
-      $yp: math.round($y * (50% - $circle-diameter) + 50%);
-      $gradient: radial-gradient(
-        $circle-diameter $circle-diameter at $xp $yp, 
-        var(--color) 0, 
-        var(--color) 99%, transparent 100%);
-      $result : list.append($result, $gradient, $separator: comma);
-    }
-    @return $result;
-}
-
 @keyframes confetti {
 }
 
