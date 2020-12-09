@@ -27,13 +27,18 @@ const BOUNCE_DURATION = 400 // ms
 
 const Confetti = () => (
   <div className="confetti">
-    {times(5).map(i => <div key={i} />)}
+    <div className="circles">
+      {times(5).map(i => <div key={i} />)}
+    </div>
+    <div className="triangles">
+      {times(5).map(i => <div key={i} />)}
+    </div>
   </div>
 )
 
 export const MediumClap = () => {
   const [on, setOn] = useState(false)
-  const [bounce, setBounce] = useState(false)
+  const [bounce, setBounce] = useState(true)
 
   return (
     <div className="medium-clap" onClick={() => setOn(false)}>

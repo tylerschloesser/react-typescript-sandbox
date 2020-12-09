@@ -67,28 +67,62 @@
   66% {
   }
   100% {
-    opacity: 0;
+    //opacity: 0;
     transform: scale(1.8);
   }
 }
 
 .confetti {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
+
+  &, .circles, .triangles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
 
   animation-name: confetti;
   animation-fill-mode: forwards;
   animation-duration: 1s;
   animation-timing-function: cubic-bezier(0, 0.5, 0, 1);
 
-  & > div {
+  .circles > div {
+    --color: rgb(66,134,150);
     --size: 5%;
     width: var(--size);
     height: var(--size);
-    background-color: rgb(64,131,147);
+    background-color: var(--color);
+    border-radius: 100%;
+
+    position: absolute;
+    $num: 5;
+    @for $i from 1 through $num {
+      $angle: 2rad * math.$pi / $num * ($i - 1);
+      $x: math.sin($angle);
+      $y: math.cos($angle);
+      $xp: math.round(50% + $x * 50%);
+      $yp: math.round(50% + $y * 50%);
+      @debug $angle $x $y $xp $yp;
+
+      &:nth-child(#{$i}) {
+        left: $xp;
+        top: $yp;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  .triangles {
+    transform: rotate(10deg);
+  }
+
+  .triangles > div {
+    --color: rgb(222,120,118);
+    --size: 5%;
+    width: var(--size);
+    height: var(--size);
+    background-color: var(--color);
     border-radius: 100%;
 
     position: absolute;
