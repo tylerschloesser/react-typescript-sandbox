@@ -1,0 +1,64 @@
+@use 'sass:math';
+@use 'sass:list';
+
+.radial-gradient {
+  width: 50vmin;
+  height: 50vmin;
+
+  border: 1px solid #999;
+  border-radius: 100%;
+
+  --color: rgb(64,131,147);
+
+  position: relative;
+  &:before {
+    position: absolute;
+    content: '';
+    display: block;
+    width: 100%;
+    top: 50%;
+    border-top: 1px solid #999;
+  }
+  &:after {
+    position: absolute;
+    content: '';
+    display: block;
+    height: 100%;
+    left: 50%;
+    border-left: 1px solid #999;
+  }
+
+  $circle-diameter: 5%;
+
+  @function gen() {
+    $result: '';
+    $result: radial-gradient(10% circle at 90% 50%, var(--color) 0, var(--color) 99%, transparent 100%);
+    //$result : $result + ',' + radial-gradient(closest-side circle at 10% 50%, red 0, red 99%, transparent 100%);
+    @return $result;
+  }
+
+  @function gen2() {
+    $result: ();
+
+    @for $i from 0 to 5 {
+      $angle: 2rad * math.$pi / 5 * $i;
+      $x: math.sin($angle);
+      $y: math.cos($angle);
+
+      @debug $x $y;
+
+      $xp: math.round($x * (50% - $circle-diameter) + 50%);
+      $yp: math.round($y * (50% - $circle-diameter) + 50%);
+      @debug $xp $yp;
+
+      $gradient: radial-gradient($circle-diameter $circle-diameter at $xp $yp, var(--color) 0, var(--color) 99%, transparent 100%);
+      $result : list.append($result, $gradient, $separator: comma);
+    }
+
+    //@debug list.nth($result, 1);
+    //@return list.nth($result, 1);
+    @return $result;
+  }
+
+  background: gen2();
+}
