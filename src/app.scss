@@ -1,9 +1,13 @@
 .app {
   background-image: radial-gradient(rgba(16, 20, 33, .9), rgb(16, 20, 33));
-  color: #bbb;
   height: 100vh;
-  letter-spacing: .03em;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+h1 {
+  font: 8vmin BookerlyDisplay-Light;
+  letter-spacing: .03em;
+  color: #777;
 }

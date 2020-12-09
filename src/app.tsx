@@ -11,7 +11,7 @@ interface Page {
   component: React.Component,
 }
 
-const Home = () => <h1>// TODO be creative.</h1>
+const Home = () => <h1>Hello World</h1>
 
 export const App = () => {
 
