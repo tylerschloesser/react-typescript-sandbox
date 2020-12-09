@@ -91,3 +91,15 @@
 
   background: gen2();
 }
+
+.conic-gradient {
+  width: 50vmin;
+  height: 50vmin;
+  border: 1px solid #aaa;
+
+  $start: (1 / math.tan(2));
+  $end: $start * 2 * -1;
+
+  @debug $start $end;
+  background: conic-gradient(from #{$start + rad} at 50% 100%, red #{$end + rad}, transparent #{$end + rad} 270deg);
+}
