@@ -60,6 +60,22 @@
   }
 }
 
+@keyframes confetti {
+  0% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  66% {
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.8);
+  }
+}
+
 .confetti {
   position: absolute;
   top: 0;
@@ -67,7 +83,10 @@
   height: 100%;
   width: 100%;
 
-  transform: scale(1.2);
+  animation-name: confetti;
+  animation-fill-mode: forwards;
+  animation-duration: 1s;
+  animation-timing-function: cubic-bezier(0, 0.5, 0, 1);
 
   & > div {
     --size: 5%;

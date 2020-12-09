@@ -44,7 +44,7 @@ export const MediumClap = () => {
           if (!bounce) {
             setBounce(true)
             setTimeout(() => {
-              //setBounce(false)
+              setBounce(false)
             }, BOUNCE_DURATION)
           }
           e.stopPropagation()
@@ -58,7 +58,7 @@ export const MediumClap = () => {
         >
           {on ? <ClapOn /> : <ClapOff />}
         </div>
-        <Confetti />
+        {bounce && <Confetti />}
       </button>
     </div>
   )
