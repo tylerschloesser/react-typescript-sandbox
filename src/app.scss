@@ -8,7 +8,21 @@ html {
   justify-content: center;
 }
 
-.clap {
+.clap-button {
+  background-color: unset;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
+
+.clap-svg {
   width: 25vmin;
   height: 25vmin;
+  fill: #bbb;
+
+  &:hover {
+    fill: #eee;
+  }
 }
