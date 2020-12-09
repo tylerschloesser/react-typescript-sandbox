@@ -1,3 +1,6 @@
+@use 'sass:math';
+@use 'sass:list';
+
 .medium-clap {
   width: 100%;
   height: 100%;
@@ -7,6 +10,7 @@
 }
 
 .clap-button {
+  position: relative;
   background-color: unset;
   border: none;
   outline: none;
@@ -53,3 +57,32 @@
     animation-duration: var(--bounce-duration);
   }
 }
+
+@function circles-background($num: 5, $circle-diameter: 5%) {
+    $result: ();
+    @for $i from 0 to $num {
+      $angle: 2rad * math.$pi / 5 * $i;
+      $x: math.sin($angle);
+      $y: math.cos($angle);
+      $xp: math.round($x * (50% - $circle-diameter) + 50%);
+      $yp: math.round($y * (50% - $circle-diameter) + 50%);
+      $gradient: radial-gradient(
+        $circle-diameter $circle-diameter at $xp $yp, 
+        var(--color) 0, 
+        var(--color) 99%, transparent 100%);
+      $result : list.append($result, $gradient, $separator: comma);
+    }
+    @return $result;
+}
+
+.confetti {
+  --padding: 10%;
+  --color: rgb(64,131,147);
+  position: absolute;
+  top: calc(var(--padding) * -1);
+  left: calc(var(--padding) * -1);
+  width: calc(100% + var(--padding) * 2);
+  height: calc(100% + var(--padding) * 2);
+  background: circles-background($circle-diameter: 3%);
+}
+

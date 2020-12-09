@@ -44,6 +44,7 @@ export const MediumClap = () => {
         >
           {on ? <ClapOn /> : <ClapOff />}
         </div>
+        <div className="confetti" />
         {bounce && <div className="confetti" />}
       </button>
     </div>
