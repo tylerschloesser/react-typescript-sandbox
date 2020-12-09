@@ -16,7 +16,7 @@ const ClapOn = () => (
 )
 
 export const App = () => {
-  const [on, setOn] = useState(false)
+  const [on, setOn] = useState(true)
   return (
     <div className="app">
       <button className="clap-button" onClick={() => setOn(!on)}>

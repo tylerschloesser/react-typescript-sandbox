@@ -17,6 +17,18 @@ html {
   padding: 0;
 }
 
+@keyframes bounce {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .clap-svg {
   width: 25vmin;
   height: 25vmin;
@@ -33,5 +45,8 @@ html {
     &:hover {
       fill: #bbb;
     }
+
+    animation-name: bounce;
+    animation-duration: .4s;
   }
 }
