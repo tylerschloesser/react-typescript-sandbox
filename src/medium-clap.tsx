@@ -23,7 +23,7 @@ const ClapOn = () => (
 	</svg>
 )
 
-const BOUNCE_DURATION = 400 // ms
+const CONFETTI_DURATION = 400 // ms
 
 const Confetti = () => (
   <div className="confetti">
@@ -38,10 +38,15 @@ const Confetti = () => (
 
 export const MediumClap = () => {
   const [on, setOn] = useState(false)
-  const [bounce, setBounce] = useState(true)
+  const [bounce, setBounce] = useState(false)
 
   return (
-    <div className="medium-clap" onClick={() => setOn(false)}>
+    <div
+      className="medium-clap" onClick={() => setOn(false)}
+      style={{
+        '--confetti-duration': `${CONFETTI_DURATION}ms`,
+      } as React.CSSProperties}
+    >
       <button
         className="clap-button"
         onClick={(e) => {
@@ -50,16 +55,13 @@ export const MediumClap = () => {
             setBounce(true)
             setTimeout(() => {
               setBounce(false)
-            }, BOUNCE_DURATION)
+            }, CONFETTI_DURATION)
           }
           e.stopPropagation()
         }}
       >
         <div
           className={`clap-icon ${bounce ? '--bounce' : ''}`}
-          style={{
-            '--bounce-duration': `${BOUNCE_DURATION}ms`,
-          } as React.CSSProperties}
         >
           {on ? <ClapOn /> : <ClapOff />}
         </div>

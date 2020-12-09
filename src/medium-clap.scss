@@ -51,7 +51,7 @@
 .clap-icon {
   &.--bounce {
     animation-name: bounce;
-    animation-duration: var(--bounce-duration);
+    animation-duration: var(--confetti-duration);
     animation-fill-mode: forwards;
   }
 }
@@ -67,7 +67,7 @@
   66% {
   }
   100% {
-    //opacity: 0;
+    opacity: 0;
     transform: scale(1.8);
   }
 }
@@ -84,8 +84,8 @@
 
   animation-name: confetti;
   animation-fill-mode: forwards;
-  animation-duration: 1s;
-  animation-timing-function: cubic-bezier(0, 0.5, 0, 1);
+  animation-duration: var(--confetti-duration);
+  animation-timing-function: cubic-bezier(0, 0, 0, 1);
 
   .circles > div {
     --color: rgb(66,134,150);
