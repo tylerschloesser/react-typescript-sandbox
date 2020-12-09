@@ -32,6 +32,7 @@
 }
 
 .clap-svg {
+  display: block;
   width: 25vmin;
   height: 25vmin;
 
@@ -77,34 +78,7 @@
 }
 
 @keyframes confetti {
-  0% {
-    transform: scale(1);
-    opacity: 0;
-  }
-  40% {
-    opacity: 1;
-  }
-  80% {
-    opacity: 0;
-  }
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
 }
 
 .confetti {
-  --padding: 10%;
-  --color: rgb(64,131,147);
-  position: absolute;
-  top: calc(var(--padding) * -1);
-  left: calc(var(--padding) * -1);
-  width: calc(100% + var(--padding) * 2);
-  height: calc(100% + var(--padding) * 2);
-  background: circles-background($circle-diameter: 3%);
-
-  animation-name: confetti;
-  animation-duration: 400ms;
-  animation-fill-mode: forwards;
 }
-
