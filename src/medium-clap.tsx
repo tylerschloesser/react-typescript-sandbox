@@ -25,8 +25,11 @@ const ClapOn = () => (
 
 const CONFETTI_DURATION = 400 // ms
 
-const Confetti = () => (
-  <div className="confetti">
+const Confetti = ({ angle }) => (
+  <div 
+    className="confetti"
+    style={{ '--angle': angle } as React.CSSProperties}
+  >
     <div className="circles">
       {times(5).map(i => <div key={i} />)}
     </div>
@@ -39,6 +42,7 @@ const Confetti = () => (
 export const MediumClap = () => {
   const [on, setOn] = useState(false)
   const [bounce, setBounce] = useState(false)
+  const [confettis, setConfettis] = useState({})
 
   return (
     <div
@@ -53,6 +57,10 @@ export const MediumClap = () => {
           setOn(true)
           if (!bounce) {
             setBounce(true)
+            setConfettis(old => ({
+              ...old,
+              [Date.now()]: `${Math.random() * 360}deg`,
+            }))
             setTimeout(() => {
               setBounce(false)
             }, CONFETTI_DURATION)
@@ -65,7 +73,9 @@ export const MediumClap = () => {
         >
           {on ? <ClapOn /> : <ClapOff />}
         </div>
-        {bounce && <Confetti />}
+        {Object.entries(confettis).map(([ key, angle ]) => (
+          <Confetti key={key} angle={angle} />
+        ))}
       </button>
     </div>
   )
