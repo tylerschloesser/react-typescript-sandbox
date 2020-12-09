@@ -2,7 +2,7 @@ import * as React from 'react'
 import { BrowserRouter as Router, Switch, Route, NavLink } from 'react-router-dom'
 
 import { MediumClap } from './medium-clap'
-import { GradientTricks } from './gradient-tricks'
+import { BackgroundTricks } from './background-tricks'
 
 import './app.scss'
 
@@ -24,9 +24,9 @@ const pages = [
     component: MediumClap,
   },
   {
-    path: '/gradient-tricks',
-    name: 'Gradient Tricks',
-    component: GradientTricks,
+    path: '/background-tricks',
+    name: 'Background Tricks',
+    component: BackgroundTricks,
   },
 ]
 
@@ -36,7 +36,7 @@ export const App = () => (
       <nav>
         <ul>
           {pages.map(({ path, name }) => (
-            <li>
+            <li key={path}>
               <NavLink exact to={path} activeClassName="active">
                 {name}
               </NavLink>
@@ -45,8 +45,8 @@ export const App = () => (
         </ul>
       </nav>
       <Switch>
-        {pages.map(({ path, component }, i) => (
-          <Route exact path={path} component={component} />
+        {pages.map(({ path, component }) => (
+          <Route key={path} exact path={path} component={component} />
         ))}
       </Switch>
     </Router>
