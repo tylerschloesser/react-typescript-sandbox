@@ -2,6 +2,7 @@ import * as React from 'react'
 import { BrowserRouter as Router, Switch, Route, NavLink } from 'react-router-dom'
 
 import { MediumClap } from './medium-clap'
+import { GradientTricks } from './gradient-tricks'
 
 import './app.scss'
 
@@ -25,6 +26,11 @@ export const App = () => {
       path: '/medium-clap',
       name: 'Medium Clap',
       component: MediumClap,
+    },
+    {
+      path: '/gradient-tricks',
+      name: 'Gradient Tricks',
+      component: GradientTricks,
     },
   ]
 
