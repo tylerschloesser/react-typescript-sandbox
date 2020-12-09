@@ -17,10 +17,11 @@ const ClapOn = () => (
 
 const BOUNCE_DURATION = 400 // ms
 
-export const App = () => {
-  const [on, setOn] = useState(false)
-  const [bounce, setBounce] = useState(false)
+const START_ON = true
 
+export const App = () => {
+  const [on, setOn] = useState(START_ON)
+  const [bounce, setBounce] = useState(START_ON)
 
   return (
     <div className="app" onClick={() => setOn(false)}>
@@ -45,6 +46,7 @@ export const App = () => {
         >
           {on ? <ClapOn /> : <ClapOff />}
         </div>
+        {bounce && <div className="confetti" />}
       </button>
     </div>
   )
