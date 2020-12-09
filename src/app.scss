@@ -11,3 +11,31 @@ h1 {
   letter-spacing: .03em;
   color: #777;
 }
+
+nav {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+
+  ul {
+    display: flex;
+    flex-direction: row;
+  }
+
+  li {
+    flex-grow: 1;
+    text-align: center;
+  }
+
+  a {
+    color: #444;
+    &:hover {
+      color: #aaa;
+    }
+    text-decoration: none;
+    font: 2vmin AmazonEmber-Light;
+
+    display: block;
+    padding: 2vmin;
+  }
+}
