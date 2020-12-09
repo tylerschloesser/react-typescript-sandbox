@@ -12,13 +12,11 @@ interface Page {
   component: React.Component,
 }
 
-const Home = () => <h1>Hello World</h1>
-
 const pages = [
   {
     path: '/',
     name: 'Home',
-    component: Home,
+    component: () => <h1>Hello World</h1>,
   },
   {
     path: '/medium-clap',
