@@ -20,9 +20,18 @@ html {
 .clap-svg {
   width: 25vmin;
   height: 25vmin;
-  fill: #bbb;
 
-  &:hover {
+  &.--off {
+    fill: #bbb;
+    &:hover {
+      fill: #eee;
+    }
+  }
+
+  &.--on {
     fill: #eee;
+    &:hover {
+      fill: #bbb;
+    }
   }
 }
