@@ -14,46 +14,43 @@ interface Page {
 
 const Home = () => <h1>Hello World</h1>
 
-export const App = () => {
+const pages = [
+  {
+    path: '/',
+    name: 'Home',
+    component: Home,
+  },
+  {
+    path: '/medium-clap',
+    name: 'Medium Clap',
+    component: MediumClap,
+  },
+  {
+    path: '/gradient-tricks',
+    name: 'Gradient Tricks',
+    component: GradientTricks,
+  },
+]
 
-  const pages = [
-    {
-      path: '/',
-      name: 'Home',
-      component: Home,
-    },
-    {
-      path: '/medium-clap',
-      name: 'Medium Clap',
-      component: MediumClap,
-    },
-    {
-      path: '/gradient-tricks',
-      name: 'Gradient Tricks',
-      component: GradientTricks,
-    },
-  ]
-
-  return (
-    <div className="app">
-      <Router>
-        <nav>
-          <ul>
-            {pages.map(({ path, name }) => (
-              <li>
-                <NavLink exact to={path} activeClassName="active">
-                  {name}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-        </nav>
-        <Switch>
-          {pages.map(({ path, component }, i) => (
-            <Route exact path={path} component={component} />
+export const App = () => (
+  <div className="app">
+    <Router>
+      <nav>
+        <ul>
+          {pages.map(({ path, name }) => (
+            <li>
+              <NavLink exact to={path} activeClassName="active">
+                {name}
+              </NavLink>
+            </li>
           ))}
-        </Switch>
-      </Router>
-    </div>
-  )
-}
+        </ul>
+      </nav>
+      <Switch>
+        {pages.map(({ path, component }, i) => (
+          <Route exact path={path} component={component} />
+        ))}
+      </Switch>
+    </Router>
+  </div>
+)
