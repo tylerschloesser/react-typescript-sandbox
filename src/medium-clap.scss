@@ -59,16 +59,21 @@
 @keyframes confetti {
   0% {
     transform: scale(1) rotate(var(--angle));
+  }
+  100% {
+    transform: scale(2) rotate(var(--angle));
+  }
+}
+
+@keyframes confetti-opacity {
+  0% {
     opacity: 0;
   }
   50% {
     opacity: 1;
   }
-  66% {
-  }
   100% {
     opacity: 0;
-    transform: scale(2) rotate(var(--angle));
   }
 }
 
@@ -82,9 +87,9 @@
     width: 100%;
   }
 
-  animation-name: confetti;
+  animation-name: confetti, confetti-opacity;
   animation-fill-mode: forwards;
-  animation-duration: var(--confetti-duration);
+  animation-duration: var(--confetti-duration), calc(var(--confetti-duration) / 1.25);
   animation-timing-function: cubic-bezier(0, 0, 0, 1);
 
   .circles > div {

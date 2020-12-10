@@ -17,7 +17,7 @@ const ClapOn = () => (
 	</svg>
 )
 
-const CONFETTI_DURATION = 400 // ms
+const CONFETTI_DURATION = 500 // ms
 const COUNT_DURATION = 1000 // ms
 
 const Confetti = ({ angle }) => (
