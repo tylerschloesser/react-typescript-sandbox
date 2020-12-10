@@ -19,9 +19,11 @@ export const VellaLike = () => {
         className={`like-button ${on ? '--on' : ''}`}
         onClick={() => setOn(last => !last)}
       >
-        <LikeIcon />
-        <div className="sparkle">
-          {times(3).map(i => <div key={i} />)}
+        <div className={`inner ${on ? '--on' : ''}`}>
+          <LikeIcon />
+          <div className="sparkle">
+            {times(3).map(i => <div key={i} />)}
+          </div>
         </div>
       </button>
     </div>
