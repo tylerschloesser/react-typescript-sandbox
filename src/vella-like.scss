@@ -57,8 +57,8 @@
     &.--on {
       background: #DAF8FC linear-gradient(-45deg, #B3F4F5 26%, #64C9F3 74%, #418FDE 96%);
 
-      transition: box-shadow .25s .25s;
-      box-shadow: 0px 0px 50px -20px #64c9f3;
+      //transition: box-shadow .25s .25s;
+      box-shadow: 0px 0px 50px -25px #64c9f3;
     }
   }
 
@@ -85,8 +85,10 @@
       opacity: 0;
       transform: rotate(-120deg);
     }
+    50% {
+      opacity: 1;
+    }
     66% {
-      opacity: .5;
       transform: rotate(calc(var(--rotate) + 10deg));
     }
     100% {
