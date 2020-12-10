@@ -1,15 +1,9 @@
 import * as React from 'react'
 import { useEffect, useState, useRef } from 'react'
 
-import './medium-clap.scss'
+import { times } from './util'
 
-function times(n: number): number[] {
-  const arr: number[] = []
-  for (let i = 0; i < n; i++) {
-    arr.push(i)
-  }
-  return arr
-}
+import './medium-clap.scss'
 
 const ClapOff = () => (
   <svg aria-label="clap" viewBox="0 0 29 29" className="clap-svg --off">

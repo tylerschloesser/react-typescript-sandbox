@@ -1,0 +1,31 @@
+.vella-like {
+
+  &, * {
+    box-sizing: border-box;
+  }
+
+  .like-svg {
+
+		display: block;
+		height: 100%;
+    margin: 0 auto;
+    path {
+			fill: #eee;
+    }
+  }
+
+  .like-button {
+    background-color: unset;
+    border: none;
+    outline: none;
+    margin: 0;
+    cursor: pointer;
+
+    width: 50vmin;
+    height: 50vmin;
+    border: 1vmin solid #eee;
+    border-radius: 100%;
+    padding: 15%;
+  }
+
+}
