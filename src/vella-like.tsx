@@ -12,14 +12,14 @@ const LikeIcon = () => (
 )
 
 export const VellaLike = () => {
-	const [on,setOn] = useState(false)
+	const [on,setOn] = useState(null)
   return (
     <div className="vella-like">
       <button 
-        className={`like-button ${on ? '--on' : ''}`}
+        className={`like-button ${on === null ? '' : on ? '--on' : '--off'}`}
         onClick={() => setOn(last => !last)}
       >
-        <div className={`inner ${on ? '--on' : ''}`}>
+        <div className={`inner ${on === null ? '' : on ? '--on' : '--off'}`}>
           <LikeIcon />
           <div className="sparkle">
             {times(3).map(i => <div key={i} />)}

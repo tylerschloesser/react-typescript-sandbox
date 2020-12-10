@@ -69,13 +69,15 @@
     animation-fill-mode: forwards;
     animation-duration: var(--animation-duration);
 
-    --sparkle-animation-name: sparkle-off;
     --sparkle-animation-delay-scalar: 0;
     &.--on {
       --sparkle-animation-name: sparkle-on;
       --sparkle-animation-delay-scalar: 1;
 
       animation-name: like-button-on;
+    }
+    &.--off {
+      --sparkle-animation-name: sparkle-off;
     }
 
   }
