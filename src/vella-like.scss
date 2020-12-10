@@ -29,9 +29,17 @@
     border: 1vmin solid #eee;
     border-radius: 100%;
     padding: 25%;
+
+    --sparkle-animation-name: sparkle-off;
+    --sparkle-animation-delay-scalar: 0;
+    &.--on {
+      --sparkle-animation-name: sparkle-on;
+      --sparkle-animation-delay-scalar: 1;
+    }
+
   }
 
-  @keyframes sparkle {
+  @keyframes sparkle-on {
     0% {
       opacity: 0;
       transform: rotate(-120deg);
@@ -39,6 +47,19 @@
     100% {
       opacity: 1;
       transform: rotate(var(--rotate));
+    }
+  }
+
+  @keyframes sparkle-off {
+    0% {
+      opacity: 1;
+      transform: rotate(var(--rotate));
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      transform: rotate(-120deg);
     }
   }
 
@@ -59,19 +80,25 @@
       border-radius: 2px;
       transform-origin: 50% 200%;
 
-      animation-name: sparkle;
+      animation-name: var(--sparkle-animation-name);
       animation-duration: 1s;
       animation-fill-mode: forwards;
       animation-timing-function: cubic-bezier(0, 0, 0, 1);
 
+      opacity: 0;
+      animation-delay: calc(var(--animation-delay) * var(--sparkle-animation-delay-scalar));
+
       &:nth-child(1) {
-        --rotate: 0deg
+        --rotate: 0deg;
+        --animation-delay: 0;
       }
       &:nth-child(2) {
-        --rotate: -40deg
+        --rotate: -40deg;
+        --animation-delay: 200ms;
       }
       &:nth-child(3) {
-        --rotate: -80deg
+        --rotate: -80deg;
+        --animation-delay: 400ms;
       }
     }
   }

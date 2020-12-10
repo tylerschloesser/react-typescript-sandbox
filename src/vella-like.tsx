@@ -20,11 +20,9 @@ export const VellaLike = () => {
         onClick={() => setOn(last => !last)}
       >
         <LikeIcon />
-        {on && (
-          <div className="sparkle">
-            {times(3).map(i => <div key={i} />)}
-          </div>
-        )}
+        <div className="sparkle">
+          {times(3).map(i => <div key={i} />)}
+        </div>
       </button>
     </div>
   )
