@@ -12,7 +12,7 @@ const LikeIcon = () => (
 )
 
 export const VellaLike = () => {
-	const [on,setOn] = useState(true)
+	const [on,setOn] = useState(false)
   return (
     <div className="vella-like">
       <button 
