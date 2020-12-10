@@ -36,7 +36,7 @@
 
   .like-button {
     position: relative;
-    background-color: unset;
+    background-color: transparent;
     border: none;
     outline: none;
     margin: 0;
@@ -46,6 +46,12 @@
     height: 50vmin;
     border: 1vmin solid #eee;
     border-radius: 100%;
+
+		transition: background var(--animation-duration);
+
+    &.--on {
+			background: #DAF8FC linear-gradient(-45deg, #B3F4F5 26%, #64C9F3 74%, #418FDE 96%);
+    }
   }
 
   .inner {
@@ -93,8 +99,8 @@
 
   .sparkle {
     position: absolute;
-    width: 3%;
-    height: 11%;
+    width: 3.5%;
+    height: 10%;
     top: 8.5%;
     left: 50%;
 
@@ -106,7 +112,7 @@
       background-color: var(--color);
 
       border-radius: 0px;
-      transform-origin: 50% 200%;
+      transform-origin: 50% 230%;
 
       animation-name: var(--sparkle-animation-name);
       animation-duration: var(--animation-duration);
@@ -116,17 +122,21 @@
       opacity: 0;
       animation-delay: calc(var(--animation-delay) * var(--sparkle-animation-delay-scalar));
 
+      --base-rotate: 0deg;
+
       &:nth-child(1) {
-        --rotate: 0deg;
+        --rotate: calc(var(--base-rotate) + 0deg);
         --animation-delay: 0;
       }
       &:nth-child(2) {
-        --rotate: -40deg;
+        //--rotate: -40deg;
+        --rotate: calc(var(--base-rotate) + -40deg);
         //--animation-delay: 200ms;
         --animation-delay: 0;
       }
       &:nth-child(3) {
-        --rotate: -80deg;
+        //--rotate: -80deg;
+        --rotate: calc(var(--base-rotate) + -80deg);
         //--animation-delay: 400ms;
         --animation-delay: 0;
       }
