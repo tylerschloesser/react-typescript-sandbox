@@ -9,12 +9,13 @@ import {
   filter,
   map,
   share,
+  withLatestFrom,
+  tap,
 } from 'rxjs/operators'
 
-const canvas = document.querySelector('canvas')
-if (!canvas) throw Error('no canvas')
-const context = canvas.getContext('2d')
-if (!context) throw Error('no context')
+// TODO error handling
+const canvas = document.querySelector('canvas')!
+const context = canvas.getContext('2d')!
 
 canvas.height = window.innerHeight
 canvas.width = window.innerWidth
@@ -76,8 +77,8 @@ const gameState$ = new BehaviorSubject<GameState>({
       width: 20,
       height: 30,
       isPaused: false,
-      color: '#000',
-      pausedColor: '#0f0',
+      color: 'red',
+      pausedColor: 'green',
       velocity: {
         x: 30,
         y: 40,
@@ -93,8 +94,8 @@ const gameState$ = new BehaviorSubject<GameState>({
       width: 50,
       height: 20,
       isPaused: false,
-      color: '#0f0',
-      pausedColor: '#00f',
+      color: 'blue',
+      pausedColor: 'yellow',
       velocity: {
         x: -30,
         y: 20,
@@ -114,3 +115,28 @@ const frames$ = of(undefined)
     map((frame) => frame.elapsed),
     share()
   )
+
+function update(elapsed: number, gameState: GameState): GameState {
+  return gameState
+}
+
+function render(gameState: GameState): void {
+  context.clearRect(0, 0, canvas.width, canvas.height)
+  context.fillStyle = 'black'
+  context.fillRect(0, 0, canvas.width, canvas.height)
+
+  gameState.objects.forEach(obj => {
+    context.fillStyle = obj.isPaused ? obj.pausedColor : obj.color
+    context.fillRect(obj.x, obj.y, obj.width, obj.height)
+  })
+}
+
+frames$
+  .pipe(
+    withLatestFrom(gameState$),
+    map(([ elapsed, gameState ]) => update(elapsed, gameState)),
+
+    // TODO why is this not in .subscribe below?
+    tap(gameState => gameState$.next(gameState))
+  )
+  .subscribe(render)
