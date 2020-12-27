@@ -27,7 +27,7 @@ function computeElapsed(now: DOMHighResTimeStamp, last?: DOMHighResTimeStamp) {
   if (typeof last === 'undefined') {
     return 0
   }
-  return now - last
+  return (now - last) / 1000 // convert ms to seconds
 }
 
 interface IFrameData {
@@ -117,7 +117,19 @@ const frames$ = of(undefined)
   )
 
 function update(elapsed: number, gameState: GameState): GameState {
-  return gameState
+  return {
+    ...gameState,
+    objects: gameState.objects.map(obj => {
+
+      const nextX = obj.x + obj.velocity.x * elapsed
+      const nextY = obj.y + obj.velocity.y * elapsed
+      return {
+        ...obj,
+        x: nextX,
+        y: nextY,
+      }
+    })
+  }
 }
 
 function render(gameState: GameState): void {
