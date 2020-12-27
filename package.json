@@ -7,8 +7,6 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
     "css-loader": "^4.3.0",
     "html-webpack-plugin": "^4.5.0",
     "react": "^17.0.1",
@@ -22,7 +20,10 @@
     "webpack-cli": "^4.3.0",
     "webpack-dev-server": "^3.11.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tylerschloesser/react-typescript-sandbox.git"
