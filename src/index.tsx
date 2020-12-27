@@ -5,9 +5,11 @@ import {
   BehaviorSubject,
   Observable,
   of,
+  fromEvent,
 } from 'rxjs'
 
 import {
+  buffer,
   expand,
   filter,
   map,
@@ -63,7 +65,6 @@ interface GameObject {
   y: number
   width: number
   height: number
-  isPaused: boolean
   color: string
   pausedColor: string
   velocity: Vec2
@@ -71,17 +72,18 @@ interface GameObject {
 }
 
 interface GameState {
+  isPaused: boolean
   objects: GameObject[]
 }
 
 const gameState$ = new BehaviorSubject<GameState>({
+  isPaused: false,
   objects: [
     {
       x: 10,
       y: 10,
       width: 20,
       height: 30,
-      isPaused: false,
       color: 'red',
       pausedColor: 'green',
       velocity: {
@@ -98,7 +100,6 @@ const gameState$ = new BehaviorSubject<GameState>({
       y: 200,
       width: 50,
       height: 20,
-      isPaused: false,
       color: 'blue',
       pausedColor: 'yellow',
       velocity: {
@@ -113,6 +114,12 @@ const gameState$ = new BehaviorSubject<GameState>({
   ],
 })
 
+const keysDown$ = fromEvent<KeyboardEvent>(document, 'keydown')
+  .pipe(
+    map((event) => event.key),
+  )
+
+
 const frames$ = of(undefined)
   .pipe(
     expand((val: IFrameData | undefined) => calculateFrame(val)),
@@ -121,12 +128,30 @@ const frames$ = of(undefined)
     share()
   )
 
-function update(elapsed: number, gameState: GameState): GameState {
+const keysDownPerFrame$ = keysDown$
+  .pipe(
+    buffer(frames$),
+    // tap(hmm => {
+    //   if (hmm.length) {
+    //     console.log(hmm)
+    //   }
+    // })
+  )
+
+function update(elapsed: number, gameState: GameState, keysDown: string[]): GameState {
+
+  let { isPaused } = gameState
+
+  if (keysDown.includes(' ')) {
+    isPaused = !isPaused
+  }
+
   return {
     ...gameState,
+    isPaused,
     objects: gameState.objects.map(obj => {
 
-      if (obj.isPaused) {
+      if (isPaused) {
         return obj
       }
 
@@ -167,15 +192,15 @@ function render(gameState: GameState): void {
   context.fillRect(0, 0, canvas.width, canvas.height)
 
   gameState.objects.forEach(obj => {
-    context.fillStyle = obj.isPaused ? obj.pausedColor : obj.color
+    context.fillStyle = gameState.isPaused ? obj.pausedColor : obj.color
     context.fillRect(obj.x, obj.y, obj.width, obj.height)
   })
 }
 
 frames$
   .pipe(
-    withLatestFrom(gameState$),
-    map(([ elapsed, gameState ]) => update(elapsed, gameState)),
+    withLatestFrom(gameState$, keysDownPerFrame$),
+    map(([ elapsed, gameState, keysDown ]) => update(elapsed, gameState, keysDown)),
 
     // TODO why is this not in .subscribe below?
     tap(gameState => gameState$.next(gameState))
