@@ -1,9 +1,11 @@
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+import path from 'path'
+import webpack from 'webpack'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
 
-module.exports = {
+const config: webpack.Configuration = {
   mode: 'development',
   entry: './src/index.tsx',
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {
@@ -31,3 +33,5 @@ module.exports = {
   ],
   stats: 'minimal',
 }
+
+export default config
