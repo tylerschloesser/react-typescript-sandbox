@@ -1,6 +1,8 @@
-import * as React from 'react'
-import * as ReactDOM from 'react-dom'
+const canvas: HTMLCanvasElement = document.querySelector('canvas')
+const context: CanvasRenderingContext2D = canvas.getContext('2d')
 
-import { App } from './app'
+canvas.height = window.innerHeight
+canvas.width = window.innerWidth
 
-ReactDOM.render(<App />, document.getElementById('root'))
+context.fillStyle = 'black'
+context.fillRect(0, 0, canvas.width, canvas.height)
