@@ -80,8 +80,8 @@ const gameState$ = new BehaviorSubject<GameState>({
       color: 'red',
       pausedColor: 'green',
       velocity: {
-        x: 30,
-        y: 40,
+        x: 60,
+        y: 80,
       },
       maxVelocity: {
         x: 250,
@@ -97,8 +97,8 @@ const gameState$ = new BehaviorSubject<GameState>({
       color: 'blue',
       pausedColor: 'yellow',
       velocity: {
-        x: -30,
-        y: 20,
+        x: -60,
+        y: 40,
       },
       maxVelocity: {
         x: 200,
@@ -121,12 +121,36 @@ function update(elapsed: number, gameState: GameState): GameState {
     ...gameState,
     objects: gameState.objects.map(obj => {
 
+      if (obj.isPaused) {
+        return obj
+      }
+
       const nextX = obj.x + obj.velocity.x * elapsed
       const nextY = obj.y + obj.velocity.y * elapsed
+
+      let nextVx = obj.velocity.x
+      let nextVy = obj.velocity.y
+
+      if (nextX < 0 || (nextX + obj.width) > canvas.width) {
+        nextVx = nextVx * -1 * 1.1
+      }
+      if (nextY < 0 || (nextY + obj.height) > canvas.height) {
+        nextVy = nextVy * -1 * 1.1
+      }
+
+      const nextVxs = nextVx / Math.abs(nextVx)
+      const nextVys = nextVy / Math.abs(nextVy)
+      nextVx = nextVxs * Math.min(Math.abs(nextVx), obj.maxVelocity.x)
+      nextVy = nextVys * Math.min(Math.abs(nextVy), obj.maxVelocity.y)
+
       return {
         ...obj,
         x: nextX,
         y: nextY,
+        velocity: {
+          x: nextVx,
+          y: nextVy,
+        }
       }
     })
   }
