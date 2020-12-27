@@ -192,6 +192,11 @@ const Debug = ({
 
   const [gameState, setGameState] = React.useState<GameState>(gameState$.getValue())
 
+  React.useEffect(() => {
+    const sub = gameState$.subscribe(setGameState)
+    return () => sub.unsubscribe()
+  }, [])
+
   return (
     <pre className="debug">
       {JSON.stringify(gameState, null, 2)}
