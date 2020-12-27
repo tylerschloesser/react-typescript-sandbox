@@ -9,6 +9,6 @@
     "target": "es5",
     "jsx": "react",
     "moduleResolution": "node",
-    "allowJs": true
+    "allowJs": false
   }
 }
