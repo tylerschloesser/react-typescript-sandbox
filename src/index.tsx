@@ -1,3 +1,6 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
+
 import {
   BehaviorSubject,
   Observable,
@@ -12,6 +15,8 @@ import {
   withLatestFrom,
   tap,
 } from 'rxjs/operators'
+
+import './index.scss'
 
 // TODO error handling
 const canvas = document.querySelector('canvas')!
@@ -176,3 +181,26 @@ frames$
     tap(gameState => gameState$.next(gameState))
   )
   .subscribe(render)
+
+interface DebugProps {
+  gameState$: BehaviorSubject<GameState>
+}
+
+const Debug = ({
+  gameState$,
+}: DebugProps) => {
+
+  const [gameState, setGameState] = React.useState<GameState>(gameState$.getValue())
+
+  return (
+    <pre className="debug">
+      {JSON.stringify(gameState, null, 2)}
+    </pre>
+  )
+}
+
+ReactDOM.render((
+  <Debug
+    gameState$={gameState$}
+  />
+), document.querySelector('#root'))

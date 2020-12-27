@@ -9,6 +9,7 @@
     "target": "es5",
     "jsx": "react",
     "moduleResolution": "node",
-    "allowJs": false
+    "allowJs": false,
+    "allowSyntheticDefaultImports": true
   }
 }
