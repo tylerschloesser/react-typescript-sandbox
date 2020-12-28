@@ -120,6 +120,7 @@ const keysDown$ = fromEvent<KeyboardEvent>(document, 'keydown')
   )
 
 
+
 const frames$ = of(undefined)
   .pipe(
     expand((val: IFrameData | undefined) => calculateFrame(val)),
@@ -127,6 +128,15 @@ const frames$ = of(undefined)
     map((frame) => frame.elapsed),
     share()
   )
+
+const pointerDown$ = fromEvent<PointerEvent>(document, 'pointerdown')
+  .pipe(
+    buffer(frames$),
+    filter(events => events.length > 0),
+    tap(event => { console.log(event) }),
+  )
+
+pointerDown$.subscribe(() => {})
 
 const keysDownPerFrame$ = keysDown$
   .pipe(
