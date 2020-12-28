@@ -5,6 +5,10 @@ body {
   font: 11px/13px Arial;
 }
 
+canvas {
+  display: block;
+}
+
 .debug {
   color: white;
   position: absolute;
