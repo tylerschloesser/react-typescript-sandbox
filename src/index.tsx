@@ -6,9 +6,11 @@ import {
   Observable,
   of,
   fromEvent,
+  merge,
 } from 'rxjs'
 
 import {
+  scan,
   buffer,
   expand,
   filter,
@@ -16,6 +18,9 @@ import {
   share,
   withLatestFrom,
   tap,
+  mergeMap,
+  takeUntil,
+  startWith,
 } from 'rxjs/operators'
 
 import './index.scss'
@@ -71,13 +76,20 @@ interface GameObject {
   maxVelocity: Vec2
 }
 
+interface GameInput {
+  start: Vec2
+  end: Vec2
+}
+
 interface GameState {
   isPaused: boolean
   objects: GameObject[]
+  input: GameInput | null
 }
 
 const gameState$ = new BehaviorSubject<GameState>({
   isPaused: false,
+  input: null,
   objects: [
     {
       x: 10,
@@ -129,26 +141,60 @@ const frames$ = of(undefined)
     share()
   )
 
-const pointerDown$ = fromEvent<PointerEvent>(document, 'pointerdown')
-  .pipe(
-    buffer(frames$),
-    filter(events => events.length > 0),
-    tap(event => { console.log(event) }),
-  )
+interface InputState {
+  down: boolean
+  drag: PointerEvent[]
+}
 
-pointerDown$.subscribe(() => {})
+const pointerDown$ = fromEvent<PointerEvent>(document, 'pointerdown')
+const pointerUp$ = fromEvent<PointerEvent>(document, 'pointerup')
+const pointerMove$ = fromEvent<PointerEvent>(document, 'pointermove')
+
+const inputState$ = merge<PointerEvent>(pointerDown$, pointerMove$, pointerUp$).pipe(
+  scan<PointerEvent, InputState>((acc, event) => {
+    switch (event.type) {
+      case 'pointerdown': {
+        return {
+          down: true,
+          drag: [ event ],
+        }
+      }
+      case 'pointermove': {
+        if (acc.down) {
+          return {
+            ...acc,
+            drag: [ ...acc.drag, event ],
+          }
+        }
+        return acc
+      }
+      case 'pointerup': {
+        return {
+          down: false,
+          drag: [ ...acc.drag, event ],
+        }
+      }
+    }
+    return acc // shouldn't happen
+  }, {
+    down: false,
+    drag: [],
+  }),
+  // TODO redundant
+  startWith({ down: false, drag: [] }),
+)
 
 const keysDownPerFrame$ = keysDown$
   .pipe(
     buffer(frames$),
-    // tap(hmm => {
-    //   if (hmm.length) {
-    //     console.log(hmm)
-    //   }
-    // })
+    tap(hmm => {
+      if (hmm.length) {
+        console.log(hmm)
+      }
+    })
   )
 
-function update(elapsed: number, gameState: GameState, keysDown: string[]): GameState {
+function update(elapsed: number, gameState: GameState, keysDown: string[], inputState: InputState): GameState {
 
   let { isPaused } = gameState
 
@@ -156,8 +202,28 @@ function update(elapsed: number, gameState: GameState, keysDown: string[]): Game
     isPaused = !isPaused
   }
 
+  let input: GameInput | null = null
+  {
+    const { drag, down } = inputState
+    if (inputState.down && drag.length > 1) {
+      const first = drag[0]
+      const last = drag[drag.length - 1]
+      input = {
+        start: {
+          x: first.clientX,
+          y: first.clientY,
+        },
+        end: {
+          x: last.clientX,
+          y: last.clientY,
+        },
+      }
+    }
+  }
+
   return {
     ...gameState,
+    input,
     isPaused,
     objects: gameState.objects.map(obj => {
 
@@ -205,12 +271,33 @@ function render(gameState: GameState): void {
     context.fillStyle = gameState.isPaused ? obj.pausedColor : obj.color
     context.fillRect(obj.x, obj.y, obj.width, obj.height)
   })
+
+  const { input } = gameState
+  if (input === null) {
+    return
+  }
+
+  context.strokeStyle = 'white'
+  context.beginPath()
+  context.moveTo(input.start.x, input.start.y)
+  context.lineTo(input.end.x, input.end.y)
+  context.stroke()
+
+  context.beginPath()
+  context.fillStyle = 'white'
+  context.arc(input.start.x, input.start.y, 10, 0, 2 * Math.PI)
+  context.fill()
+
+  context.beginPath()
+  context.fillStyle = 'white'
+  context.arc(input.end.x, input.end.y, 10, 0, 2 * Math.PI)
+  context.fill()
 }
 
 frames$
   .pipe(
-    withLatestFrom(gameState$, keysDownPerFrame$),
-    map(([ elapsed, gameState, keysDown ]) => update(elapsed, gameState, keysDown)),
+    withLatestFrom(gameState$, keysDownPerFrame$, inputState$),
+    map(([ elapsed, gameState, keysDown, inputState ]) => update(elapsed, gameState, keysDown, inputState)),
 
     // TODO why is this not in .subscribe below?
     tap(gameState => gameState$.next(gameState))
