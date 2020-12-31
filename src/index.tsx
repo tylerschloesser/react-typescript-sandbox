@@ -90,7 +90,6 @@ interface GameBall {
 
 interface GameState {
   isPaused: boolean
-  objects: GameObject[]
   input: GameInput | null
   ball: GameBall
 }
@@ -98,7 +97,6 @@ interface GameState {
 const gameState$ = new BehaviorSubject<GameState>({
   isPaused: false,
   input: null,
-  objects: [],
   ball: {
     pos: { x: canvas.width / 2, y: canvas.height / 2 },
     vel: { x: 0, y: 0 },
@@ -241,11 +239,6 @@ function render(gameState: GameState): void {
   context.clearRect(0, 0, canvas.width, canvas.height)
   context.fillStyle = 'black'
   context.fillRect(0, 0, canvas.width, canvas.height)
-
-  gameState.objects.forEach(obj => {
-    context.fillStyle = gameState.isPaused ? obj.pausedColor : obj.color
-    context.fillRect(obj.x, obj.y, obj.width, obj.height)
-  })
 
   {
     const { ball } = gameState
