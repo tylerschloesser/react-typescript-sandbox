@@ -81,49 +81,30 @@ interface GameInput {
   end: Vec2
 }
 
+interface GameBall {
+  pos: Vec2
+  vel: Vec2
+  radius: number
+  color: string
+}
+
 interface GameState {
   isPaused: boolean
   objects: GameObject[]
   input: GameInput | null
+  ball: GameBall
 }
 
 const gameState$ = new BehaviorSubject<GameState>({
   isPaused: false,
   input: null,
-  objects: [
-    {
-      x: 10,
-      y: 10,
-      width: 20,
-      height: 30,
-      color: 'red',
-      pausedColor: 'green',
-      velocity: {
-        x: 60,
-        y: 80,
-      },
-      maxVelocity: {
-        x: 250,
-        y: 200,
-      },
-    },
-    {
-      x: 200,
-      y: 200,
-      width: 50,
-      height: 20,
-      color: 'blue',
-      pausedColor: 'yellow',
-      velocity: {
-        x: -60,
-        y: 40,
-      },
-      maxVelocity: {
-        x: 200,
-        y: 100,
-      },
-    },
-  ],
+  objects: [],
+  ball: {
+    pos: { x: 100, y: 100 },
+    vel: { x: 0, y: 0 },
+    radius: 20,
+    color: 'blue',
+  }
 })
 
 const keysDown$ = fromEvent<KeyboardEvent>(document, 'keydown')
@@ -271,6 +252,14 @@ function render(gameState: GameState): void {
     context.fillStyle = gameState.isPaused ? obj.pausedColor : obj.color
     context.fillRect(obj.x, obj.y, obj.width, obj.height)
   })
+
+  {
+    const { ball } = gameState
+    context.beginPath()
+    context.fillStyle = ball.color
+    context.arc(ball.pos.x, ball.pos.y, ball.radius, 0, 2 * Math.PI)
+    context.fill()
+  }
 
   const { input } = gameState
   if (input === null) {
