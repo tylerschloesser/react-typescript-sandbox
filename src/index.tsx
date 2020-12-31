@@ -175,6 +175,20 @@ const keysDownPerFrame$ = keysDown$
     })
   )
 
+function toVec2(event: PointerEvent): Vec2 {
+  return {
+    x: event.clientX,
+    y: event.clientY,
+  }
+}
+
+function subtractVec2(a: Vec2, b: Vec2): Vec2 {
+  return {
+    x: a.x - b.x,
+    y: a.y - b.y,
+  }
+}
+
 function update(elapsed: number, gameState: GameState, keysDown: string[], inputState: InputState): GameState {
 
   let { isPaused } = gameState
@@ -183,6 +197,7 @@ function update(elapsed: number, gameState: GameState, keysDown: string[], input
     isPaused = !isPaused
   }
 
+  let ballVelocity = gameState.ball.vel
   let input: GameInput | null = null
   {
     const { drag, down } = inputState
@@ -199,6 +214,15 @@ function update(elapsed: number, gameState: GameState, keysDown: string[], input
           y: last.clientY,
         },
       }
+
+    } else if (gameState.input) {
+      console.log('add velocity')
+
+      const first = toVec2(drag[0])
+      const last = toVec2(drag[drag.length - 1])
+
+      ballVelocity = subtractVec2(last, first)
+
     }
   }
 
@@ -206,40 +230,10 @@ function update(elapsed: number, gameState: GameState, keysDown: string[], input
     ...gameState,
     input,
     isPaused,
-    objects: gameState.objects.map(obj => {
-
-      if (isPaused) {
-        return obj
-      }
-
-      const nextX = obj.x + obj.velocity.x * elapsed
-      const nextY = obj.y + obj.velocity.y * elapsed
-
-      let nextVx = obj.velocity.x
-      let nextVy = obj.velocity.y
-
-      if (nextX < 0 || (nextX + obj.width) > canvas.width) {
-        nextVx = nextVx * -1 * 1.1
-      }
-      if (nextY < 0 || (nextY + obj.height) > canvas.height) {
-        nextVy = nextVy * -1 * 1.1
-      }
-
-      const nextVxs = nextVx / Math.abs(nextVx)
-      const nextVys = nextVy / Math.abs(nextVy)
-      nextVx = nextVxs * Math.min(Math.abs(nextVx), obj.maxVelocity.x)
-      nextVy = nextVys * Math.min(Math.abs(nextVy), obj.maxVelocity.y)
-
-      return {
-        ...obj,
-        x: nextX,
-        y: nextY,
-        velocity: {
-          x: nextVx,
-          y: nextVy,
-        }
-      }
-    })
+    ball: {
+      ...gameState.ball,
+      vel: ballVelocity,
+    },
   }
 }
 
