@@ -100,9 +100,9 @@ const gameState$ = new BehaviorSubject<GameState>({
   input: null,
   objects: [],
   ball: {
-    pos: { x: 100, y: 100 },
+    pos: { x: canvas.width / 2, y: canvas.height / 2 },
     vel: { x: 0, y: 0 },
-    radius: 20,
+    radius: 100,
     color: 'blue',
   }
 })
