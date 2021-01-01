@@ -103,26 +103,34 @@ export function updateGameState(
 
   {
     const { drag, down } = inputState
-    if (inputState.down && drag.length > 1) {
+    if (inputState.down && drag.length > 1 && (!input?.swipes || input.swipes.length <= 2)) {
       const first = drag[0]
       const last = drag[drag.length - 1]
-      input = {
-        swipes: [
-          {
-            active: true,
-            start: {
-              x: first.clientX,
-              y: first.clientY,
-            },
-            startTime: first.timeStamp,
-            end: {
-              x: last.clientX,
-              y: last.clientY,
-            },
-            //endTime: last.timeStamp,
-            endTime: frame.timestamp,
-          }
-        ]
+
+      const swipe: GameSwipe = {
+        active: true,
+        start: {
+          x: first.clientX,
+          y: first.clientY,
+        },
+        startTime: first.timeStamp,
+        end: {
+          x: last.clientX,
+          y: last.clientY,
+        },
+        //endTime: last.timeStamp,
+        endTime: frame.timestamp,
+      }
+
+      const swipes = input?.swipes || []
+      if (swipes.length > 0 && !swipes[0].active) {
+        input = {
+          swipes: [ swipes[0], swipe ],
+        }
+      } else {
+        input = {
+          swipes: [ swipe ]
+        }
       }
     } else if (input?.swipes.length) {
       const { swipes } = input
@@ -147,7 +155,7 @@ export function updateGameState(
       const first = swipe.start
       const last = swipe.end
 
-      if (frame.timestamp - swipe.endTime > 200) {
+      if (frame.timestamp - swipe.endTime > 500) {
         nextBallVel = divideVec2(subtractVec2(first, last), gameState.vmin)
         input = null
       }
