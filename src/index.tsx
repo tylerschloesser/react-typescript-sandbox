@@ -229,9 +229,35 @@ function update(elapsed: number, gameState: GameState, keysDown: string[], input
   let nextBallX = ballPosition.x + (ballVelocity.x * elapsed)
   let nextBallY = ballPosition.y + (ballVelocity.y * elapsed)
 
+  let nextBallVx = ballVelocity.x
+  let nextBallVy = ballVelocity.y
+
+  if ((nextBallX - ball.radius) < 0) {
+    nextBallX = ball.radius + Math.abs(nextBallX - ball.radius)
+    nextBallVx *= -1
+  }
+  if ((nextBallY - ball.radius) < 0) {
+    nextBallY = ball.radius + Math.abs(nextBallY - ball.radius)
+    nextBallVy *= -1
+  }
+
+  if ((nextBallX + ball.radius) > canvas.width) {
+    nextBallX = canvas.width - ball.radius - ((nextBallX + ball.radius) - (canvas.width))
+    nextBallVx *= -1
+  }
+  if ((nextBallY + ball.radius) > canvas.height) {
+    nextBallY = canvas.height - ball.radius - ((nextBallY + ball.radius) - (canvas.height))
+    nextBallVy *= -1
+  }
+
   ballPosition = {
     x: nextBallX,
     y: nextBallY,
+  }
+
+  ballVelocity = {
+    x: nextBallVx,
+    y: nextBallVy,
   }
 
   {
