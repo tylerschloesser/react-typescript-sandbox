@@ -72,17 +72,17 @@ interface GameInput {
   end: Vec2
 }
 
-interface GameTarget {
+interface GameCircle {
   pos: Vec2
   radius: number
   color: string
 }
 
-interface GameBall {
-  pos: Vec2
+interface GameTarget extends GameCircle {
+}
+
+interface GameBall extends GameCircle {
   vel: Vec2
-  radius: number
-  color: string
 }
 
 interface GameState {
@@ -313,21 +313,14 @@ function updateGameState(elapsed: number, gameState: GameState, keysDown: string
   }
 }
 
-function translateBall(state: GameState): GameBall {
-  const { ball } = state
-  return {
-    ...ball,
-    radius: ball.radius * state.vmin,
-    pos: {
-      x: ball.pos.x * state.vmin,
-      y: ball.pos.y * state.vmin,
-    },
-    vel: {
-      x: ball.vel.x * state.vmin,
-      y: ball.vel.y * state.vmin,
-    },
-  }
-}
+const translateCircle = (circle: GameCircle, state: GameState): GameCircle => ({
+  ...circle,
+  radius: circle.radius * state.vmin,
+  pos: {
+    x: circle.pos.x * state.vmin,
+    y: circle.pos.y * state.vmin,
+  },
+})
 
 function render(gameState: GameState): void {
   context.clearRect(0, 0, canvas.width, canvas.height)
@@ -347,13 +340,23 @@ function render(gameState: GameState): void {
   )
 
   {
-    const ball = translateBall(gameState)
+    const target = translateCircle(gameState.target, gameState)
+    const radius = target.radius
+    context.beginPath()
+    context.fillStyle = target.color
+    context.arc(target.pos.x, target.pos.y, radius, 0, 2 * Math.PI)
+    context.fill()
+  }
+
+  {
+    const ball = translateCircle(gameState.ball, gameState)
     const radius = ball.radius
     context.beginPath()
     context.fillStyle = ball.color
     context.arc(ball.pos.x, ball.pos.y, radius, 0, 2 * Math.PI)
     context.fill()
   }
+
 
 
   context.beginPath();
