@@ -124,7 +124,7 @@ let initialState = ((): GameState => {
     ball: {
       pos: { x: vmin / 2, y: vmin / 2 },
       vel: { x: 0, y: 0 },
-      radius: vmin * .08,
+      radius: .08,
       color: 'blue',
     },
   }
@@ -263,7 +263,7 @@ function update(elapsed: number, gameState: GameState, keysDown: string[], input
   let nextBallVy = ballVelocity.y
 
   {
-    const radius = ball.radius
+    const radius = ball.radius * gameState.vmin
 
     if ((nextBallX - radius) < 0) {
       nextBallX = radius + Math.abs(nextBallX - radius)
@@ -325,7 +325,7 @@ function render(gameState: GameState): void {
 
   {
     const { ball } = gameState
-    const radius = ball.radius
+    const radius = ball.radius * gameState.vmin
     context.beginPath()
     context.fillStyle = ball.color
     context.arc(ball.pos.x, ball.pos.y, radius, 0, 2 * Math.PI)
