@@ -169,14 +169,14 @@ function render(gameState: GameState): void {
   const { vmin } = gameState
 
 
-  context.transform(
-    1,
-    0,
-    0,
-    1,
-    (canvas.width - gameState.vx) / 2,
-    (canvas.height - gameState.vy) / 2,
-  )
+  // context.transform(
+  //   1,
+  //   0,
+  //   0,
+  //   1,
+  //   (canvas.width - gameState.vx) / 2,
+  //   (canvas.height - gameState.vy) / 2,
+  // )
 
   {
     const target = translateCircle(gameState.target, gameState)
