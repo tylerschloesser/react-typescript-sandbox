@@ -93,7 +93,10 @@ const frames$ = of(undefined)
   .pipe(
     expand((val: IFrameData | undefined) => calculateFrame(val)),
     filter(frame => typeof frame !== 'undefined'),
-    //map((frame) => frame.elapsed),
+    map(frame => ({
+      ...frame,
+      elapsed: Math.min(frame.elapsed, 1/30),
+    })),
     share()
   )
 

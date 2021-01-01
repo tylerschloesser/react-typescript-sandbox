@@ -5,8 +5,8 @@ export interface Vec2 {
 }
 
 export interface GameSwipe {
-  startTime: number
   start: Vec2
+  startTime: number
   end: Vec2
   endTime: number
 }
