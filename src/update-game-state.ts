@@ -122,12 +122,16 @@ export function updateGameState(
           }
         ]
       }
+    }
 
-    } else if (gameState.input) {
+    if (!inputState.down && gameState.input?.swipes) {
       // handle letting go of velocity trigger
 
-      const first = toVec2(drag[0])
-      const last = toVec2(drag[drag.length - 1])
+      const [ swipe ] = gameState.input.swipes
+      const first = swipe.start
+
+      // TODO should be "end"
+      const last = swipe.current
 
       nextBallVel = divideVec2(subtractVec2(first, last), gameState.vmin)
 
