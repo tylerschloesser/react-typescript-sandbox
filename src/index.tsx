@@ -104,7 +104,7 @@ function generateTarget(state?: GameState): GameTarget {
 
 
   return {
-    pos: vec2(.5, .5),
+    pos: vec2(.25, .25),
     radius: .04,
     color: 'cyan',
   }
