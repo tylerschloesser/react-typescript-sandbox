@@ -26,10 +26,10 @@ function generateTarget(ball: GameBall, prevTarget?: GameTarget): GameTarget {
   do {
     x = radius*2 + Math.random() * (1-radius*4)
     y = radius*2 + Math.random() * (1-radius*4)
-  } while ((
-    distVec2({ x, y }, ball.pos) < minDistFromBall
-    && (prevTarget && distVec2({ x, y }, prevTarget.pos) < minDistFromPrevTarget)
-  ))
+  } while (
+    (distVec2({ x, y }, ball.pos) < minDistFromBall)
+    || (prevTarget && (distVec2({ x, y }, prevTarget.pos) < minDistFromPrevTarget))
+  )
 
   return {
     pos: vec2(x, y),
@@ -42,7 +42,7 @@ export function getInitialState(canvas: HTMLCanvasElement): GameState {
   const vmin = Math.min(canvas.height, canvas.width)
 
   let vel: Vec2
-  { 
+  {
     let theta = Math.random() * Math.PI * 2
     vel = divideVec2({
       x: Math.cos(theta),
