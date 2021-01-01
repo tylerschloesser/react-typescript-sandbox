@@ -25,7 +25,7 @@ import {
   startWith,
 } from 'rxjs/operators'
 
-import { 
+import {
   Vec2,
   GameInput,
   GameCircle,
@@ -39,7 +39,10 @@ import {
   divideVec2,
 } from './common'
 
-import { updateGameState } from './update-game-state'
+import {
+  getInitialState,
+  updateGameState,
+} from './update-game-state'
 
 import './index.scss'
 
@@ -79,46 +82,8 @@ function calculateFrame(lastFrame: IFrameData | undefined): Observable<IFrameDat
 }
 
 
-function generateTarget(state?: GameState): GameTarget {
 
-  if (!state) {
-    return {
-      pos: vec2(.25, .25),
-      radius: .04,
-      color: 'cyan',
-    }
-  }
-
-  let x = Math.random()
-  let y = Math.random()
-
-  return {
-    pos: vec2(.25, .25),
-    radius: .04,
-    color: 'cyan',
-  }
-}
-
-let initialState = ((): GameState => {
-  const vmin = Math.min(canvas.height, canvas.width)
-
-  return {
-    vmin,
-    vx: vmin,
-    vy: vmin,
-    isPaused: false,
-    input: null,
-    ball: {
-      pos: { x: .5, y: .5 },
-      vel: { x: 0, y: 0 },
-      radius: .08,
-      color: 'blue',
-    },
-    target: generateTarget(),
-  }
-})()
-
-const gameState$ = new BehaviorSubject<GameState>(initialState)
+const gameState$ = new BehaviorSubject<GameState>(getInitialState(canvas))
 
 const keysDown$ = fromEvent<KeyboardEvent>(document, 'keydown')
   .pipe(

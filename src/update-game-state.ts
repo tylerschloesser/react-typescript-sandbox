@@ -12,7 +12,51 @@ import {
   divideVec2,
 } from './common'
 
-export function updateGameState(elapsed: number, gameState: GameState, keysDown: string[], inputState: InputState): GameState {
+function generateTarget(state?: GameState): GameTarget {
+
+  if (!state) {
+    return {
+      pos: vec2(.25, .25),
+      radius: .04,
+      color: 'cyan',
+    }
+  }
+
+  let x = Math.random()
+  let y = Math.random()
+
+  return {
+    pos: vec2(.25, .25),
+    radius: .04,
+    color: 'cyan',
+  }
+}
+
+export function getInitialState(canvas: HTMLCanvasElement): GameState {
+  const vmin = Math.min(canvas.height, canvas.width)
+
+  return {
+    vmin,
+    vx: vmin,
+    vy: vmin,
+    isPaused: false,
+    input: null,
+    ball: {
+      pos: { x: .5, y: .5 },
+      vel: { x: 0, y: 0 },
+      radius: .08,
+      color: 'blue',
+    },
+    target: generateTarget(),
+  }
+}
+
+export function updateGameState(
+  elapsed: number,
+  gameState: GameState,
+  keysDown: string[],
+  inputState: InputState,
+): GameState {
 
   let { isPaused } = gameState
 
