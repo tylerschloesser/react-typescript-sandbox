@@ -208,11 +208,11 @@ function renderGame(gameState: GameState): void {
 
   const { input } = gameState
   if (input !== null) {
-    input.swipes.forEach(({ start, current }) => {
+    input.swipes.forEach(({ start, end }) => {
       context.strokeStyle = 'white'
       context.beginPath()
       context.moveTo(start.x, start.y)
-      context.lineTo(current.x, current.y)
+      context.lineTo(end.x, end.y)
       context.stroke()
 
       context.beginPath()
@@ -222,7 +222,7 @@ function renderGame(gameState: GameState): void {
 
       context.beginPath()
       context.fillStyle = 'white'
-      context.arc(current.x, current.y, vmin*.02, 0, 2 * Math.PI)
+      context.arc(end.x, end.y, vmin*.02, 0, 2 * Math.PI)
       context.fill()
     })
   }

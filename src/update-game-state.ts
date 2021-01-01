@@ -110,15 +110,16 @@ export function updateGameState(
       input = {
         swipes: [
           {
-            startTime: first.timeStamp,
             start: {
               x: first.clientX,
               y: first.clientY,
             },
-            current: {
+            startTime: first.timeStamp,
+            end: {
               x: last.clientX,
               y: last.clientY,
             },
+            endTime: last.timeStamp,
           }
         ]
       }
@@ -129,9 +130,7 @@ export function updateGameState(
 
       const [ swipe ] = gameState.input.swipes
       const first = swipe.start
-
-      // TODO should be "end"
-      const last = swipe.current
+      const last = swipe.end
 
       nextBallVel = divideVec2(subtractVec2(first, last), gameState.vmin)
 
