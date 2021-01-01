@@ -4,10 +4,16 @@ export interface Vec2 {
   y: number
 }
 
-export interface GameInput {
+export interface GameSwipe {
   startTime: number
   start: Vec2
-  end: Vec2
+  current: Vec2
+  end?: Vec2
+  endTime?: number
+}
+
+export interface GameInput {
+  swipes: GameSwipe[]
 }
 
 export interface GameCircle {

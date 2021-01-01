@@ -1,6 +1,7 @@
 import {
   Vec2,
   GameInput,
+  GameSwipe,
   GameCircle,
   GameTarget,
   GameBall,
@@ -100,21 +101,26 @@ export function updateGameState(
   let nextBallPos = gameState.ball.pos
   let nextBallVel = gameState.ball.vel
   let input: GameInput | null = null
+
   {
     const { drag, down } = inputState
     if (inputState.down && drag.length > 1) {
       const first = drag[0]
       const last = drag[drag.length - 1]
       input = {
-        startTime: first.timeStamp,
-        start: {
-          x: first.clientX,
-          y: first.clientY,
-        },
-        end: {
-          x: last.clientX,
-          y: last.clientY,
-        },
+        swipes: [
+          {
+            startTime: first.timeStamp,
+            start: {
+              x: first.clientX,
+              y: first.clientY,
+            },
+            current: {
+              x: last.clientX,
+              y: last.clientY,
+            },
+          }
+        ]
       }
 
     } else if (gameState.input) {
@@ -131,7 +137,7 @@ export function updateGameState(
   let inputScaledBallVx = nextBallVel.x
   let inputScaledBallVy = nextBallVel.y
 
-  if (input && (frame.timestamp - input.startTime > 250)) {
+  if (input?.swipes && (frame.timestamp - input?.swipes[0].startTime > 250)) {
     inputScaledBallVx *= .25
     inputScaledBallVy *= .25
   }

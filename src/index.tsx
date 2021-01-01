@@ -208,21 +208,23 @@ function renderGame(gameState: GameState): void {
 
   const { input } = gameState
   if (input !== null) {
-    context.strokeStyle = 'white'
-    context.beginPath()
-    context.moveTo(input.start.x, input.start.y)
-    context.lineTo(input.end.x, input.end.y)
-    context.stroke()
+    input.swipes.forEach(({ start, current }) => {
+      context.strokeStyle = 'white'
+      context.beginPath()
+      context.moveTo(start.x, start.y)
+      context.lineTo(current.x, current.y)
+      context.stroke()
 
-    context.beginPath()
-    context.fillStyle = 'white'
-    context.arc(input.start.x, input.start.y, vmin*.02, 0, 2 * Math.PI)
-    context.fill()
+      context.beginPath()
+      context.fillStyle = 'white'
+      context.arc(start.x, start.y, vmin*.02, 0, 2 * Math.PI)
+      context.fill()
 
-    context.beginPath()
-    context.fillStyle = 'white'
-    context.arc(input.end.x, input.end.y, vmin*.02, 0, 2 * Math.PI)
-    context.fill()
+      context.beginPath()
+      context.fillStyle = 'white'
+      context.arc(current.x, current.y, vmin*.02, 0, 2 * Math.PI)
+      context.fill()
+    })
   }
 }
 
@@ -271,15 +273,15 @@ const Debug = ({
             update('targets[0].pos.y', v => v.toFixed(2)),
             update('targets[1].pos.x', v => v.toFixed(2)),
             update('targets[1].pos.y', v => v.toFixed(2)),
-            cond([
-              [pipe(get('input'), nonNull), compose(
-                update('input.start.x', v => v.toFixed()),
-                update('input.start.y', v => v.toFixed()),
-                update('input.end.x', v => v.toFixed()),
-                update('input.end.y', v => v.toFixed()),
-              )],
-              [stubTrue, identity],
-            ]),
+            // cond([
+            //   [pipe(get('input'), nonNull), compose(
+            //     update('input.start.x', v => v.toFixed()),
+            //     update('input.start.y', v => v.toFixed()),
+            //     update('input.end.x', v => v.toFixed()),
+            //     update('input.end.y', v => v.toFixed()),
+            //   )],
+            //   [stubTrue, identity],
+            // ]),
           )(gameState), null, 2)}
       </pre>
     </>
