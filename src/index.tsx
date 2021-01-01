@@ -176,7 +176,7 @@ function renderGame(gameState: GameState): void {
   // )
 
   {
-    const target = translateCircle(gameState.target, gameState)
+    const target = translateCircle(gameState.targets[0], gameState)
     const radius = target.radius
     context.beginPath()
     context.fillStyle = target.color

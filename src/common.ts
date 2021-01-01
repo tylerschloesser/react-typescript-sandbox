@@ -30,7 +30,6 @@ export interface GameState {
   isPaused: boolean
   input: GameInput | null
   ball: GameBall
-  target: GameTarget
   targets: GameTarget[]
   score: number
 }
