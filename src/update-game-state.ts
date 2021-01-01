@@ -102,7 +102,7 @@ export function updateGameState(
       }
 
     } else if (gameState.input) {
-      console.log('add velocity')
+      // handle letting go of velocity trigger
 
       const first = toVec2(drag[0])
       const last = toVec2(drag[drag.length - 1])
