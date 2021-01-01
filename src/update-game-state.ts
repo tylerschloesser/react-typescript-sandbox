@@ -109,6 +109,7 @@ export function updateGameState(
       input = {
         swipes: [
           {
+            active: true,
             start: {
               x: first.clientX,
               y: first.clientY,
@@ -123,12 +124,26 @@ export function updateGameState(
           }
         ]
       }
+    } else if (input?.swipes.length) {
+      const { swipes } = input
+      input = {
+        ...input,
+        swipes: [
+          ...swipes.slice(-1),
+          {
+            ...(swipes[swipes.length - 1]),
+            active: false,
+          }
+        ],
+      }
     }
 
-    if (!inputState.down && gameState.input?.swipes) {
+    const swipes = input?.swipes
+
+    if (swipes && !swipes[swipes.length - 1].active) {
       // handle letting go of velocity trigger
 
-      const [ swipe ] = gameState.input.swipes
+      const swipe = swipes[ swipes.length - 1 ]
       const first = swipe.start
       const last = swipe.end
 

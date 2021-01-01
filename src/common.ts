@@ -5,6 +5,7 @@ export interface Vec2 {
 }
 
 export interface GameSwipe {
+  active: boolean
   start: Vec2
   startTime: number
   end: Vec2
