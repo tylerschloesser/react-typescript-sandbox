@@ -25,6 +25,22 @@ import {
   startWith,
 } from 'rxjs/operators'
 
+import { 
+  Vec2,
+  GameInput,
+  GameCircle,
+  GameTarget,
+  GameBall,
+  GameState,
+  vec2,
+  InputState,
+  toVec2,
+  subtractVec2,
+  divideVec2,
+} from './common'
+
+import { updateGameState } from './update-game-state'
+
 import './index.scss'
 
 // TODO error handling
@@ -62,46 +78,19 @@ function calculateFrame(lastFrame: IFrameData | undefined): Observable<IFrameDat
   })
 }
 
-interface Vec2 {
-  x: number
-  y: number
-}
-
-interface GameInput {
-  start: Vec2
-  end: Vec2
-}
-
-interface GameCircle {
-  pos: Vec2
-  radius: number
-  color: string
-}
-
-interface GameTarget extends GameCircle {
-}
-
-interface GameBall extends GameCircle {
-  vel: Vec2
-}
-
-interface GameState {
-  vmin: number
-  vx: number
-  vy: number
-  isPaused: boolean
-  input: GameInput | null
-  ball: GameBall
-  target: GameTarget
-}
-
-const vec2 = (x: number, y: number): Vec2 => ({ x, y })
 
 function generateTarget(state?: GameState): GameTarget {
 
+  if (!state) {
+    return {
+      pos: vec2(.25, .25),
+      radius: .04,
+      color: 'cyan',
+    }
+  }
+
   let x = Math.random()
   let y = Math.random()
-
 
   return {
     pos: vec2(.25, .25),
@@ -146,10 +135,6 @@ const frames$ = of(undefined)
     share()
   )
 
-interface InputState {
-  down: boolean
-  drag: PointerEvent[]
-}
 
 // disable scroll on iphone
 fromEvent<TouchEvent>(document, 'touchmove', { passive: false }).pipe(tap(e => e.preventDefault())).subscribe(() => {})
@@ -201,117 +186,6 @@ const keysDownPerFrame$ = keysDown$
       }
     })
   )
-
-function toVec2(event: PointerEvent): Vec2 {
-  return {
-    x: event.clientX,
-    y: event.clientY,
-  }
-}
-
-function subtractVec2(a: Vec2, b: Vec2): Vec2 {
-  return {
-    x: a.x - b.x,
-    y: a.y - b.y,
-  }
-}
-
-function divideVec2(v: Vec2, s: number): Vec2 {
-  return {
-    x: v.x / s,
-    y: v.y / s,
-  }
-}
-
-function updateGameState(elapsed: number, gameState: GameState, keysDown: string[], inputState: InputState): GameState {
-
-  let { isPaused } = gameState
-
-  if (keysDown.includes(' ')) {
-    isPaused = !isPaused
-  }
-
-  let ball = gameState.ball
-  let ballPosition = gameState.ball.pos
-  let ballVelocity = gameState.ball.vel
-  let input: GameInput | null = null
-  {
-    const { drag, down } = inputState
-    if (inputState.down && drag.length > 1) {
-      const first = drag[0]
-      const last = drag[drag.length - 1]
-      input = {
-        start: {
-          x: first.clientX,
-          y: first.clientY,
-        },
-        end: {
-          x: last.clientX,
-          y: last.clientY,
-        },
-      }
-
-    } else if (gameState.input) {
-      console.log('add velocity')
-
-      const first = toVec2(drag[0])
-      const last = toVec2(drag[drag.length - 1])
-
-      ballVelocity = divideVec2(subtractVec2(first, last), gameState.vmin)
-
-    }
-  }
-
-  let nextBallX = ballPosition.x + (ballVelocity.x * elapsed)
-  let nextBallY = ballPosition.y + (ballVelocity.y * elapsed)
-
-  let nextBallVx = ballVelocity.x
-  let nextBallVy = ballVelocity.y
-
-  {
-    //const radius = ball.radius * gameState.vmin
-    const radius = ball.radius
-
-    if ((nextBallX - radius) < 0) {
-      nextBallX = radius + Math.abs(nextBallX - radius)
-      nextBallVx *= -1
-    }
-    if ((nextBallY - radius) < 0) {
-      nextBallY = radius + Math.abs(nextBallY - radius)
-      nextBallVy *= -1
-    }
-
-    if ((nextBallX + radius) > 1) {
-      nextBallX = 1 - radius - ((nextBallX + radius) - (1))
-      nextBallVx *= -1
-    }
-    if ((nextBallY + radius) > 1) {
-      nextBallY = 1 - radius - ((nextBallY + radius) - (1))
-      nextBallVy *= -1
-    }
-  }
-
-  ballPosition = {
-    x: nextBallX,
-    y: nextBallY,
-  }
-
-  ballVelocity = {
-    x: nextBallVx,
-    y: nextBallVy,
-  }
-
-  return {
-    ...gameState,
-    input,
-    isPaused,
-    ball: {
-      ...gameState.ball,
-      vel: ballVelocity,
-      pos: ballPosition,
-    },
-  }
-}
 
 const translateCircle = (circle: GameCircle, state: GameState): GameCircle => ({
   ...circle,
