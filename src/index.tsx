@@ -161,7 +161,7 @@ const translateCircle = (circle: GameCircle, state: GameState): GameCircle => ({
   },
 })
 
-function render(gameState: GameState): void {
+function renderGame(gameState: GameState): void {
   context.clearRect(0, 0, canvas.width, canvas.height)
   context.fillStyle = 'black'
   context.fillRect(0, 0, canvas.width, canvas.height)
@@ -233,7 +233,7 @@ frames$
     // TODO why is this not in .subscribe below?
     tap(gameState => gameState$.next(gameState))
   )
-  .subscribe(render)
+  .subscribe(renderGame)
 
 interface DebugProps {
   gameState$: BehaviorSubject<GameState>

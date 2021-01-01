@@ -70,9 +70,15 @@ export function updateGameState(
 
   if (keysDown.includes(' ')) {
     isPaused = !isPaused
+  } else if (isPaused && inputState.down) {
+    isPaused = false
   }
   if (isPaused) {
-    return { ...gameState, isPaused }
+    return {
+      ...gameState,
+      isPaused,
+      input: null,
+    }
   }
 
   let ball = gameState.ball
@@ -113,7 +119,6 @@ export function updateGameState(
   let nextBallVy = nextBallVel.y
 
   {
-    //const radius = ball.radius * gameState.vmin
     const radius = ball.radius
 
     if ((nextBallX - radius) < 0) {
