@@ -107,7 +107,7 @@ let initialState = ((): GameState => {
     ball: {
       pos: { x: vmin / 2, y: vmin / 2 },
       vel: { x: 0, y: 0 },
-      radius: vmin / 10,
+      radius: vmin * .08,
       color: 'blue',
     },
   }
