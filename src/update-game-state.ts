@@ -63,6 +63,9 @@ export function updateGameState(
   if (keysDown.includes(' ')) {
     isPaused = !isPaused
   }
+  if (isPaused) {
+    return { ...gameState, isPaused }
+  }
 
   let ball = gameState.ball
   let ballPosition = gameState.ball.pos
