@@ -195,6 +195,8 @@ function update(elapsed: number, gameState: GameState, keysDown: string[], input
     isPaused = !isPaused
   }
 
+  let ball = gameState.ball
+  let ballPosition = gameState.ball.pos
   let ballVelocity = gameState.ball.vel
   let input: GameInput | null = null
   {
@@ -219,10 +221,27 @@ function update(elapsed: number, gameState: GameState, keysDown: string[], input
       const first = toVec2(drag[0])
       const last = toVec2(drag[drag.length - 1])
 
-      ballVelocity = subtractVec2(last, first)
+      ballVelocity = subtractVec2(first, last)
 
     }
   }
+
+  let nextBallX = ballPosition.x + (ballVelocity.x * elapsed)
+  let nextBallY = ballPosition.y + (ballVelocity.y * elapsed)
+
+  ballPosition = {
+    x: nextBallX,
+    y: nextBallY,
+  }
+
+  {
+    //let dx = ballPosition.x - ball.radius
+  }
+
+  // if (ballPosition.x - ball.radius < 0 || ballPosition.y - ball.radius < 0 || ballPosition.x + ball.radius > canvas.width || ballPosition.y + ball.radius > canvas.height) {
+  //   ballVelocity = { x: 0, y: 0 }
+  //   console.log("stop")
+  // }
 
   return {
     ...gameState,
@@ -231,6 +250,7 @@ function update(elapsed: number, gameState: GameState, keysDown: string[], input
     ball: {
       ...gameState.ball,
       vel: ballVelocity,
+      pos: ballPosition,
     },
   }
 }
