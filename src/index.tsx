@@ -89,21 +89,32 @@ interface GameBall {
 }
 
 interface GameState {
+  vw: number
+  vh: number
   isPaused: boolean
   input: GameInput | null
   ball: GameBall
 }
 
-const gameState$ = new BehaviorSubject<GameState>({
-  isPaused: false,
-  input: null,
-  ball: {
-    pos: { x: canvas.width / 2, y: canvas.height / 2 },
-    vel: { x: 0, y: 0 },
-    radius: Math.min(canvas.height, canvas.width) / 10,
-    color: 'blue',
+let initialState = (() => {
+  const vw = Math.min(canvas.height, canvas.width)
+  const vh = Math.min(canvas.height, canvas.width)
+
+  return {
+    vw: Math.min(canvas.height, canvas.width),
+    vh: Math.min(canvas.height, canvas.width),
+    isPaused: false,
+    input: null,
+    ball: {
+      pos: { x: canvas.width / 2, y: canvas.height / 2 },
+      vel: { x: 0, y: 0 },
+      radius: Math.min(canvas.height, canvas.width) / 10,
+      color: 'blue',
+    }
   }
-})
+})()
+
+const gameState$ = new BehaviorSubject<GameState>(initialState)
 
 const keysDown$ = fromEvent<KeyboardEvent>(document, 'keydown')
   .pipe(
