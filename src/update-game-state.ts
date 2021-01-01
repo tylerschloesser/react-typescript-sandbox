@@ -14,25 +14,17 @@ import {
   IFrameData,
 } from './common'
 
-function generateTarget(state?: GameState): GameTarget {
+function generateTarget(ball: GameBall): GameTarget {
 
   const radius = .04
   const color = 'cyan'
 
-  if (!state) {
-    return {
-      pos: vec2(.25, .25),
-      radius,
-      color,
-    }
-  }
-
-  const minDist = (state.ball.radius + radius) * 2
+  const minDist = (ball.radius + radius) * 2
   let x, y
   do {
     x = radius*2 + Math.random() * (1-radius*4)
     y = radius*2 + Math.random() * (1-radius*4)
-  } while (distVec2({ x, y }, state.ball.pos) < minDist)
+  } while (distVec2({ x, y }, ball.pos) < minDist)
 
   return {
     pos: vec2(x, y),
@@ -53,7 +45,14 @@ export function getInitialState(canvas: HTMLCanvasElement): GameState {
     }, 2)
   }
 
-  const target = generateTarget()
+  const ball: GameBall = {
+    pos: { x: .5, y: .5 },
+    vel,
+    radius: .08,
+    color: 'blue',
+  }
+
+  const target = generateTarget(ball)
 
   return {
     vmin,
@@ -61,12 +60,7 @@ export function getInitialState(canvas: HTMLCanvasElement): GameState {
     vy: vmin,
     isPaused: false,
     input: null,
-    ball: {
-      pos: { x: .5, y: .5 },
-      vel,
-      radius: .08,
-      color: 'blue',
-    },
+    ball,
     targets: [ target ],
     score: 0
   }
@@ -177,10 +171,16 @@ export function updateGameState(
   let { score } = gameState
   let [ target ] = gameState.targets
 
+  const nextBall: GameBall = {
+    ...gameState.ball,
+    vel: nextBallVel,
+    pos: nextBallPos,
+  }
+
   {
     let dist = distVec2(nextBallPos, target.pos)
-    if (dist < (ball.radius + target.radius)) {
-      target = generateTarget(gameState)
+    if (dist < (nextBall.radius + target.radius)) {
+      target = generateTarget(nextBall)
       score++
     }
   }
@@ -189,11 +189,7 @@ export function updateGameState(
     ...gameState,
     input,
     isPaused,
-    ball: {
-      ...gameState.ball,
-      vel: nextBallVel,
-      pos: nextBallPos,
-    },
+    ball: nextBall,
     targets: [ target ],
     score,
   }
