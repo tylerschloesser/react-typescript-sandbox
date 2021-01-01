@@ -19,12 +19,13 @@ function generateTarget(ball: GameBall): GameTarget {
   const radius = .04
   const color = 'cyan'
 
-  const minDist = (ball.radius + radius) * 2
+  const minDistFromBall = (ball.radius + radius) * 2
+
   let x, y
   do {
     x = radius*2 + Math.random() * (1-radius*4)
     y = radius*2 + Math.random() * (1-radius*4)
-  } while (distVec2({ x, y }, ball.pos) < minDist)
+  } while (distVec2({ x, y }, ball.pos) < minDistFromBall)
 
   return {
     pos: vec2(x, y),
