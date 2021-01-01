@@ -37,6 +37,7 @@ import {
   toVec2,
   subtractVec2,
   divideVec2,
+  IFrameData,
 } from './common'
 
 import {
@@ -63,10 +64,6 @@ function computeElapsed(now: DOMHighResTimeStamp, last?: DOMHighResTimeStamp) {
   return (now - last) / 1000 // convert ms to seconds
 }
 
-interface IFrameData {
-  timestamp: DOMHighResTimeStamp;
-  elapsed: number;
-}
 
 function calculateFrame(lastFrame: IFrameData | undefined): Observable<IFrameData> {
   return new Observable<IFrameData>(observer => {
@@ -96,7 +93,7 @@ const frames$ = of(undefined)
   .pipe(
     expand((val: IFrameData | undefined) => calculateFrame(val)),
     filter(frame => typeof frame !== 'undefined'),
-    map((frame) => frame.elapsed),
+    //map((frame) => frame.elapsed),
     share()
   )
 

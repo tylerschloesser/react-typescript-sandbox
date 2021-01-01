@@ -11,6 +11,7 @@ import {
   subtractVec2,
   divideVec2,
   distVec2,
+  IFrameData,
 } from './common'
 
 function generateTarget(state?: GameState): GameTarget {
@@ -69,11 +70,13 @@ export function getInitialState(canvas: HTMLCanvasElement): GameState {
 }
 
 export function updateGameState(
-  elapsed: number,
+  frame: IFrameData,
   gameState: GameState,
   keysDown: string[],
   inputState: InputState,
 ): GameState {
+
+  const { elapsed } = frame
 
   let { isPaused } = gameState
 
@@ -100,6 +103,7 @@ export function updateGameState(
       const first = drag[0]
       const last = drag[drag.length - 1]
       input = {
+        startTime: first.timeStamp,
         start: {
           x: first.clientX,
           y: first.clientY,

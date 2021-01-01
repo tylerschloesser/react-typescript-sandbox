@@ -5,6 +5,7 @@ export interface Vec2 {
 }
 
 export interface GameInput {
+  startTime: number
   start: Vec2
   end: Vec2
 }
@@ -64,4 +65,9 @@ export function distVec2(a: Vec2, b: Vec2): number {
   const dx = a.x - b.x
   const dy = a.y - b.y
   return Math.sqrt(dx*dx+dy*dy)
+}
+
+export interface IFrameData {
+  timestamp: DOMHighResTimeStamp;
+  elapsed: number;
 }
