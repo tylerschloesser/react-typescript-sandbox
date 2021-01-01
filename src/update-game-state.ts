@@ -14,18 +14,22 @@ import {
   IFrameData,
 } from './common'
 
-function generateTarget(ball: GameBall): GameTarget {
+function generateTarget(ball: GameBall, prevTarget?: GameTarget): GameTarget {
 
   const radius = .04
   const color = 'cyan'
 
   const minDistFromBall = (ball.radius + radius) * 2
+  const minDistFromPrevTarget = radius * 8
 
   let x, y
   do {
     x = radius*2 + Math.random() * (1-radius*4)
     y = radius*2 + Math.random() * (1-radius*4)
-  } while (distVec2({ x, y }, ball.pos) < minDistFromBall)
+  } while ((
+    distVec2({ x, y }, ball.pos) < minDistFromBall
+    && (prevTarget && distVec2({ x, y }, prevTarget.pos) < minDistFromPrevTarget)
+  ))
 
   return {
     pos: vec2(x, y),
@@ -53,7 +57,8 @@ export function getInitialState(canvas: HTMLCanvasElement): GameState {
     color: 'blue',
   }
 
-  const target = generateTarget(ball)
+  const target1 = generateTarget(ball)
+  const target2 = generateTarget(ball, target1)
 
   return {
     vmin,
@@ -62,7 +67,7 @@ export function getInitialState(canvas: HTMLCanvasElement): GameState {
     isPaused: false,
     input: null,
     ball,
-    targets: [ target ],
+    targets: [ target1, target2 ],
     score: 0
   }
 }
@@ -169,8 +174,7 @@ export function updateGameState(
     y: nextBallVy,
   }
 
-  let { score } = gameState
-  let [ target ] = gameState.targets
+  let { targets, score } = gameState
 
   const nextBall: GameBall = {
     ...gameState.ball,
@@ -179,9 +183,13 @@ export function updateGameState(
   }
 
   {
+    const [ target ] = targets
     let dist = distVec2(nextBallPos, target.pos)
     if (dist < (nextBall.radius + target.radius)) {
-      target = generateTarget(nextBall)
+      targets = [
+        targets[1],
+        generateTarget(nextBall, targets[1])
+      ],
       score++
     }
   }
@@ -191,7 +199,7 @@ export function updateGameState(
     input,
     isPaused,
     ball: nextBall,
-    targets: [ target ],
+    targets,
     score,
   }
 }
