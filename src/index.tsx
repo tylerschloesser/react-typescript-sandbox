@@ -254,12 +254,12 @@ function update(elapsed: number, gameState: GameState, keysDown: string[], input
     nextBallVy *= -1
   }
 
-  if ((nextBallX + ball.radius) > canvas.width) {
-    nextBallX = canvas.width - ball.radius - ((nextBallX + ball.radius) - (canvas.width))
+  if ((nextBallX + ball.radius) > gameState.vx) {
+    nextBallX = gameState.vx - ball.radius - ((nextBallX + ball.radius) - (gameState.vx))
     nextBallVx *= -1
   }
-  if ((nextBallY + ball.radius) > canvas.height) {
-    nextBallY = canvas.height - ball.radius - ((nextBallY + ball.radius) - (canvas.height))
+  if ((nextBallY + ball.radius) > gameState.vy) {
+    nextBallY = gameState.vy - ball.radius - ((nextBallY + ball.radius) - (gameState.vy))
     nextBallVy *= -1
   }
 
@@ -306,6 +306,12 @@ function render(gameState: GameState): void {
     context.arc(ball.pos.x, ball.pos.y, ball.radius, 0, 2 * Math.PI)
     context.fill()
   }
+
+
+  context.beginPath();
+  context.strokeStyle='red'
+  context.rect(0, 0, gameState.vx, gameState.vy);
+  context.stroke();
 
   const { input } = gameState
   if (input === null) {
