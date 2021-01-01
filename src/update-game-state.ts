@@ -10,25 +10,33 @@ import {
   toVec2,
   subtractVec2,
   divideVec2,
+  distVec2,
 } from './common'
 
 function generateTarget(state?: GameState): GameTarget {
 
+  const radius = .04
+  const color = 'cyan'
+
   if (!state) {
     return {
       pos: vec2(.25, .25),
-      radius: .04,
-      color: 'cyan',
+      radius,
+      color,
     }
   }
 
-  let x = Math.random()
-  let y = Math.random()
+  const minDist = (state.ball.radius + state.target.radius) * 2
+  let x, y
+  do {
+    x = state.target.radius*2 + Math.random() * (1-state.target.radius*4)
+    y = state.target.radius*2 + Math.random() * (1-state.target.radius*4)
+  } while (distVec2({ x, y }, state.ball.pos) < minDist)
 
   return {
-    pos: vec2(.25, .25),
-    radius: .04,
-    color: 'cyan',
+    pos: vec2(x, y),
+    radius,
+    color,
   }
 }
 
@@ -68,8 +76,8 @@ export function updateGameState(
   }
 
   let ball = gameState.ball
-  let ballPosition = gameState.ball.pos
-  let ballVelocity = gameState.ball.vel
+  let nextBallPos = gameState.ball.pos
+  let nextBallVel = gameState.ball.vel
   let input: GameInput | null = null
   {
     const { drag, down } = inputState
@@ -93,16 +101,16 @@ export function updateGameState(
       const first = toVec2(drag[0])
       const last = toVec2(drag[drag.length - 1])
 
-      ballVelocity = divideVec2(subtractVec2(first, last), gameState.vmin)
+      nextBallVel = divideVec2(subtractVec2(first, last), gameState.vmin)
 
     }
   }
 
-  let nextBallX = ballPosition.x + (ballVelocity.x * elapsed)
-  let nextBallY = ballPosition.y + (ballVelocity.y * elapsed)
+  let nextBallX = nextBallPos.x + (nextBallVel.x * elapsed)
+  let nextBallY = nextBallPos.y + (nextBallVel.y * elapsed)
 
-  let nextBallVx = ballVelocity.x
-  let nextBallVy = ballVelocity.y
+  let nextBallVx = nextBallVel.x
+  let nextBallVy = nextBallVel.y
 
   {
     //const radius = ball.radius * gameState.vmin
@@ -127,14 +135,23 @@ export function updateGameState(
     }
   }
 
-  ballPosition = {
+  nextBallPos = {
     x: nextBallX,
     y: nextBallY,
   }
 
-  ballVelocity = {
+  nextBallVel = {
     x: nextBallVx,
     y: nextBallVy,
+  }
+
+  let { target } = gameState
+
+  {
+    let dist = distVec2(nextBallPos, target.pos)
+    if (dist < (ball.radius + target.radius)) {
+      target = generateTarget(gameState)
+    }
   }
 
   return {
@@ -143,8 +160,9 @@ export function updateGameState(
     isPaused,
     ball: {
       ...gameState.ball,
-      vel: ballVelocity,
-      pos: ballPosition,
+      vel: nextBallVel,
+      pos: nextBallPos,
     },
+    target,
   }
 }

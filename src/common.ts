@@ -59,3 +59,9 @@ export function divideVec2(v: Vec2, s: number): Vec2 {
     y: v.y / s,
   }
 }
+
+export function distVec2(a: Vec2, b: Vec2): number {
+  const dx = a.x - b.x
+  const dy = a.y - b.y
+  return Math.sqrt(dx*dx+dy*dy)
+}
