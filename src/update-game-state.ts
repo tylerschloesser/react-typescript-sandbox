@@ -43,6 +43,15 @@ function generateTarget(state?: GameState): GameTarget {
 export function getInitialState(canvas: HTMLCanvasElement): GameState {
   const vmin = Math.min(canvas.height, canvas.width)
 
+  let vel: Vec2
+  { 
+    let theta = Math.random() * Math.PI * 2
+    vel = divideVec2({
+      x: Math.cos(theta),
+      y: Math.sin(theta),
+    }, 2)
+  }
+
   return {
     vmin,
     vx: vmin,
@@ -51,7 +60,7 @@ export function getInitialState(canvas: HTMLCanvasElement): GameState {
     input: null,
     ball: {
       pos: { x: .5, y: .5 },
-      vel: { x: 0, y: 0 },
+      vel,
       radius: .08,
       color: 'blue',
     },
