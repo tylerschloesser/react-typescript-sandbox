@@ -97,10 +97,9 @@ export function updateGameState(
     }
   }
 
-  let ball = gameState.ball
+  let { ball, input } = gameState
   let nextBallPos = gameState.ball.pos
   let nextBallVel = gameState.ball.vel
-  let input: GameInput | null = null
 
   {
     const { drag, down } = inputState
@@ -119,7 +118,8 @@ export function updateGameState(
               x: last.clientX,
               y: last.clientY,
             },
-            endTime: last.timeStamp,
+            //endTime: last.timeStamp,
+            endTime: frame.timestamp,
           }
         ]
       }
@@ -132,8 +132,10 @@ export function updateGameState(
       const first = swipe.start
       const last = swipe.end
 
-      nextBallVel = divideVec2(subtractVec2(first, last), gameState.vmin)
-
+      if (frame.timestamp - swipe.endTime > 200) {
+        nextBallVel = divideVec2(subtractVec2(first, last), gameState.vmin)
+        input = null
+      }
     }
   }
 
