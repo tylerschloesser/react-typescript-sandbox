@@ -92,15 +92,22 @@ interface GameState {
   isPaused: boolean
   input: GameInput | null
   ball: GameBall
-  //target: GameTarget
+  target: GameTarget
 }
 
-function generateTarget(state: GameState) {
+const vec2 = (x: number, y: number): Vec2 => ({ x, y })
+
+function generateTarget(state?: GameState): GameTarget {
 
   let x = Math.random()
   let y = Math.random()
 
 
+  return {
+    pos: vec2(.5, .5),
+    radius: .04,
+    color: 'cyan',
+  }
 }
 
 let initialState = ((): GameState => {
@@ -118,6 +125,7 @@ let initialState = ((): GameState => {
       radius: .08,
       color: 'blue',
     },
+    target: generateTarget(),
   }
 })()
 
