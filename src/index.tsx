@@ -303,24 +303,6 @@ function render(gameState: GameState): void {
 
   const { vmin } = gameState
 
-  const { input } = gameState
-  if (input !== null) {
-    context.strokeStyle = 'white'
-    context.beginPath()
-    context.moveTo(input.start.x, input.start.y)
-    context.lineTo(input.end.x, input.end.y)
-    context.stroke()
-
-    context.beginPath()
-    context.fillStyle = 'white'
-    context.arc(input.start.x, input.start.y, vmin*.02, 0, 2 * Math.PI)
-    context.fill()
-
-    context.beginPath()
-    context.fillStyle = 'white'
-    context.arc(input.end.x, input.end.y, vmin*.02, 0, 2 * Math.PI)
-    context.fill()
-  }
 
   context.transform(
     1,
@@ -346,6 +328,25 @@ function render(gameState: GameState): void {
   context.stroke();
 
   context.resetTransform()
+
+  const { input } = gameState
+  if (input !== null) {
+    context.strokeStyle = 'white'
+    context.beginPath()
+    context.moveTo(input.start.x, input.start.y)
+    context.lineTo(input.end.x, input.end.y)
+    context.stroke()
+
+    context.beginPath()
+    context.fillStyle = 'white'
+    context.arc(input.start.x, input.start.y, vmin*.02, 0, 2 * Math.PI)
+    context.fill()
+
+    context.beginPath()
+    context.fillStyle = 'white'
+    context.arc(input.end.x, input.end.y, vmin*.02, 0, 2 * Math.PI)
+    context.fill()
+  }
 }
 
 frames$
