@@ -125,8 +125,16 @@ export function updateGameState(
     }
   }
 
-  let nextBallX = nextBallPos.x + (nextBallVel.x * elapsed)
-  let nextBallY = nextBallPos.y + (nextBallVel.y * elapsed)
+  let inputScaledBallVx = nextBallVel.x
+  let inputScaledBallVy = nextBallVel.y
+
+  if (input && (frame.timestamp - input.startTime > 250)) {
+    inputScaledBallVx *= .25
+    inputScaledBallVy *= .25
+  }
+
+  let nextBallX = nextBallPos.x + (inputScaledBallVx * elapsed)
+  let nextBallY = nextBallPos.y + (inputScaledBallVy * elapsed)
 
   let nextBallVx = nextBallVel.x
   let nextBallVy = nextBallVel.y
