@@ -53,6 +53,8 @@ export function getInitialState(canvas: HTMLCanvasElement): GameState {
     }, 2)
   }
 
+  const target = generateTarget()
+
   return {
     vmin,
     vx: vmin,
@@ -65,7 +67,8 @@ export function getInitialState(canvas: HTMLCanvasElement): GameState {
       radius: .08,
       color: 'blue',
     },
-    target: generateTarget(),
+    target,
+    targets: [ target ],
     score: 0
   }
 }
@@ -192,6 +195,7 @@ export function updateGameState(
       pos: nextBallPos,
     },
     target,
+    targets: [ target ],
     score,
   }
 }

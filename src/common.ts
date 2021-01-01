@@ -31,6 +31,7 @@ export interface GameState {
   input: GameInput | null
   ball: GameBall
   target: GameTarget
+  targets: GameTarget[]
   score: number
 }
 
