@@ -111,7 +111,7 @@ let initialState = ((): GameState => {
     isPaused: false,
     input: null,
     ball: {
-      pos: { x: vmin / 2, y: vmin / 2 },
+      pos: { x: .5, y: .5 },
       vel: { x: 0, y: 0 },
       radius: .08,
       color: 'blue',
@@ -206,6 +206,13 @@ function subtractVec2(a: Vec2, b: Vec2): Vec2 {
   }
 }
 
+function divideVec2(v: Vec2, s: number): Vec2 {
+  return {
+    x: v.x / s,
+    y: v.y / s,
+  }
+}
+
 function update(elapsed: number, gameState: GameState, keysDown: string[], inputState: InputState): GameState {
 
   let { isPaused } = gameState
@@ -240,7 +247,7 @@ function update(elapsed: number, gameState: GameState, keysDown: string[], input
       const first = toVec2(drag[0])
       const last = toVec2(drag[drag.length - 1])
 
-      ballVelocity = subtractVec2(first, last)
+      ballVelocity = divideVec2(subtractVec2(first, last), gameState.vmin)
 
     }
   }
@@ -252,7 +259,8 @@ function update(elapsed: number, gameState: GameState, keysDown: string[], input
   let nextBallVy = ballVelocity.y
 
   {
-    const radius = ball.radius * gameState.vmin
+    //const radius = ball.radius * gameState.vmin
+    const radius = ball.radius
 
     if ((nextBallX - radius) < 0) {
       nextBallX = radius + Math.abs(nextBallX - radius)
@@ -263,12 +271,12 @@ function update(elapsed: number, gameState: GameState, keysDown: string[], input
       nextBallVy *= -1
     }
 
-    if ((nextBallX + radius) > gameState.vx) {
-      nextBallX = gameState.vx - radius - ((nextBallX + radius) - (gameState.vx))
+    if ((nextBallX + radius) > 1) {
+      nextBallX = 1 - radius - ((nextBallX + radius) - (1))
       nextBallVx *= -1
     }
-    if ((nextBallY + radius) > gameState.vy) {
-      nextBallY = gameState.vy - radius - ((nextBallY + radius) - (gameState.vy))
+    if ((nextBallY + radius) > 1) {
+      nextBallY = 1 - radius - ((nextBallY + radius) - (1))
       nextBallVy *= -1
     }
   }
@@ -295,6 +303,22 @@ function update(elapsed: number, gameState: GameState, keysDown: string[], input
   }
 }
 
+function translateBall(state: GameState): GameBall {
+  const { ball } = state
+  return {
+    ...ball,
+    radius: ball.radius * state.vmin,
+    pos: {
+      x: ball.pos.x * state.vmin,
+      y: ball.pos.y * state.vmin,
+    },
+    vel: {
+      x: ball.vel.x * state.vmin,
+      y: ball.vel.y * state.vmin,
+    },
+  }
+}
+
 function render(gameState: GameState): void {
   context.clearRect(0, 0, canvas.width, canvas.height)
   context.fillStyle = 'black'
@@ -313,8 +337,8 @@ function render(gameState: GameState): void {
   )
 
   {
-    const { ball } = gameState
-    const radius = ball.radius * gameState.vmin
+    const ball = translateBall(gameState)
+    const radius = ball.radius
     context.beginPath()
     context.fillStyle = ball.color
     context.arc(ball.pos.x, ball.pos.y, radius, 0, 2 * Math.PI)
