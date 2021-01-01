@@ -95,7 +95,7 @@ const frames$ = of(undefined)
     filter(frame => typeof frame !== 'undefined'),
     map(frame => ({
       ...frame,
-      elapsed: Math.min(frame.elapsed, 1/30),
+      elapsed: Math.min(frame.elapsed, 1/30), // in case we have a really long frame
     })),
     share()
   )
