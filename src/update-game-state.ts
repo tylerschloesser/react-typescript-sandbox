@@ -27,12 +27,11 @@ function generateTarget(state?: GameState): GameTarget {
     }
   }
 
-  const [ target ] = state.targets
-  const minDist = (state.ball.radius + target.radius) * 2
+  const minDist = (state.ball.radius + radius) * 2
   let x, y
   do {
-    x = target.radius*2 + Math.random() * (1-target.radius*4)
-    y = target.radius*2 + Math.random() * (1-target.radius*4)
+    x = radius*2 + Math.random() * (1-radius*4)
+    y = radius*2 + Math.random() * (1-radius*4)
   } while (distVec2({ x, y }, state.ball.pos) < minDist)
 
   return {
@@ -176,7 +175,7 @@ export function updateGameState(
   }
 
   let { score } = gameState
-  let target = gameState.targets[0]
+  let [ target ] = gameState.targets
 
   {
     let dist = distVec2(nextBallPos, target.pos)
