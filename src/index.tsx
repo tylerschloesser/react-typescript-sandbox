@@ -89,6 +89,7 @@ interface GameBall {
 }
 
 interface GameState {
+  vmin: number
   vx: number
   vy: number
   isPaused: boolean
@@ -100,6 +101,7 @@ let initialState = ((): GameState => {
   const vmin = Math.min(canvas.height, canvas.width)
 
   return {
+    vmin,
     vx: vmin,
     vy: vmin,
     isPaused: false,
@@ -299,6 +301,8 @@ function render(gameState: GameState): void {
   context.fillStyle = 'black'
   context.fillRect(0, 0, canvas.width, canvas.height)
 
+  const { vmin } = gameState
+
   const { input } = gameState
   if (input !== null) {
     context.strokeStyle = 'white'
@@ -309,12 +313,12 @@ function render(gameState: GameState): void {
 
     context.beginPath()
     context.fillStyle = 'white'
-    context.arc(input.start.x, input.start.y, 10, 0, 2 * Math.PI)
+    context.arc(input.start.x, input.start.y, vmin*.02, 0, 2 * Math.PI)
     context.fill()
 
     context.beginPath()
     context.fillStyle = 'white'
-    context.arc(input.end.x, input.end.y, 10, 0, 2 * Math.PI)
+    context.arc(input.end.x, input.end.y, vmin*.02, 0, 2 * Math.PI)
     context.fill()
   }
 
