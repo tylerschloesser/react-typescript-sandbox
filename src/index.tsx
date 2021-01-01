@@ -81,6 +81,12 @@ interface GameInput {
   end: Vec2
 }
 
+interface GameTarget {
+  pos: Vec2
+  radius: number
+  color: string
+}
+
 interface GameBall {
   pos: Vec2
   vel: Vec2
@@ -95,6 +101,15 @@ interface GameState {
   isPaused: boolean
   input: GameInput | null
   ball: GameBall
+  //target: GameTarget
+}
+
+function generateTarget(state: GameState) {
+
+  let x = Math.random()
+  let y = Math.random()
+
+
 }
 
 let initialState = ((): GameState => {
@@ -247,22 +262,26 @@ function update(elapsed: number, gameState: GameState, keysDown: string[], input
   let nextBallVx = ballVelocity.x
   let nextBallVy = ballVelocity.y
 
-  if ((nextBallX - ball.radius) < 0) {
-    nextBallX = ball.radius + Math.abs(nextBallX - ball.radius)
-    nextBallVx *= -1
-  }
-  if ((nextBallY - ball.radius) < 0) {
-    nextBallY = ball.radius + Math.abs(nextBallY - ball.radius)
-    nextBallVy *= -1
-  }
+  {
+    const radius = ball.radius
 
-  if ((nextBallX + ball.radius) > gameState.vx) {
-    nextBallX = gameState.vx - ball.radius - ((nextBallX + ball.radius) - (gameState.vx))
-    nextBallVx *= -1
-  }
-  if ((nextBallY + ball.radius) > gameState.vy) {
-    nextBallY = gameState.vy - ball.radius - ((nextBallY + ball.radius) - (gameState.vy))
-    nextBallVy *= -1
+    if ((nextBallX - radius) < 0) {
+      nextBallX = radius + Math.abs(nextBallX - radius)
+      nextBallVx *= -1
+    }
+    if ((nextBallY - radius) < 0) {
+      nextBallY = radius + Math.abs(nextBallY - radius)
+      nextBallVy *= -1
+    }
+
+    if ((nextBallX + radius) > gameState.vx) {
+      nextBallX = gameState.vx - radius - ((nextBallX + radius) - (gameState.vx))
+      nextBallVx *= -1
+    }
+    if ((nextBallY + radius) > gameState.vy) {
+      nextBallY = gameState.vy - radius - ((nextBallY + radius) - (gameState.vy))
+      nextBallVy *= -1
+    }
   }
 
   ballPosition = {
@@ -274,15 +293,6 @@ function update(elapsed: number, gameState: GameState, keysDown: string[], input
     x: nextBallVx,
     y: nextBallVy,
   }
-
-  {
-    //let dx = ballPosition.x - ball.radius
-  }
-
-  // if (ballPosition.x - ball.radius < 0 || ballPosition.y - ball.radius < 0 || ballPosition.x + ball.radius > canvas.width || ballPosition.y + ball.radius > canvas.height) {
-  //   ballVelocity = { x: 0, y: 0 }
-  //   console.log("stop")
-  // }
 
   return {
     ...gameState,
@@ -315,15 +325,16 @@ function render(gameState: GameState): void {
 
   {
     const { ball } = gameState
+    const radius = ball.radius
     context.beginPath()
     context.fillStyle = ball.color
-    context.arc(ball.pos.x, ball.pos.y, ball.radius, 0, 2 * Math.PI)
+    context.arc(ball.pos.x, ball.pos.y, radius, 0, 2 * Math.PI)
     context.fill()
   }
 
 
   context.beginPath();
-  context.strokeStyle='red'
+  context.strokeStyle='rgba(255,0,0,.5)'
   context.rect(0, 0, gameState.vx, gameState.vy);
   context.stroke();
 
