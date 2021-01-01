@@ -31,6 +31,7 @@ export interface GameState {
   input: GameInput | null
   ball: GameBall
   target: GameTarget
+  score: number
 }
 
 export const vec2 = (x: number, y: number): Vec2 => ({ x, y })

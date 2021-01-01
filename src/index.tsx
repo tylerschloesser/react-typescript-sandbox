@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { pipe, get, negate, isNull, stubTrue, has, compose, update, cond, identity } from 'lodash/fp'
+import { omit, pipe, get, negate, isNull, stubTrue, has, compose, update, cond, identity } from 'lodash/fp'
 
 import {
   BehaviorSubject,
@@ -250,26 +250,33 @@ const Debug = ({
   }, [])
 
   return (
-    <pre className="debug">
-      {JSON.stringify(
-        compose(
-          update('ball.pos.x', v => v.toFixed(2)),
-          update('ball.pos.y', v => v.toFixed(2)),
-          update('ball.vel.x', v => v.toFixed(2)),
-          update('ball.vel.y', v => v.toFixed(2)),
-          update('target.pos.x', v => v.toFixed(2)),
-          update('target.pos.y', v => v.toFixed(2)),
-          cond([
-            [pipe(get('input'), nonNull), compose(
-              update('input.start.x', v => v.toFixed()),
-              update('input.start.y', v => v.toFixed()),
-              update('input.end.x', v => v.toFixed()),
-              update('input.end.y', v => v.toFixed()),
-            )],
-            [stubTrue, identity],
-          ]),
-        )(gameState), null, 2)}
-    </pre>
+    <>
+      <div className="score">
+        <div className="score__label">Score</div>
+        <div className="score__number">{gameState.score}</div>
+      </div>
+      <pre className="debug">
+        {JSON.stringify(
+          compose(
+            omit('score'),
+            update('ball.pos.x', v => v.toFixed(2)),
+            update('ball.pos.y', v => v.toFixed(2)),
+            update('ball.vel.x', v => v.toFixed(2)),
+            update('ball.vel.y', v => v.toFixed(2)),
+            update('target.pos.x', v => v.toFixed(2)),
+            update('target.pos.y', v => v.toFixed(2)),
+            cond([
+              [pipe(get('input'), nonNull), compose(
+                update('input.start.x', v => v.toFixed()),
+                update('input.start.y', v => v.toFixed()),
+                update('input.end.x', v => v.toFixed()),
+                update('input.end.y', v => v.toFixed()),
+              )],
+              [stubTrue, identity],
+            ]),
+          )(gameState), null, 2)}
+      </pre>
+    </>
   )
 }
 

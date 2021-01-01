@@ -11,6 +11,26 @@ canvas {
 
 .debug {
   color: white;
-  position: absolute;
+  position: fixed;
   opacity: .25;
+}
+
+.score {
+  opacity: .5;
+  color: white;
+  position: fixed;
+  right: 0;
+  text-align: center;
+  border-left: 1px solid #888;
+  border-bottom: 1px solid #888;
+  padding: .2vmin 1vmin;
+
+  &__label {
+    font-size: 1vmin;
+    line-height: 1vmin;
+  }
+  &__number {
+    font-size: 4vmin;
+    line-height: 4vmin;
+  }
 }

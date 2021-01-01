@@ -66,6 +66,7 @@ export function getInitialState(canvas: HTMLCanvasElement): GameState {
       color: 'blue',
     },
     target: generateTarget(),
+    score: 0
   }
 }
 
