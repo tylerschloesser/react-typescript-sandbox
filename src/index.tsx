@@ -260,6 +260,8 @@ const Debug = ({
           update('ball.pos.y', v => v.toFixed(2)),
           update('ball.vel.x', v => v.toFixed(2)),
           update('ball.vel.y', v => v.toFixed(2)),
+          update('target.pos.x', v => v.toFixed(2)),
+          update('target.pos.y', v => v.toFixed(2)),
           cond([
             [pipe(get('input'), nonNull), compose(
               update('input.start.x', v => v.toFixed()),
