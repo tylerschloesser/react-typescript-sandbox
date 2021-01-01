@@ -172,12 +172,13 @@ export function updateGameState(
     y: nextBallVy,
   }
 
-  let { target } = gameState
+  let { target, score } = gameState
 
   {
     let dist = distVec2(nextBallPos, target.pos)
     if (dist < (ball.radius + target.radius)) {
       target = generateTarget(gameState)
+      score++
     }
   }
 
@@ -191,5 +192,6 @@ export function updateGameState(
       pos: nextBallPos,
     },
     target,
+    score,
   }
 }
