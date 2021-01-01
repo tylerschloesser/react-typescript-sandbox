@@ -299,6 +299,34 @@ function render(gameState: GameState): void {
   context.fillStyle = 'black'
   context.fillRect(0, 0, canvas.width, canvas.height)
 
+  const { input } = gameState
+  if (input !== null) {
+    context.strokeStyle = 'white'
+    context.beginPath()
+    context.moveTo(input.start.x, input.start.y)
+    context.lineTo(input.end.x, input.end.y)
+    context.stroke()
+
+    context.beginPath()
+    context.fillStyle = 'white'
+    context.arc(input.start.x, input.start.y, 10, 0, 2 * Math.PI)
+    context.fill()
+
+    context.beginPath()
+    context.fillStyle = 'white'
+    context.arc(input.end.x, input.end.y, 10, 0, 2 * Math.PI)
+    context.fill()
+  }
+
+  context.transform(
+    1,
+    0,
+    0,
+    1,
+    (canvas.width - gameState.vx) / 2,
+    (canvas.height - gameState.vy) / 2,
+  )
+
   {
     const { ball } = gameState
     context.beginPath()
@@ -313,26 +341,7 @@ function render(gameState: GameState): void {
   context.rect(0, 0, gameState.vx, gameState.vy);
   context.stroke();
 
-  const { input } = gameState
-  if (input === null) {
-    return
-  }
-
-  context.strokeStyle = 'white'
-  context.beginPath()
-  context.moveTo(input.start.x, input.start.y)
-  context.lineTo(input.end.x, input.end.y)
-  context.stroke()
-
-  context.beginPath()
-  context.fillStyle = 'white'
-  context.arc(input.start.x, input.start.y, 10, 0, 2 * Math.PI)
-  context.fill()
-
-  context.beginPath()
-  context.fillStyle = 'white'
-  context.arc(input.end.x, input.end.y, 10, 0, 2 * Math.PI)
-  context.fill()
+  context.resetTransform()
 }
 
 frames$
