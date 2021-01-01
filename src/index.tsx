@@ -100,7 +100,7 @@ const gameState$ = new BehaviorSubject<GameState>({
   ball: {
     pos: { x: canvas.width / 2, y: canvas.height / 2 },
     vel: { x: 0, y: 0 },
-    radius: 100,
+    radius: Math.min(canvas.height, canvas.width) / 10,
     color: 'blue',
   }
 })
@@ -124,6 +124,9 @@ interface InputState {
   down: boolean
   drag: PointerEvent[]
 }
+
+// disable scroll on iphone
+fromEvent<TouchEvent>(document, 'touchmove', { passive: false }).pipe(tap(e => e.preventDefault())).subscribe(() => {})
 
 const pointerDown$ = fromEvent<PointerEvent>(document, 'pointerdown')
 const pointerUp$ = fromEvent<PointerEvent>(document, 'pointerup')
