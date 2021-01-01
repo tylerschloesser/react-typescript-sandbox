@@ -175,14 +175,18 @@ function renderGame(gameState: GameState): void {
   //   (canvas.height - gameState.vy) / 2,
   // )
 
-  {
-    const target = translateCircle(gameState.targets[0], gameState)
-    const radius = target.radius
-    context.beginPath()
-    context.fillStyle = target.color
-    context.arc(target.pos.x, target.pos.y, radius, 0, 2 * Math.PI)
-    context.fill()
-  }
+  gameState.targets.map(target => translateCircle(target, gameState))
+    .forEach((circle, i) => {
+      if (i === 1) {
+        context.globalAlpha = .25
+      }
+      const radius = circle.radius
+      context.beginPath()
+      context.fillStyle = circle.color
+      context.arc(circle.pos.x, circle.pos.y, radius, 0, 2 * Math.PI)
+      context.fill()
+    })
+  context.globalAlpha = 1
 
   {
     const ball = translateCircle(gameState.ball, gameState)
@@ -265,6 +269,8 @@ const Debug = ({
             update('ball.vel.y', v => v.toFixed(2)),
             update('targets[0].pos.x', v => v.toFixed(2)),
             update('targets[0].pos.y', v => v.toFixed(2)),
+            update('targets[1].pos.x', v => v.toFixed(2)),
+            update('targets[1].pos.y', v => v.toFixed(2)),
             cond([
               [pipe(get('input'), nonNull), compose(
                 update('input.start.x', v => v.toFixed()),
