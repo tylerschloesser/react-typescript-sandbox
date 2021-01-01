@@ -65,17 +65,6 @@ interface Vec2 {
   y: number
 }
 
-interface GameObject {
-  x: number
-  y: number
-  width: number
-  height: number
-  color: string
-  pausedColor: string
-  velocity: Vec2
-  maxVelocity: Vec2
-}
-
 interface GameInput {
   start: Vec2
   end: Vec2
