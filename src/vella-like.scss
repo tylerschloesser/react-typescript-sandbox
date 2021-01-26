@@ -115,11 +115,11 @@
   .sparkle {
     position: absolute;
 
-    width: 5%;
+    width: 6%;
     height: 18%;
 
-    left: 50%;
-    top: 10%;
+    left: 52%;
+    top: 8%;
 
     // & > div {
     //   position: absolute;
@@ -168,24 +168,22 @@
     background-color: white;
 
     --rotate: 0deg;
-    --translate-y: 0px;
+    --translate-scalar: 1.6;
+    --translate-y: calc(var(--translate-scalar) * 100%);
     transform: rotate(var(--rotate)) translateY(var(--translate-y));
     background-color: var(--color);
   }
 
   .sparkle > div:nth-child(1) {
     --rotate: calc(90deg + 10deg);
-    --translate-y: calc(1.5 * 100%);
   }
 
   .sparkle > div:nth-child(2) {
-    --rotate: -40deg;
-    display: none;
+    --rotate: calc(90deg + 50deg);
   }
 
   .sparkle > div:nth-child(3) {
-    --rotate: 0deg;
-    display: none;
+    --rotate: calc(90deg + 90deg);
   }
 
 }
