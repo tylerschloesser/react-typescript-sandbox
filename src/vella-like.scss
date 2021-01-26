@@ -50,9 +50,8 @@
 
     overflow: hidden;
 
-    background: #DAF8FC linear-gradient(-45deg, #B3F4F5 26%, #64C9F3 74%, #418FDE 96%);
-    &.--on {
-    }
+    background: 
+      linear-gradient(-45deg, #B3F4F5 26%, #64C9F3 74%, #418FDE 96%);
   }
 
   .inner {
