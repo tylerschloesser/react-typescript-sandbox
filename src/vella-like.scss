@@ -18,25 +18,7 @@
 
 
   --animation-duration: .8s;
-  //--animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1); // easeOutBack
-  //--animation-timing-function: cubic-bezier(0.68, -0.6, 0.32, 1.6);
 
-  //--animation-timing-function: cubic-bezier(0, 0, 0, 1);
-
-  // @keyframes like-button-on {
-  //   0% {
-  //     transform: scale(1);
-  //   }
-  //   33% {
-  //     transform: scale(.8) rotate(-20deg);
-  //   }
-  //   66% {
-  //     transform: scale(1) rotate(5deg);
-  //   }
-  //   100% {
-  //     transform: scale(1);
-  //   }
-  // }
   @keyframes like-button-on {
     0% {
       transform: scale(1);
@@ -73,8 +55,7 @@
 
     overflow: hidden;
 
-    background: 
-      linear-gradient(-45deg, #B3F4F5 26%, #64C9F3 74%, #418FDE 96%);
+    background: linear-gradient(-45deg, #B3F4F5 26%, #64C9F3 74%, #418FDE 96%);
   }
 
   .inner {
@@ -95,37 +76,6 @@
 
   }
 
-  // @keyframes sparkle-on {
-  //   0%,33% {
-  //     opacity: 0;
-  //     transform: rotate(-120deg);
-  //   }
-  //   50% {
-  //     opacity: 1;
-  //   }
-  //   66% {
-  //     transform: rotate(calc(var(--rotate) + 10deg));
-  //   }
-  //   100% {
-  //     opacity: 1;
-  //     transform: rotate(var(--rotate));
-  //   }
-  // }
-
-  // @keyframes sparkle-off {
-  //   0% {
-  //     opacity: 1;
-  //     transform: scale(1) rotate(var(--rotate));
-  //   }
-  //   25% {
-  //     opacity: 0;
-  //   }
-  //   50% {
-  //     opacity: 0;
-  //     transform: scale(0) rotate(var(--rotate));
-  //   }
-  // }
-
   .sparkle {
     position: absolute;
 
@@ -134,45 +84,6 @@
 
     left: 51%;
     top: 7%;
-
-    // & > div {
-    //   position: absolute;
-    //   top: 0;
-    //   width: 100%;
-    //   height: 100%;
-    //   //background-color: var(--color);
-    //   background-color: var(white);
-
-    //   border-radius: 0px;
-    //   transform-origin: 50% 230%;
-
-    //   animation-name: var(--sparkle-animation-name);
-    //   animation-duration: var(--animation-duration);
-    //   animation-fill-mode: forwards;
-    //   //animation-timing-function: cubic-bezier(0, 0, 0, 1);
-
-    //   //opacity: 0;
-    //   animation-delay: calc(var(--animation-delay) * var(--sparkle-animation-delay-scalar));
-
-    //   --base-rotate: 0deg;
-
-    //   &:nth-child(1) {
-    //     --rotate: calc(var(--base-rotate) + 0deg);
-    //     --animation-delay: 0;
-    //   }
-    //   &:nth-child(2) {
-    //     //--rotate: -40deg;
-    //     --rotate: calc(var(--base-rotate) + -40deg);
-    //     //--animation-delay: 200ms;
-    //     --animation-delay: 0;
-    //   }
-    //   &:nth-child(3) {
-    //     //--rotate: -80deg;
-    //     --rotate: calc(var(--base-rotate) + -80deg);
-    //     //--animation-delay: 400ms;
-    //     --animation-delay: 0;
-    //   }
-    // }
   }
 
   @keyframes sparkle-on {
@@ -196,9 +107,12 @@
       transform: rotate(var(--rotate-on)) translateY(var(--translate-y));
       opacity: 1;
     }
+    25% {
+      opacity: 0;
+    }
     100% {
       opacity: 0;
-      transform: rotate(var(90deg)) translateY(var(--translate-y));
+      transform: rotate(0deg) translateY(var(--translate-y));
     }
   }
 
