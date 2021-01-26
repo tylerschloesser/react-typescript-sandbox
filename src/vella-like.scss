@@ -86,13 +86,10 @@
 
     --sparkle-animation-delay-scalar: 0;
     &.--on {
-      --sparkle-animation-name: sparkle-on;
       --sparkle-animation-delay-scalar: 1;
-
       animation-name: like-button-on;
     }
     &.--off {
-      --sparkle-animation-name: sparkle-off;
     }
 
   }
@@ -196,6 +193,14 @@
   @keyframes sparkle-off {
   }
 
+  .sparkle.--on > div {
+    animation-name: sparkle-on;
+  }
+
+  .sparkle.--off > div {
+    animation-name: sparkle-off;
+  }
+
   .sparkle > div {
     position: absolute;
     height: 100%;
@@ -207,23 +212,25 @@
     --translate-y: calc(var(--translate-scalar) * 100%);
     background-color: var(--color);
 
-    animation-name: var(--sparkle-animation-name);
     animation-duration: var(--animation-duration);
     animation-fill-mode: forwards;
     animation-timing-function: var(--animation-timing-function);
-    animation-delay: 50ms;
+    //animation-delay: 50ms;
   }
 
   .sparkle > div:nth-child(1) {
     --rotate-on: calc(90deg + 10deg);
+    --n: 0;
   }
 
   .sparkle > div:nth-child(2) {
     --rotate-on: calc(90deg + 50deg);
+    --n: 1;
   }
 
   .sparkle > div:nth-child(3) {
     --rotate-on: calc(90deg + 90deg);
+    --n: 2;
   }
 
 }
