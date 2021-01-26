@@ -211,6 +211,7 @@
     animation-duration: var(--animation-duration);
     animation-fill-mode: forwards;
     animation-timing-function: var(--animation-timing-function);
+    animation-delay: 50ms;
   }
 
   .sparkle > div:nth-child(1) {
