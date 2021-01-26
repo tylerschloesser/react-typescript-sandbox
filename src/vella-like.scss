@@ -17,23 +17,23 @@
   }
 
 
-  --animation-duration: .8s;
+  --animation-duration: .75s;
   //--animation-timing-function: cubic-bezier(0, 0, 0, 1)
 
-  @keyframes like-button-on {
-    0% {
-      transform: scale(1);
-    }
-    33% {
-      transform: scale(.8) rotate(-20deg);
-    }
-    66% {
-      transform: scale(1) rotate(5deg);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
+  // @keyframes like-button-on {
+  //   0% {
+  //     transform: scale(1);
+  //   }
+  //   33% {
+  //     transform: scale(.8) rotate(-20deg);
+  //   }
+  //   66% {
+  //     transform: scale(1) rotate(5deg);
+  //   }
+  //   100% {
+  //     transform: scale(1);
+  //   }
+  // }
 
   .like-button {
     --color: #002F36;
@@ -81,36 +81,36 @@
 
   }
 
-  @keyframes sparkle-on {
-    0%,33% {
-      opacity: 0;
-      transform: rotate(-120deg);
-    }
-    50% {
-      opacity: 1;
-    }
-    66% {
-      transform: rotate(calc(var(--rotate) + 10deg));
-    }
-    100% {
-      opacity: 1;
-      transform: rotate(var(--rotate));
-    }
-  }
+  // @keyframes sparkle-on {
+  //   0%,33% {
+  //     opacity: 0;
+  //     transform: rotate(-120deg);
+  //   }
+  //   50% {
+  //     opacity: 1;
+  //   }
+  //   66% {
+  //     transform: rotate(calc(var(--rotate) + 10deg));
+  //   }
+  //   100% {
+  //     opacity: 1;
+  //     transform: rotate(var(--rotate));
+  //   }
+  // }
 
-  @keyframes sparkle-off {
-    0% {
-      opacity: 1;
-      transform: scale(1) rotate(var(--rotate));
-    }
-    25% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 0;
-      transform: scale(0) rotate(var(--rotate));
-    }
-  }
+  // @keyframes sparkle-off {
+  //   0% {
+  //     opacity: 1;
+  //     transform: scale(1) rotate(var(--rotate));
+  //   }
+  //   25% {
+  //     opacity: 0;
+  //   }
+  //   50% {
+  //     opacity: 0;
+  //     transform: scale(0) rotate(var(--rotate));
+  //   }
+  // }
 
   .sparkle {
     position: absolute;
@@ -161,6 +161,18 @@
     // }
   }
 
+  @keyframes sparkle-on {
+    from {
+
+    }
+    to {
+      --rotate: var(--rotate-on);
+    }
+  }
+
+  @keyframes sparkle-off {
+  }
+
   .sparkle > div {
     position: absolute;
     height: 100%;
@@ -172,18 +184,23 @@
     --translate-y: calc(var(--translate-scalar) * 100%);
     transform: rotate(var(--rotate)) translateY(var(--translate-y));
     background-color: var(--color);
+
+    animation-name: var(--sparkle-animation-name);
+    animation-duration: var(--animation-duration);
+    animation-fill-mode: forwards;
+    //animation-timing-function: cubic-bezier(0, 0, 0, 1);
   }
 
   .sparkle > div:nth-child(1) {
-    --rotate: calc(90deg + 10deg);
+    --rotate-on: calc(90deg + 10deg);
   }
 
   .sparkle > div:nth-child(2) {
-    --rotate: calc(90deg + 50deg);
+    --rotate-on: calc(90deg + 50deg);
   }
 
   .sparkle > div:nth-child(3) {
-    --rotate: calc(90deg + 90deg);
+    --rotate-on: calc(90deg + 90deg);
   }
 
 }
