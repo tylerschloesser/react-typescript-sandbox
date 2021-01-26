@@ -21,7 +21,7 @@ export const VellaLike = () => {
       >
         <div className={`inner ${on === null ? '' : on ? '--on' : '--off'}`}>
           <LikeIcon />
-          <div className="sparkle">
+          <div className={`sparkle ${on === null ? '' : on ? '--on' : '--off'}`}>
             {times(3).map(i => <div key={i} />)}
           </div>
         </div>
