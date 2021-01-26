@@ -17,8 +17,10 @@
   }
 
 
-  --animation-duration: .75s;
-  //--animation-timing-function: cubic-bezier(0, 0, 0, 1)
+  --animation-duration: .8s;
+  //--animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1); // easeOutBack
+  //--animation-timing-function: cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  --animation-timing-function: cubic-bezier(0, 0, 0, 1);
 
   // @keyframes like-button-on {
   //   0% {
@@ -34,6 +36,20 @@
   //     transform: scale(1);
   //   }
   // }
+  @keyframes like-button-on {
+    0% {
+      transform: scale(1);
+    }
+    33% {
+      transform: scale(.8) rotate(-20deg);
+    }
+    66% {
+      transform: scale(1) rotate(5deg);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
 
   .like-button {
     --color: #002F36;
@@ -162,11 +178,18 @@
   }
 
   @keyframes sparkle-on {
-    from {
-
+    0%,33% {
+      transform: rotate(30deg) translateY(var(--translate-y));
+      opacity: 0;
     }
-    to {
-      --rotate: var(--rotate-on);
+    50% {
+      opacity: 1;
+    }
+    66% {
+      transform: rotate(calc(var(--rotate-on) + 10deg)) translateY(var(--translate-y));
+    }
+    100% {
+      transform: rotate(var(--rotate-on)) translateY(var(--translate-y));
     }
   }
 
@@ -182,13 +205,12 @@
     --rotate: 0deg;
     --translate-scalar: 1.6;
     --translate-y: calc(var(--translate-scalar) * 100%);
-    transform: rotate(var(--rotate)) translateY(var(--translate-y));
     background-color: var(--color);
 
     animation-name: var(--sparkle-animation-name);
     animation-duration: var(--animation-duration);
     animation-fill-mode: forwards;
-    //animation-timing-function: cubic-bezier(0, 0, 0, 1);
+    animation-timing-function: var(--animation-timing-function);
   }
 
   .sparkle > div:nth-child(1) {
