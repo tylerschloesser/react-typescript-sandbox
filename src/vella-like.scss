@@ -128,11 +128,11 @@
   .sparkle {
     position: absolute;
 
-    width: 6%;
+    width: 6.5%;
     height: 18%;
 
-    left: 52%;
-    top: 8%;
+    left: 51%;
+    top: 7%;
 
     // & > div {
     //   position: absolute;
@@ -175,14 +175,14 @@
   }
 
   @keyframes sparkle-on {
-    0%,33% {
-      transform: rotate(30deg) translateY(var(--translate-y));
+    0%,40% {
+      transform: rotate(60deg) translateY(var(--translate-y));
       opacity: 0;
     }
     50% {
-      opacity: 1;
     }
-    66% {
+    70% {
+      opacity: 1;
       transform: rotate(calc(var(--rotate-on) + 10deg)) translateY(var(--translate-y));
     }
     100% {
@@ -191,6 +191,14 @@
   }
 
   @keyframes sparkle-off {
+    0% {
+      transform: rotate(var(--rotate-on)) translateY(var(--translate-y));
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: rotate(var(90deg)) translateY(var(--translate-y));
+    }
   }
 
   .sparkle.--on > div {
